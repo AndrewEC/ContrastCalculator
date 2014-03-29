@@ -3,15 +3,15 @@ package gov.intra.net.gui;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import javax.swing.ImageIcon;
-import javax.swing.JSlider;
 
 @SuppressWarnings("serial")
 public class Panel extends JPanel {
@@ -50,7 +50,11 @@ public class Panel extends JPanel {
 
 		//initialize foreground specific components
 		JButton btnForeSelect = new JButton("");
-		btnForeSelect.setIcon(new ImageIcon(Panel.class.getResource("/resources/DropperIcon.png")));
+		try {
+			btnForeSelect.setIcon(new ImageIcon(Panel.class.getResource("/resources/DropperIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		btnForeSelect.setBounds(109, 14, 40, 40);
 		btnForeSelect.addActionListener(event);
 		btnForeSelect.setActionCommand("select fore");
@@ -101,9 +105,10 @@ public class Panel extends JPanel {
 		foreHex = new JTextField();
 		foreHex.setText("#ffffff");
 		foreHex.setBounds(37, 28, 70, 25);
+		foreHex.setDocument(new LimitedDocument(7, this));
 		foreHex.getDocument().addDocumentListener(hex);
 		add(foreHex);
-		foreHex.setColumns(10);
+		foreHex.setColumns(7);
 
 		foreCol = new JPanel();
 		foreCol.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -113,7 +118,11 @@ public class Panel extends JPanel {
 
 		//initialize background specific components
 		JButton btnBackSelect = new JButton("");
-		btnBackSelect.setIcon(new ImageIcon(Panel.class.getResource("/resources/DropperIcon.png")));
+		try {
+			btnBackSelect.setIcon(new ImageIcon(Panel.class.getResource("/resources/DropperIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		btnBackSelect.setBounds(314, 14, 40, 40);
 		btnBackSelect.addActionListener(event);
 		btnBackSelect.setActionCommand("select back");
@@ -163,8 +172,9 @@ public class Panel extends JPanel {
 
 		backHex = new JTextField();
 		backHex.setText("#000000");
-		backHex.setColumns(10);
+		backHex.setColumns(7);
 		backHex.setBounds(242, 28, 70, 25);
+		backHex.setDocument(new LimitedDocument(7, this));
 		backHex.getDocument().addDocumentListener(hex);
 		add(backHex);
 
@@ -365,28 +375,28 @@ public class Panel extends JPanel {
 		event.setForeColour(Color.white, true);
 		event.setBackColour(Color.black, true);
 	}
-	
-	public JSlider getFrSlider(){
+
+	public JSlider getFrSlider() {
 		return frSlider;
 	}
-	
-	public JSlider getFgSlider(){
+
+	public JSlider getFgSlider() {
 		return fgSlider;
 	}
-	
-	public JSlider getFbSlider(){
+
+	public JSlider getFbSlider() {
 		return fbSlider;
 	}
-	
-	public JSlider getBrSlider(){
+
+	public JSlider getBrSlider() {
 		return brSlider;
 	}
-	
-	public JSlider getBgSlider(){
+
+	public JSlider getBgSlider() {
 		return bgSlider;
 	}
-	
-	public JSlider getBbSlider(){
+
+	public JSlider getBbSlider() {
 		return bbSlider;
 	}
 

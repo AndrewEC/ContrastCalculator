@@ -95,7 +95,8 @@ public class DropperPanel extends JPanel implements ActionListener {
 			if (mx != x || my != y) {
 				x = mx;
 				y = my;
-				dropper.setLocation(x - Constants.DROPPER_CENTER_MOD, y - Constants.DROPPER_CENTER_MOD);
+				final int centerMod = Constants.DROPPER_CENTER_MOD;
+				dropper.setLocation(x - centerMod, y - centerMod);
 				try {
 					final int grabSize = Constants.DROPPER_GRAB_SIZE;
 					mag = dropper.getImage().getSubimage(x - grabSize / 2, y - grabSize / 2, grabSize, grabSize);

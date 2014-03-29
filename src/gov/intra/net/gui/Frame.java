@@ -40,7 +40,7 @@ public class Frame extends JFrame {
 	private JRadioButton rbText, rbHTML;
 	private JTable tbResults;
 	private JTextField txtResultName, txtExpName;
-	private JCheckBox cbTop, cbEnableWindowMag, cbColourInvert, cbShowSliders;
+	private JCheckBox cbTop, cbEnableWindowMag, cbColourInvert, cbShowSliders, cbBlindPicker;
 	private JMenu mnColourBlind;
 
 	private FrameEventHandle event;
@@ -173,6 +173,10 @@ public class Frame extends JFrame {
 		cbColourInvert = new JCheckBox("Allow Colour Invert");
 		cbColourInvert.setSelected(true);
 		mnPixelDropper.add(cbColourInvert);
+		
+		cbBlindPicker = new JCheckBox("Enable Colour Blind Picker");
+		cbBlindPicker.setSelected(true);
+		mnPixelDropper.add(cbBlindPicker);
 		//initialize pixel dropper menu
 
 		//initialize other options
@@ -418,6 +422,10 @@ public class Frame extends JFrame {
 
 	public boolean getInvert() {
 		return cbColourInvert.isSelected();
+	}
+	
+	public boolean getBlindPicker(){
+		return cbBlindPicker.isSelected();
 	}
 
 	public boolean getWindowEnabled() {

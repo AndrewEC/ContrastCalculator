@@ -32,7 +32,8 @@ public class Dropper extends JFrame {
 		setAlwaysOnTop(true);
 		setUndecorated(true);
 		setVisible(false);
-		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 		try {
 			InputStream in = Dropper.class.getResourceAsStream("/resources/icon.png");
 			BufferedImage image = ImageIO.read(in);
@@ -43,7 +44,6 @@ public class Dropper extends JFrame {
 
 		Rectangle r = Shot.getMultiSize();
 		setSize(Constants.DROPPER_MAG_SIZE, Constants.DROPPER_MAG_SIZE);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		dPanel = new DropperPanel(new Dimension(r.width, r.height), this);
 		add(dPanel);
@@ -77,8 +77,12 @@ public class Dropper extends JFrame {
 		return image;
 	}
 
-	public void openDropper(boolean invertable, BlindColour colour) {
-		this.image = Contraster.convertImage(Shot.getMultiScreenShot(this), colour);
+	public void openDropper(boolean invertable, BlindColour colour, boolean blindMod) {
+		if (blindMod) {
+			this.image = Contraster.convertImage(Shot.getMultiScreenShot(this), colour);
+		}else{
+			this.image = Shot.getMultiScreenShot(this);
+		}
 		this.invertable = invertable;
 		setVisible(true);
 		dPanel.getTimer().start();

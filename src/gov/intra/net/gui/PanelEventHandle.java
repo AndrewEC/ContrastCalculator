@@ -91,10 +91,10 @@ public class PanelEventHandle extends AbstractAction implements ActionListener, 
 	private void processCommand(String command) {
 		if (command.equals("select fore")) {
 			type = "foreground";
-			dropper.openDropper(frame.getInvert(), frame.getEvent().getBlindColour());
+			dropper.openDropper(frame.getInvert(), frame.getEvent().getBlindColour(), frame.getBlindPicker());
 		} else if (command.equals("select back")) {
 			type = "background";
-			dropper.openDropper(frame.getInvert(), frame.getEvent().getBlindColour());
+			dropper.openDropper(frame.getInvert(), frame.getEvent().getBlindColour(), frame.getBlindPicker());
 		} else if (command.equals("view details")) {
 			startDetailsDialog();
 		} else if (command.equals("magnify area")) {
