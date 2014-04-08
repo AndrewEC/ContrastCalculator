@@ -2,6 +2,7 @@ package gov.intra.net.window;
 
 import gov.intra.net.gui.Frame;
 
+import java.awt.Dimension;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
@@ -26,13 +27,16 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import resources.Constants;
+
 @SuppressWarnings("serial")
-public class WindowMagnifier extends JFrame implements ChangeListener, ComponentListener {
+public class WindowMagnifier extends JFrame implements ChangeListener,
+		ComponentListener {
 
 	@SuppressWarnings("rawtypes")
-	public JList windowList;
-	public JButton btnView, btnRefresh, btnSave;
-	public JTextField txtFileName;
+	private JList windowList;
+	private JButton btnView, btnRefresh, btnSave;
+	private JTextField txtFileName;
 
 	private WindowMagImagePanel imagePanel;
 	private WindowMagEventHandler event;
@@ -40,6 +44,8 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 
 	private JRadioButton rbJpg, rbGif, rbPng;
 	private ButtonGroup ext;
+
+	private JScrollPane imageScrollPanel;
 
 	private JLabel lblZoom, lblViewDelay;
 	private JSlider zoomSlider, delaySlider;
@@ -53,7 +59,8 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		this.frame = frame;
 
 		try {
-			InputStream in = WindowMagnifier.class.getResourceAsStream("/resources/icon.png");
+			InputStream in = WindowMagnifier.class
+					.getResourceAsStream("/resources/icon.png");
 			BufferedImage image = ImageIO.read(in);
 			setIconImage(image);
 		} catch (IOException e) {
@@ -62,7 +69,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 
 		setVisible(false);
 		setSize(800, 638);
-		setResizable(false);
+		setMinimumSize(new Dimension(800, 630));
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		addComponentListener(this);
@@ -86,14 +93,16 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		btnRefresh.addActionListener(event);
 		getContentPane().add(btnRefresh);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane_1.setBounds(177, 1, 616, 608);
-		getContentPane().add(scrollPane_1);
+		imageScrollPanel = new JScrollPane();
+		imageScrollPanel
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		imageScrollPanel
+				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		imageScrollPanel.setBounds(177, 1, 616, 608);
+		getContentPane().add(imageScrollPanel);
 
 		imagePanel = new WindowMagImagePanel();
-		scrollPane_1.setViewportView(imagePanel);
+		imageScrollPanel.setViewportView(imagePanel);
 
 		btnSave = new JButton("Save");
 		btnSave.setBounds(19, 263, 142, 23);
@@ -169,8 +178,30 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		getContentPane().add(delaySlider);
 	}
 
+	public JButton getViewButton() {
+		return btnView;
+	}
+
+	public JButton getRefreshButton() {
+		return btnRefresh;
+	}
+
+	public JButton getSaveButton() {
+		return btnSave;
+	}
+	
+	public JTextField getFileName(){
+		return txtFileName;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public JList getWindowList(){
+		return windowList;
+	}
+
 	public String getExt() {
-		for (Enumeration<AbstractButton> e = ext.getElements(); e.hasMoreElements();) {
+		for (Enumeration<AbstractButton> e = ext.getElements(); e
+				.hasMoreElements();) {
 			JRadioButton r = (JRadioButton) e.nextElement();
 			if (r.isSelected()) {
 				return r.getText();
@@ -211,7 +242,8 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 			lblZoom.setText(String.format("Zoom: %.2f", val));
 			imagePanel.setZoom(val);
 		} else if (e.getSource() == delaySlider) {
-			lblViewDelay.setText(String.format("View Delay: %d Millis", delaySlider.getValue()));
+			lblViewDelay.setText(String.format("View Delay: %d Millis",
+					delaySlider.getValue()));
 		}
 	}
 
@@ -223,6 +255,12 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 	}
 
 	public void componentResized(ComponentEvent e) {
+		if (e.getSource() == this) {
+			imageScrollPanel.setSize(this.getWidth()
+					- Constants.IMAGE_SCROLL_PANE_MARGIN_RIGHT,
+					this.getHeight()
+							- Constants.IMAGE_SCROLL_PANE_MARGIN_BOTTOM);
+		}
 	}
 
 	public void componentShown(ComponentEvent e) {

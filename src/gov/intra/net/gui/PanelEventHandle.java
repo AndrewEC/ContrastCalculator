@@ -5,6 +5,7 @@ import gov.intra.net.area.AreaMagnifierResult;
 import gov.intra.net.drop.Dropper;
 import gov.intra.net.gui.dialogs.Details;
 import gov.intra.net.util.Contraster;
+import gov.intra.net.util.HexValidator;
 import gov.intra.net.window.WindowMagnifier;
 
 import java.awt.Color;
@@ -117,11 +118,11 @@ public class PanelEventHandle extends AbstractAction implements ActionListener, 
 	private void swapColours() {
 		String fore = panel.getForeHex().getText();
 		String back = panel.getBackHex().getText();
-		if (!Contraster.isValidHex(fore) || !Contraster.isValidHex(back)) {
+		if (!HexValidator.isValid6Hex(fore) || !HexValidator.isValid6Hex(back)) {
 			JOptionPane.showMessageDialog(frame, "Could not swap colours due to invalid hex value.", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
-			setForeColour(Contraster.hexToColour(back), true);
-			setBackColour(Contraster.hexToColour(fore), true);
+			setForeColour(HexValidator.hexToColour(back), true);
+			setBackColour(HexValidator.hexToColour(fore), true);
 		}
 	}
 

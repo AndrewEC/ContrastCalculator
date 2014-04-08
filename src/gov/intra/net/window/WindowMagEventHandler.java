@@ -3,7 +3,7 @@ package gov.intra.net.window;
 import gov.intra.net.util.Contraster;
 import gov.intra.net.util.DelayedShot;
 import gov.intra.net.util.Exporter;
-import gov.intra.net.util.Windower;
+import gov.intra.net.util.WindowIdentifier;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,13 +33,13 @@ public class WindowMagEventHandler implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == mag.btnRefresh) {
+		if (e.getSource() == mag.getRefreshButton()) {
 			refreshWindowList();
-		} else if (e.getSource() == mag.btnView) {
-			if (mag.windowList.getSelectedIndex() == -1) {
+		} else if (e.getSource() == mag.getViewButton()) {
+			if (mag.getWindowList().getSelectedIndex() == -1) {
 				JOptionPane.showMessageDialog(null, "Please select an item to view.", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
-				String name = mag.windowList.getSelectedValue().toString();
+				String name = mag.getWindowList().getSelectedValue().toString();
 				if (shot == null) {
 					shot = new DelayedShot(instance, mag.getDelay());
 					shot.setWindowName(name);
@@ -48,15 +48,15 @@ public class WindowMagEventHandler implements ActionListener {
 			}
 		} else if (e.getSource() == timer) {
 			shotTimer();
-		} else if (e.getSource() == mag.btnSave) {
+		} else if (e.getSource() == mag.getSaveButton()) {
 			saveImage();
 		}
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void refreshWindowList() {
-		List<String> names = Windower.getWindowList(instance);
-		DefaultListModel model = (DefaultListModel) mag.windowList.getModel();
+		List<String> names = WindowIdentifier.getWindowList(instance);
+		DefaultListModel model = (DefaultListModel) mag.getWindowList().getModel();
 		model.clear();
 		for (String n : names) {
 			model.addElement(n);
@@ -64,7 +64,7 @@ public class WindowMagEventHandler implements ActionListener {
 	}
 
 	private void saveImage() {
-		String fileName = mag.txtFileName.getText().trim();
+		String fileName = mag.getFileName().getText().trim();
 		if (fileName.equals("")) {
 			JOptionPane.showMessageDialog(mag, "Please enter a valid name.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;

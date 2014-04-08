@@ -1,6 +1,7 @@
 package gov.intra.net.gui;
 
 import gov.intra.net.util.Contraster;
+import gov.intra.net.util.HexValidator;
 
 import java.awt.Color;
 
@@ -39,8 +40,8 @@ public class DocumentEventHandle implements DocumentListener {
 
 	private void foreground() {
 		String text = panel.getForeHex().getText();
-		if (Contraster.isValidHex(text)) {
-			Color c = Contraster.hexToColour(text);
+		if (HexValidator.isValid6Hex(text)) {
+			Color c = HexValidator.hexToColour(text);
 			panel.getEventHandle().setForeColour(c, false);
 			inputContrast();
 		}
@@ -48,8 +49,8 @@ public class DocumentEventHandle implements DocumentListener {
 
 	private void background() {
 		String text = panel.getBackHex().getText();
-		if (Contraster.isValidHex(text)) {
-			Color c = Contraster.hexToColour(text);
+		if (HexValidator.isValid6Hex(text)) {
+			Color c = HexValidator.hexToColour(text);
 			panel.getEventHandle().setBackColour(c, false);
 			inputContrast();
 		}
@@ -58,10 +59,10 @@ public class DocumentEventHandle implements DocumentListener {
 	private void inputContrast() {
 		String fore = panel.getForeHex().getText();
 		String back = panel.getBackHex().getText();
-		if (Contraster.isValidHex(fore) && Contraster.isValidHex(back)) {
+		if (HexValidator.isValid6Hex(fore) && HexValidator.isValid6Hex(back)) {
 			Contraster c = new Contraster();
-			c.setForeground(Contraster.hexToColour(fore));
-			c.setBackground(Contraster.hexToColour(back));
+			c.setForeground(HexValidator.hexToColour(fore));
+			c.setBackground(HexValidator.hexToColour(back));
 			double val = c.calculateContrast();
 			panel.getEventHandle().setRatio(val);
 		}

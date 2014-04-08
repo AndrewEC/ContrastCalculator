@@ -107,7 +107,7 @@ public class Shortcuts extends JDialog {
 			}
 		};
 		TableColumnModel model = table.getColumnModel();
-		model.getColumn(0).setPreferredWidth(10);
+		model.getColumn(0).setPreferredWidth(40);
 		model.getColumn(1).setPreferredWidth(300);
 		table.setColumnModel(model);
 		scrollPane.setViewportView(table);

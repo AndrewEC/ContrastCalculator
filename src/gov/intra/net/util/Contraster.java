@@ -8,7 +8,6 @@ import resources.Constants.BlindColour;
 public class Contraster {
 
 	private Color fore, back;
-	private static char[] valid = new char[] { 'a', 'b', 'c', 'd', 'e', 'f' };
 
 	public void setForeground(Color fore) {
 		this.fore = fore;
@@ -48,38 +47,8 @@ public class Contraster {
 		}
 	}
 
-	public static Color hexToColour(String hex) {
-		return new Color(Integer.valueOf(hex.substring(1, 3), 16), Integer.valueOf(hex.substring(3, 5), 16), Integer.valueOf(hex.substring(5, 7), 16));
-	}
-
 	public static Color invert(Color c) {
 		return new Color(Math.abs(c.getRed() - 255), Math.abs(c.getGreen() - 255), Math.abs(c.getBlue() - 255));
-	}
-
-	public static boolean isValidHex(String hex) {
-		if (hex.length() != 7) {
-			return false;
-		}
-		if (!hex.startsWith("#")) {
-			return false;
-		}
-		for (char c : hex.substring(1, hex.length() - 1).toLowerCase().toCharArray()) {
-			if (!Character.isDigit(c)) {
-				if (!isValidHexChar(c)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
-	public static boolean isValidHexChar(char ch) {
-		for (char c : valid) {
-			if (c == ch) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public static Color getColour(String red, String green, String blue) {

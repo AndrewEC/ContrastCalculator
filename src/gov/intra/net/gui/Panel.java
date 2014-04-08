@@ -32,7 +32,7 @@ public class Panel extends JPanel {
 	private JPanel sliderPanel;
 
 	private JPanel panel;
-	private Preview aaSmall, aaLarge, aaaSmall, aaaLarge;
+	private TextPreview aaSmall, aaLarge, aaaSmall, aaaLarge;
 	private PanelEventHandle event;
 	private DocumentEventHandle hex;
 	private final Frame frame;
@@ -272,22 +272,22 @@ public class Panel extends JPanel {
 		separator_3.setOrientation(SwingConstants.VERTICAL);
 		separator_3.setBackground(Color.BLACK);
 
-		aaSmall = new Preview(12, "AA Small - Pass");
+		aaSmall = new TextPreview(12, "AA Small - Pass");
 		aaSmall.setBounds(52, 135, 125, 30);
 		panel.add(aaSmall);
 		aaSmall.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
-		aaLarge = new Preview(18, "AA Large - Pass");
+		aaLarge = new TextPreview(18, "AA Large - Pass");
 		aaLarge.setBounds(2, 171, 175, 41);
 		panel.add(aaLarge);
 		aaLarge.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
-		aaaSmall = new Preview(12, "AAA Small - Pass");
+		aaaSmall = new TextPreview(12, "AAA Small - Pass");
 		aaaSmall.setBounds(218, 135, 125, 30);
 		panel.add(aaaSmall);
 		aaaSmall.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
-		aaaLarge = new Preview(18, "AAA Large - Pass");
+		aaaLarge = new TextPreview(18, "AAA Large - Pass");
 		aaaLarge.setBounds(218, 175, 175, 41);
 		panel.add(aaaLarge);
 		aaaLarge.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -412,19 +412,19 @@ public class Panel extends JPanel {
 		return ratio;
 	}
 
-	public Preview getAASmall() {
+	public TextPreview getAASmall() {
 		return aaSmall;
 	}
 
-	public Preview getAALarge() {
+	public TextPreview getAALarge() {
 		return aaLarge;
 	}
 
-	public Preview getAAASmall() {
+	public TextPreview getAAASmall() {
 		return aaaSmall;
 	}
 
-	public Preview getAAALarge() {
+	public TextPreview getAAALarge() {
 		return aaaLarge;
 	}
 

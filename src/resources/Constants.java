@@ -9,6 +9,8 @@ public class Constants {
 	public static final int DROPPER_MAG_SIZE = 192, DROPPER_GRAB_SIZE = 24;
 	public static final int DROPPER_CENTER_MOD = 96;
 	
+	public static final int IMAGE_SCROLL_PANE_MARGIN_RIGHT = 195, IMAGE_SCROLL_PANE_MARGIN_BOTTOM = 40;
+	
 	public static enum BlindColour{
 		
 		NORMAL("Normal", new double[] { 1, 0, 0, 0, 1, 0, 0, 0, 1 }),

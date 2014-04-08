@@ -102,8 +102,8 @@ public class Exporter {
 			return "class='pass'";
 		} else if (val.contains("Fail")) {
 			return "class='fail'";
-		} else if (Contraster.isValidHex(val)) {
-			Color c = Contraster.invert(Contraster.hexToColour(val));
+		} else if (HexValidator.isValid6Hex(val)) {
+			Color c = Contraster.invert(HexValidator.hexToColour(val));
 			return String.format("style='background-color: %s; color: rgb(%d, %d, %d);'", val, c.getRed(), c.getBlue(), c.getGreen());
 		} else {
 			return "background-color: white";

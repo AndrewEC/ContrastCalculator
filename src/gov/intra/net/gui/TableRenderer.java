@@ -1,6 +1,7 @@
 package gov.intra.net.gui;
 
 import gov.intra.net.util.Contraster;
+import gov.intra.net.util.HexValidator;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -25,8 +26,8 @@ public class TableRenderer extends DefaultTableCellRenderer {
 			JComponent jc = (JComponent) c;
 			jc.setBorder(new MatteBorder(1, (column == 0) ? 1 : 0, 1, (column == 7) ? 1 : 0, Color.black));
 		}
-		if (Contraster.isValidHex(val)) {
-			Color col = Contraster.hexToColour(val);
+		if (HexValidator.isValid6Hex(val)) {
+			Color col = HexValidator.hexToColour(val);
 			c.setForeground(Contraster.invert(col));
 			c.setBackground(col);
 		} else if (val.contains("Pass")) {

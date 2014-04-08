@@ -26,14 +26,14 @@ public class DelayedShot extends Thread implements Runnable {
 
 	@Override
 	public void run() {
-		HWND hwnd = Windower.getHandle(instance, windowName, null);
+		HWND hwnd = WindowIdentifier.getHandle(instance, windowName, null);
 		if (hwnd == null) {
 			failed = true;
 			return;
 		}
-		Windower.bringToFront(instance, hwnd);
+		WindowIdentifier.bringToFront(instance, hwnd);
 
-		RECT r = Windower.getPosition(instance, hwnd, null);
+		RECT r = WindowIdentifier.getPosition(instance, hwnd, null);
 		if (r == null) {
 			failed = true;
 			return;
@@ -48,12 +48,12 @@ public class DelayedShot extends Thread implements Runnable {
 		image = Shot.getScreenShot(r, null);
 		cap = true;
 
-		hwnd = Windower.getHandle(instance, "Contrast Calculator", null);
+		hwnd = WindowIdentifier.getHandle(instance, "Contrast Calculator", null);
 		if (hwnd == null) {
 			failed = true;
 			return;
 		}
-		Windower.bringToFront(instance, hwnd);
+		WindowIdentifier.bringToFront(instance, hwnd);
 	}
 
 	public void setWindowName(String windowName) {

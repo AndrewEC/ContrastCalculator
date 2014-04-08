@@ -175,7 +175,6 @@ public class Frame extends JFrame {
 		mnPixelDropper.add(cbColourInvert);
 		
 		cbBlindPicker = new JCheckBox("Enable Colour Blind Picker");
-		cbBlindPicker.setSelected(true);
 		mnPixelDropper.add(cbBlindPicker);
 		//initialize pixel dropper menu
 
