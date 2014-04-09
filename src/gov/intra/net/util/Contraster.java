@@ -63,7 +63,7 @@ public class Contraster {
 		return null;
 	}
 
-	public static BufferedImage modifyImage(BufferedImage buffer, BlindColour colour) {
+	public static BufferedImage filterImage(BufferedImage buffer, BlindColour colour) {
 		double[] mod = colour.modifier;
 		for (int x = 0; x < buffer.getWidth(); x++) {
 			for (int y = 0; y < buffer.getHeight(); y++) {
@@ -112,7 +112,7 @@ public class Contraster {
 		case INVERT:
 			return invertImage(buffer);
 		default:
-			return modifyImage(buffer, colour);
+			return filterImage(buffer, colour);
 		}
 	}
 }

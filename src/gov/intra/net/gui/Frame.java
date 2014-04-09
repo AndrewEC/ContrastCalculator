@@ -217,7 +217,7 @@ public class Frame extends JFrame {
 		event.registerCommand(mnGuidelines, KeyEvent.VK_G);
 		mnHelp.add(mnGuidelines);
 
-		JMenuItem mnGuide = new JMenuItem("Guide");
+		JMenuItem mnGuide = new JMenuItem("User Guide");
 		mnGuide.addActionListener(event);
 		mnGuide.setActionCommand("menu guide");
 		event.registerCommand(mnGuide, KeyEvent.VK_M);
