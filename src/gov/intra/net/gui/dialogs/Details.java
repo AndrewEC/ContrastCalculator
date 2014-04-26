@@ -50,7 +50,7 @@ public class Details extends JDialog implements ActionListener {
 		};
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 1, 262, 371);
+		scrollPane.setBounds(0, 1, 233, 371);
 		getContentPane().add(scrollPane);
 
 		text = new JTextArea();

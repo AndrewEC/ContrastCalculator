@@ -1,0 +1,16 @@
+Version 1.0
+	* Initial Release
+
+Version 1.1
+	* Added option to enable or disable applying colour blind filters to the dropper tool
+	* Code cleanup and formatting
+	* Modified foreground and background hex fields with validation errors and limited input length to 7 characters
+	* Created Readme file
+
+Version 1.1.1
+	* Added shortcut key for the colour blind picker option
+	* Updated shortcuts table with the new key
+	* Updated guide to include information about the option
+	* Added reference to the colour blind option shortcut keys to the guide
+	* Improved formatting of guide dialog and details dialog
+	* Update Readme file

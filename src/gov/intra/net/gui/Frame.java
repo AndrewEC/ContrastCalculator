@@ -71,7 +71,7 @@ public class Frame extends JFrame {
 		panel = new Panel(this);
 		tabbedPane.addTab("Contraster", null, panel, null);
 
-		//initialize results panel
+		// initialize results panel
 		panelResults = new JPanel();
 		tabbedPane.addTab("Results", null, panelResults, null);
 		panelResults.setLayout(null);
@@ -114,7 +114,7 @@ public class Frame extends JFrame {
 		btnExportTable.setActionCommand("export table");
 		event.registerCommand(btnExportTable, KeyEvent.VK_S);
 		panelResults.add(btnExportTable);
-		//initialize results panel
+		// initialize results panel
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -130,7 +130,7 @@ public class Frame extends JFrame {
 		JMenu mnOptions = new JMenu("Options");
 		menuBar.add(mnOptions);
 
-		//initialize colour blind options
+		// initialize colour blind options
 		mnColourBlind = new JMenu("Colour Blind");
 		mnOptions.add(mnColourBlind);
 
@@ -164,21 +164,21 @@ public class Frame extends JFrame {
 
 		JRadioButton rbAchromatomaly = new JRadioButton("Achromatomaly");
 		mnColourBlind.add(rbAchromatomaly);
-		//initialize colour blind options
+		// initialize colour blind options
 
-		//initialize pixel dropper menu
+		// initialize pixel dropper menu
 		JMenu mnPixelDropper = new JMenu("Pixel Dropper");
 		mnOptions.add(mnPixelDropper);
 
 		cbColourInvert = new JCheckBox("Allow Colour Invert");
 		cbColourInvert.setSelected(true);
 		mnPixelDropper.add(cbColourInvert);
-		
+
 		cbBlindPicker = new JCheckBox("Enable Colour Blind Picker");
 		mnPixelDropper.add(cbBlindPicker);
-		//initialize pixel dropper menu
+		// initialize pixel dropper menu
 
-		//initialize other options
+		// initialize other options
 		JMenu mnOther = new JMenu("Other");
 		mnOptions.add(mnOther);
 
@@ -193,9 +193,9 @@ public class Frame extends JFrame {
 		cbShowSliders = new JCheckBox("Show RGB Sliders");
 		mnOther.add(cbShowSliders);
 		cbShowSliders.addItemListener(event);
-		//initialize other options
+		// initialize other options
 
-		//initialize help menu
+		// initialize help menu
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
 
@@ -228,9 +228,9 @@ public class Frame extends JFrame {
 		btnGetFocus.setActionCommand("get focus");
 		event.registerCommand(btnGetFocus, KeyEvent.VK_O);
 		menuBar.add(btnGetFocus);
-		//initialize help menu
+		// initialize help menu
 
-		//initialize export menu
+		// initialize export menu
 		JMenu mnExport = new JMenu("Export");
 		mnOptions.add(mnExport);
 
@@ -256,9 +256,9 @@ public class Frame extends JFrame {
 		btnLocation.addActionListener(event);
 		btnLocation.setActionCommand("export location");
 		mnExport.add(btnLocation);
-		//initialize export menu
+		// initialize export menu
 
-		//initialize button groups
+		// initialize button groups
 		bgExport = new ButtonGroup();
 		bgExport.add(rbText);
 		bgExport.add(rbHTML);
@@ -274,9 +274,9 @@ public class Frame extends JFrame {
 		bgBlind.add(rbTritanomaly);
 		bgBlind.add(rbAchromatopsia);
 		bgBlind.add(rbAchromatomaly);
-		//initialize button groups
+		// initialize button groups
 
-		//initialize hidden buttons
+		// initialize hidden buttons
 		Rectangle r = new Rectangle(-100, -100, 0, 0);
 
 		JButton hResTab = new JButton("");
@@ -357,6 +357,12 @@ public class Frame extends JFrame {
 		event.registerCommand(hSFocus, KeyEvent.VK_F);
 		panel.add(hSFocus);
 
+		JButton hBlindDropper = new JButton("");
+		hBlindDropper.setBounds(r);
+		hBlindDropper.setActionCommand("toggle blind dropper");
+		event.registerCommand(hBlindDropper, KeyEvent.VK_P);
+		panel.add(hBlindDropper);
+
 		for (int i = 0; i < 10; i++) {
 			JButton bo = new JButton("");
 			bo.setBounds(r);
@@ -364,7 +370,7 @@ public class Frame extends JFrame {
 			event.registerCommand(bo, 0x30 + i);
 			panelTabRoot.add(bo);
 		}
-		//initialize hidden buttons
+		// initialize hidden buttons
 	}
 
 	public ButtonGroup getBlindGroup() {
@@ -422,9 +428,9 @@ public class Frame extends JFrame {
 	public boolean getInvert() {
 		return cbColourInvert.isSelected();
 	}
-	
-	public boolean getBlindPicker(){
-		return cbBlindPicker.isSelected();
+
+	public JCheckBox getBlindPicker() {
+		return cbBlindPicker;
 	}
 
 	public boolean getWindowEnabled() {

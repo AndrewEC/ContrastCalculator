@@ -44,7 +44,7 @@ public class FrameEventHandle implements ActionListener, ChangeListener, ItemLis
 		this.frame = frame;
 		path = new File(System.getProperty("user.dir"));
 
-		//initialize dialogs
+		// initialize dialogs
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				dgAbout = new About(frame);
@@ -53,7 +53,7 @@ public class FrameEventHandle implements ActionListener, ChangeListener, ItemLis
 				dgGuide = new Guide(frame);
 			}
 		});
-		//initialize dialogs
+		// initialize dialogs
 
 		aa = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
@@ -147,6 +147,8 @@ public class FrameEventHandle implements ActionListener, ChangeListener, ItemLis
 		} else if (command.contains("set blind")) {
 			String temp = command.split(" ")[2];
 			setBlind(Integer.parseInt(temp));
+		} else if (command.equals("toggle blind dropper")) {
+			frame.getBlindPicker().setSelected(!frame.getBlindPicker().isSelected());
 		}
 	}
 

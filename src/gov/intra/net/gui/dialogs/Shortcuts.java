@@ -41,7 +41,7 @@ public class Shortcuts extends JDialog {
 		data.addRow(new Object[] { "Shift + U", "Open the shortcuts dialog." });
 		data.addRow(new Object[] { "Shift + M", "Open the built in guide dialog." });
 		data.addRow(new Object[] { "", "" });
-		
+
 		data.addRow(new Object[] { "", "Contraster Tab" });
 		data.addRow(new Object[] { "Shift + Z", "Open pixel dropper tool to select foreground colour." });
 		data.addRow(new Object[] { "Shift + X", "Open pixel dropper tool to select background colour." });
@@ -52,7 +52,7 @@ public class Shortcuts extends JDialog {
 		data.addRow(new Object[] { "Shift + W", "Swap the background and foreground colours." });
 		data.addRow(new Object[] { "Shift + D", "Open the details dialog window." });
 		data.addRow(new Object[] { "", "" });
-		
+
 		data.addRow(new Object[] { "", "Results Tab" });
 		data.addRow(new Object[] { "Shift + D", "Delete selected record from table." });
 		data.addRow(new Object[] { "Shift + N", "Add current result to table." });
@@ -70,9 +70,10 @@ public class Shortcuts extends JDialog {
 		data.addRow(new Object[] { "Shift + E", "Enable or diable window magnifier." });
 		data.addRow(new Object[] { "Shift + L", "Select export location for results table." });
 		data.addRow(new Object[] { "Shift + R", "Enable or disable RGB sliders." });
+		data.addRow(new Object[] { "Shift + P", "Enable or diable colour blind picking." });
 		data.addRow(new Object[] { "Shift + (0-9)", "Set the colour blind mask option." });
 		data.addRow(new Object[] { "", "" });
-		
+
 		data.addRow(new Object[] { "", "Area Magnifier Result" });
 		data.addRow(new Object[] { "Shift + F", "Bring focus to the save name text edit field." });
 		data.addRow(new Object[] { "Shift + S", "Save the grabbed image in its current size." });

@@ -11,15 +11,15 @@ The current list of available features are as follows:
 * Dropper tool for selecting individual on screen pixels
 * Take screenshots of a single monitor, multiple monitors, or an individual program window
 * Save and export results into html table or textual format
-* Apply colour blind settings to screenshots or dropper tool
-* Magnification tool for magnifying individual windows or smaller portions of the screen 
+* Apply colour blind filters to screenshots or dropper tool
+* Magnification tool for magnifying individual windows or user defined portions of the screen 
 
 Known Issues
 ---
 * When using a multi monitor setup the main monitor must be the top left most monitor (in terms of virtual coordinates)
 * May have some issues on lower memory machines with many monitors
 * Cannot use dropper tool to select pixels at the very edge of the screen
-* Html template for exporting results currently does not use unicode character encoding
+* Only accepts a 6 digit hex based colour code
 
 Running the Program
 ---
