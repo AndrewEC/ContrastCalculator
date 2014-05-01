@@ -40,6 +40,7 @@ public class Shortcuts extends JDialog {
 		data.addRow(new Object[] { "Shift + G", "Open the guidelines dialog." });
 		data.addRow(new Object[] { "Shift + U", "Open the shortcuts dialog." });
 		data.addRow(new Object[] { "Shift + M", "Open the built in guide dialog." });
+		data.addRow(new Object[] { "Shift + N", "Open the colour picker wheel." });
 		data.addRow(new Object[] { "", "" });
 
 		data.addRow(new Object[] { "", "Contraster Tab" });
@@ -82,7 +83,7 @@ public class Shortcuts extends JDialog {
 
 		data.addRow(new Object[] { "", "Pixel Dropper and Area Magnifier" });
 		data.addRow(new Object[] { "Escape", "Exit the dropper or area magnifier." });
-		data.addRow(new Object[] { "Right + Click", "Exit the dropper or area magnifier." });
+		data.addRow(new Object[] { "Right Click", "Exit the dropper or area magnifier." });
 		data.addRow(new Object[] { "", "" });
 
 		data.addRow(new Object[] { "", "View Details Dialog" });

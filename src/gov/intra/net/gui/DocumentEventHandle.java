@@ -19,9 +19,9 @@ public class DocumentEventHandle implements DocumentListener {
 	public void changedUpdate(DocumentEvent e) {
 	}
 
-	public void insertString(int offset){
+	public void insertString(int offset) {
 	}
-	
+
 	public void insertUpdate(DocumentEvent e) {
 		if (e.getDocument() == panel.getForeHex().getDocument()) {
 			foreground();

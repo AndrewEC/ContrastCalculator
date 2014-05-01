@@ -1,4 +1,4 @@
-Contrast Calculator V1.1.1
+Contrast Calculator V1.2
 =====
 
 The project was created for use within the ACOE and other I&IT clusters for checking colour contrast ratios between specified colours. It supports multiple monitors, multiple colour blind settings, and use of JNA for manipulating specific windows in the windows environment.
@@ -22,13 +22,17 @@ Known Issues
 * May have some issues on lower memory machines with many monitors
 * Cannot use dropper tool to select pixels at the very edge of the screen
 * Only accepts a 6 digit hex based colour code for entering colours manually
+* The Shift + N shortcut key is bound to two different places, causing two different actions to occur when viewing the results table panel
 
 Running the Program
 ---
 
 ```
 1. Make sure to have at least JRE 1.5 or newer. Version 1.7 is the recommended version.
-2. Download the runnable Contrast Calculator.jar or the Contrast Calculator.exe from the build directory.
+2. Download the runnable jar or exe from the build directory
+	2a. The Contrast Calculator - WebLaF uses the 3rd party WebLaF look and feel
+	2b. The Contrast Calculator - Steel uses Java's build in Blue Steel look and feel.
+		(WebLaF looks better but Blue Steel has a much faster load time and is a bit easier on memory)
 3. Run the program.
 ```
 

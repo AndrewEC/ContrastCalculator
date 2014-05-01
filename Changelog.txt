@@ -8,9 +8,15 @@ Version 1.1
 	* Created Readme file
 
 Version 1.1.1
-	* Added shortcut key for the colour blind picker option
-	* Updated shortcuts table with the new key
-	* Updated guide to include information about the option
-	* Added reference to the colour blind option shortcut keys to the guide
+	* Added shortcut key for the enable/disable colour blind picker option
+	* Updated shortcuts table with the new key for the colour blind picker option
+	* Updated guide to include information about the new option
 	* Improved formatting of guide dialog and details dialog
 	* Update Readme file
+	
+Version 1.2
+	* Added colour wheel for selecting background and foreground colours
+	* Updated user guide and shortcuts for colour wheel
+	* Updated user guide to remove additional notes section and added detail to area magnifier section
+	* Removed unused code for processing 3 character hex values
+	* Created separate builds for WebLaF look and feel and Blue Steel, both available in build directory with launch4j configurations

@@ -122,9 +122,14 @@ public class Frame extends JFrame {
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 
+		JMenuItem mnColourPicker = new JMenuItem("Open Colour Picker");
+		mnColourPicker.setActionCommand("open colour picker");
+		mnColourPicker.addActionListener(event);
+		mnFile.add(mnColourPicker);
+		
 		JMenuItem mnExit = new JMenuItem("Exit");
-		mnExit.addActionListener(event);
 		mnExit.setActionCommand("menu exit");
+		mnExit.addActionListener(event);
 		mnFile.add(mnExit);
 
 		JMenu mnOptions = new JMenu("Options");
@@ -362,6 +367,12 @@ public class Frame extends JFrame {
 		hBlindDropper.setActionCommand("toggle blind dropper");
 		event.registerCommand(hBlindDropper, KeyEvent.VK_P);
 		panel.add(hBlindDropper);
+		
+		JButton hColourPicker = new JButton("");
+		hColourPicker.setBounds(r);
+		hColourPicker.setActionCommand("open colour picker");
+		event.registerCommand(hColourPicker, KeyEvent.VK_N);
+		panel.add(hColourPicker);
 
 		for (int i = 0; i < 10; i++) {
 			JButton bo = new JButton("");

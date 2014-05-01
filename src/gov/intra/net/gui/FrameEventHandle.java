@@ -1,6 +1,7 @@
 package gov.intra.net.gui;
 
 import gov.intra.net.gui.dialogs.About;
+import gov.intra.net.gui.dialogs.ColourPicker;
 import gov.intra.net.gui.dialogs.Guide;
 import gov.intra.net.gui.dialogs.Ratios;
 import gov.intra.net.gui.dialogs.Shortcuts;
@@ -23,6 +24,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
@@ -37,6 +39,7 @@ public class FrameEventHandle implements ActionListener, ChangeListener, ItemLis
 	private final Frame frame;
 	private File path;
 	private JDialog dgAbout, dgShortcut, dgRatios, dgGuide;
+	private JFrame colourPicker;
 	private AbstractAction aa;
 
 	@SuppressWarnings("serial")
@@ -51,6 +54,7 @@ public class FrameEventHandle implements ActionListener, ChangeListener, ItemLis
 				dgShortcut = new Shortcuts(frame);
 				dgRatios = new Ratios(frame);
 				dgGuide = new Guide(frame);
+				colourPicker = new ColourPicker(frame.getPanel());
 			}
 		});
 		// initialize dialogs
@@ -149,6 +153,10 @@ public class FrameEventHandle implements ActionListener, ChangeListener, ItemLis
 			setBlind(Integer.parseInt(temp));
 		} else if (command.equals("toggle blind dropper")) {
 			frame.getBlindPicker().setSelected(!frame.getBlindPicker().isSelected());
+		} else if (command.equals("open colour picker")) {
+			if (!colourPicker.isVisible()) {
+				colourPicker.setVisible(true);
+			}
 		}
 	}
 

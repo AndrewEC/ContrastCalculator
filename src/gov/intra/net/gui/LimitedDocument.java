@@ -44,7 +44,7 @@ public class LimitedDocument extends PlainDocument {
 			}
 		}
 
-		if (ofLength(str)) {
+		if (str.length() > 1 && ofLength(str)) {
 			return;
 		}
 
@@ -54,13 +54,14 @@ public class LimitedDocument extends PlainDocument {
 	}
 
 	private boolean ofLength(String str) {
-		if (str.length() >= 7) {
-			if (!str.startsWith("#") || !HexValidator.isValid6Hex(str)) {
-				if (showError && parent != null) {
-					JOptionPane.showMessageDialog(parent, "The pasted value is not a proper hex value.\nA hex value must be 7 characters in length and start with the '#' symbol.", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				return true;
+		if (str.length() != 7) {
+			JOptionPane.showMessageDialog(parent, "The pasted value needs to be 7 characters in length. Including the initial # character.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		if (!HexValidator.isValid6Hex(str)) {
+			if (showError && parent != null) {
+				JOptionPane.showMessageDialog(parent, "The pasted value is not a proper hex format.", "Error", JOptionPane.ERROR_MESSAGE);
 			}
+			return true;
 		}
 		return false;
 	}
