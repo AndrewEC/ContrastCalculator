@@ -2,12 +2,7 @@ package gov.intra.net.gui.dialogs;
 
 import gov.intra.net.gui.Frame;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,18 +10,13 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 @SuppressWarnings("serial")
-public class Shortcuts extends JDialog {
+public class Shortcuts extends GenericDialog {
 
 	private JTable table;
-	private DialogAction hide;
 
 	public Shortcuts(Frame frame) {
 		super(frame, "Shortcuts");
-		setVisible(false);
-		setResizable(false);
 		setBounds(100, 100, 450, 476);
-		getContentPane().setLayout(null);
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 0, 444, 377);
@@ -119,15 +109,10 @@ public class Shortcuts extends JDialog {
 		getContentPane().add(lblIfTheShortcut);
 
 		JButton btnClose = new JButton("Close");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-			}
-		});
+		btnClose.addActionListener(this);
 		btnClose.setBounds(350, 418, 85, 25);
 		btnClose.setActionCommand("close");
-		hide = new DialogAction(this);
-		hide.registerItem(btnClose);
+		registerForClose(btnClose);
 		getContentPane().add(btnClose);
 	}
 }

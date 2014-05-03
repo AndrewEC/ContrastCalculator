@@ -228,12 +228,10 @@ public class WindowMagnifier extends JFrame implements ChangeListener,
 
 	public void openMagnifier() {
 		setVisible(true);
-		event.getTimer().start();
 	}
 
 	public void closeMagnifier() {
 		setVisible(false);
-		event.getTimer().stop();
 	}
 
 	public void stateChanged(ChangeEvent e) {

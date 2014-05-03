@@ -8,6 +8,8 @@ import java.awt.Color;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import resources.Constants.ColourLayer;
+
 public class DocumentEventHandle implements DocumentListener {
 
 	private final Panel panel;
@@ -24,34 +26,34 @@ public class DocumentEventHandle implements DocumentListener {
 
 	public void insertUpdate(DocumentEvent e) {
 		if (e.getDocument() == panel.getForeHex().getDocument()) {
-			foreground();
+			setColour(ColourLayer.FOREGROUND);
 		} else if (e.getDocument() == panel.getBackHex().getDocument()) {
-			background();
+			setColour(ColourLayer.BACKGROUND);
 		}
 	}
 
 	public void removeUpdate(DocumentEvent e) {
 		if (e.getDocument() == panel.getForeHex().getDocument()) {
-			foreground();
+			setColour(ColourLayer.FOREGROUND);
 		} else if (e.getDocument() == panel.getBackHex().getDocument()) {
-			background();
+			setColour(ColourLayer.BACKGROUND);
 		}
 	}
 
-	private void foreground() {
-		String text = panel.getForeHex().getText();
-		if (HexValidator.isValid6Hex(text)) {
-			Color c = HexValidator.hexToColour(text);
-			panel.getEventHandle().setForeColour(c, false);
-			inputContrast();
+	private void setColour(ColourLayer layer) {
+		String text = "";
+		if (layer == ColourLayer.FOREGROUND) {
+			text = panel.getForeHex().getText();
+		} else if (layer == ColourLayer.BACKGROUND) {
+			text = panel.getBackHex().getText();
 		}
-	}
-
-	private void background() {
-		String text = panel.getBackHex().getText();
 		if (HexValidator.isValid6Hex(text)) {
 			Color c = HexValidator.hexToColour(text);
-			panel.getEventHandle().setBackColour(c, false);
+			if (layer == ColourLayer.FOREGROUND) {
+				panel.getEventHandle().setForeColour(c, false);
+			} else if (layer == ColourLayer.BACKGROUND) {
+				panel.getEventHandle().setBackColour(c, false);
+			}
 			inputContrast();
 		}
 	}

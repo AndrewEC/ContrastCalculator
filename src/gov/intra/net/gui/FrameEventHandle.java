@@ -54,7 +54,7 @@ public class FrameEventHandle implements ActionListener, ChangeListener, ItemLis
 				dgShortcut = new Shortcuts(frame);
 				dgRatios = new Ratios(frame);
 				dgGuide = new Guide(frame);
-				colourPicker = new ColourPicker(frame.getPanel());
+				colourPicker = new ColourPicker(frame);
 			}
 		});
 		// initialize dialogs

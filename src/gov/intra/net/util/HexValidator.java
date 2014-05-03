@@ -21,7 +21,7 @@ public class HexValidator {
 		if (!hex.startsWith("#")) {
 			return false;
 		}
-		for (char c : hex.substring(1, hex.length() - 1).toLowerCase().toCharArray()) {
+		for (char c : hex.substring(1, hex.length() - 1).toCharArray()) {
 			if (!Character.isDigit(c)) {
 				if (!isValidHexChar(c)) {
 					return false;

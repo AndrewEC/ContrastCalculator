@@ -84,7 +84,7 @@ public class Exporter {
 			JOptionPane.showMessageDialog(parent, "Results Table was successfully exported as html to:\n" + file.getAbsolutePath(), "Export Completed", JOptionPane.INFORMATION_MESSAGE);
 		} catch (IOException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(parent, "Could not export table.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(parent, "Could not export table.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		} finally {
 			if (writer != null) {
 				try {

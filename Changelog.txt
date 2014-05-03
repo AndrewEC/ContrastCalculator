@@ -3,13 +3,13 @@ Version 1.0
 
 Version 1.1
 	* Added option to enable or disable applying colour blind filters to the dropper tool
-	* Code cleanup and formatting
+	* Various code cleanup and formatting
 	* Modified foreground and background hex fields with validation errors and limited input length to 7 characters
 	* Created Readme file
 
 Version 1.1.1
 	* Added shortcut key for the enable/disable colour blind picker option
-	* Updated shortcuts table with the new key for the colour blind picker option
+	* Updated shortcuts with the new key for the colour blind picker option
 	* Updated guide to include information about the new option
 	* Improved formatting of guide dialog and details dialog
 	* Update Readme file
@@ -20,3 +20,10 @@ Version 1.2
 	* Updated user guide to remove additional notes section and added detail to area magnifier section
 	* Removed unused code for processing 3 character hex values
 	* Created separate builds for WebLaF look and feel and Blue Steel, both available in build directory with launch4j configurations
+	
+Version 1.2.1
+	* Added icon to colour wheel frame
+	* Fixed size issues with the colour wheel in the Blue Steel build
+	* Simplified code for all the dialogs in the gov.intra.net.gui.dialogs package and for DocumentEventHandle
+	* Added more error handling for utility classes
+	* Removed timer from window magnifier, instead used callback interface

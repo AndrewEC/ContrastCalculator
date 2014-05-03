@@ -1,4 +1,4 @@
-Contrast Calculator V1.2
+Contrast Calculator V1.2.1
 =====
 
 The project was created for use within the ACOE and other I&IT clusters for checking colour contrast ratios between specified colours. It supports multiple monitors, multiple colour blind settings, and use of JNA for manipulating specific windows in the windows environment.
@@ -39,7 +39,7 @@ Running the Program
 3rd Party Libraries
 ---
 
-The project implements the following libraries:
+The project implements the following 3rd party libraries:
 
 * JNA for native window manipulation on the Windows OS
 * WebLaF look and feel for Java swing GUI

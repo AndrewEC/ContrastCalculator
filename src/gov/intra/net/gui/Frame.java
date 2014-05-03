@@ -27,7 +27,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
@@ -44,9 +43,11 @@ public class Frame extends JFrame {
 	private JMenu mnColourBlind;
 
 	private FrameEventHandle event;
+	private boolean usingWeblaf = true;
 
-	public Frame() {
+	public Frame(boolean loaded) {
 		super("Contrast Calculator");
+		usingWeblaf = loaded;
 		try {
 			InputStream in = Frame.class.getResourceAsStream("/resources/icon.png");
 			BufferedImage image = ImageIO.read(in);
@@ -126,7 +127,7 @@ public class Frame extends JFrame {
 		mnColourPicker.setActionCommand("open colour picker");
 		mnColourPicker.addActionListener(event);
 		mnFile.add(mnColourPicker);
-		
+
 		JMenuItem mnExit = new JMenuItem("Exit");
 		mnExit.setActionCommand("menu exit");
 		mnExit.addActionListener(event);
@@ -367,7 +368,7 @@ public class Frame extends JFrame {
 		hBlindDropper.setActionCommand("toggle blind dropper");
 		event.registerCommand(hBlindDropper, KeyEvent.VK_P);
 		panel.add(hBlindDropper);
-		
+
 		JButton hColourPicker = new JButton("");
 		hColourPicker.setBounds(r);
 		hColourPicker.setActionCommand("open colour picker");
@@ -448,22 +449,23 @@ public class Frame extends JFrame {
 		return cbEnableWindowMag.isSelected();
 	}
 
+	public boolean isUsingWebLaF() {
+		return usingWeblaf;
+	}
+
+	private static boolean loaded = true;
+
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
-		} catch (ClassNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
+			loaded = false;
 		}
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				Frame frame = new Frame();
+				Frame frame = new Frame(loaded);
 				frame.setVisible(true);
 				frame.requestFocus();
 			}

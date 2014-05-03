@@ -32,5 +32,9 @@ public class Constants {
 			this.modifier = modifier;
 		}
 	}
+	
+	public static enum ColourLayer{
+		FOREGROUND, BACKGROUND;
+	}
 
 }

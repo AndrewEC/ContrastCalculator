@@ -1,53 +1,31 @@
 package gov.intra.net.gui.dialogs;
 
+import gov.intra.net.gui.Frame;
 import gov.intra.net.util.Exporter;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 
 @SuppressWarnings("serial")
-public class Details extends JDialog implements ActionListener {
+public class Details extends GenericDialog implements IEventCallback {
 
 	private JTextArea text;
 	private JTextField fileName;
-	private AbstractAction aa;
 
-	public Details(JFrame frame) {
-		super(frame);
-		setVisible(false);
-		setTitle("Details");
-		setResizable(false);
+	public Details(Frame frame) {
+		super(frame, "Details");
 		setSize(239, 492);
-		getContentPane().setLayout(null);
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-		aa = new AbstractAction() {
-			public void actionPerformed(ActionEvent e) {
-				AbstractButton ab = (AbstractButton) e.getSource();
-				String command = ab.getActionCommand();
-				if (command != null) {
-					processCommand(command);
-				}
-			}
-		};
+		registerCallback(this);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 1, 233, 371);
@@ -69,7 +47,7 @@ public class Details extends JDialog implements ActionListener {
 		btnClose.addActionListener(this);
 		btnClose.setBounds(139, 407, 85, 25);
 		btnClose.setActionCommand("close");
-		registerCommand(btnClose, KeyEvent.VK_D);
+		registerForClose(btnClose);
 		getContentPane().add(btnClose);
 
 		JButton btnSave = new JButton("Save");
@@ -91,13 +69,8 @@ public class Details extends JDialog implements ActionListener {
 		JButton focusName = new JButton("");
 		focusName.setBounds(-100, -100, 1, 1);
 		focusName.setActionCommand("focus name");
-		registerCommand(focusName, KeyEvent.VK_F);
+		registerForFocus(focusName, fileName);
 		getContentPane().add(focusName);
-	}
-
-	private void registerCommand(AbstractButton button, int key) {
-		button.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK), button.getActionCommand());
-		button.getActionMap().put(button.getActionCommand(), aa);
 	}
 
 	public void append(String t) {
@@ -108,29 +81,29 @@ public class Details extends JDialog implements ActionListener {
 		text.setText("");
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		String command = e.getActionCommand();
-		if (command != null) {
-			processCommand(command);
+	public void onAction(String command) {
+		if (command.equals("")) {
+			return;
+		}
+		if (command.equals("copy")) {
+			copy();
+		} else if (command.equals("save")) {
+			save();
 		}
 	}
 
-	private void processCommand(String command) {
-		if (command.equals("close")) {
-			dispose();
-		} else if (command.equals("save")) {
-			String name = fileName.getText().trim();
-			if (name.equals("")) {
-				JOptionPane.showMessageDialog(this, "Please enter a file name.", "Error", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-			Exporter.saveTextFile(fileName.getText() + ".txt", text.getText(), this);
-		} else if (command.equals("focus name")) {
-			fileName.requestFocus();
-		} else if (command.equals("copy")) {
-			StringSelection s = new StringSelection(text.getText());
-			Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-			c.setContents(s, null);
+	private void copy() {
+		StringSelection s = new StringSelection(text.getText());
+		Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+		c.setContents(s, null);
+	}
+
+	private void save() {
+		String name = fileName.getText().trim();
+		if (name.equals("")) {
+			JOptionPane.showMessageDialog(this, "Please enter a file name.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
+		Exporter.saveTextFile(fileName.getText() + ".txt", text.getText(), this);
 	}
 }

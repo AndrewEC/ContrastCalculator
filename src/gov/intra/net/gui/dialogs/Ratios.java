@@ -1,28 +1,20 @@
 package gov.intra.net.gui.dialogs;
 
+import gov.intra.net.gui.Frame;
+
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JEditorPane;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 @SuppressWarnings("serial")
-public class Ratios extends JDialog {
+public class Ratios extends GenericDialog {
 
-	private DialogAction hide;
-
-	public Ratios(JFrame frame) {
+	public Ratios(Frame frame) {
 		super(frame, "About Contrast Requirements");
-		setVisible(false);
-		setTitle("Font/Colour Guidelines");
-		setResizable(false);
-		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 		setSize(563, 373);
 		getContentPane().setLayout(new BorderLayout());
 
@@ -31,15 +23,10 @@ public class Ratios extends JDialog {
 		panel.setLayout(null);
 
 		JButton btnClose = new JButton("Close");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-			}
-		});
+		btnClose.addActionListener(this);
 		btnClose.setBounds(464, 320, 89, 23);
 		btnClose.setActionCommand("close");
-		hide = new DialogAction(this);
-		hide.registerItem(btnClose);
+		registerForClose(btnClose);
 		panel.add(btnClose);
 
 		final JScrollPane scrollPane = new JScrollPane();
@@ -55,7 +42,7 @@ public class Ratios extends JDialog {
 		focus.setBounds(-100, -100, 0, 0);
 		focus.setActionCommand("focus");
 		panel.add(focus);
-		hide.registerForFocus(focus, content);
+		registerForFocus(focus, content);
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
