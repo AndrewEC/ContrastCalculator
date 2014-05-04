@@ -27,3 +27,8 @@ Version 1.2.1
 	* Simplified code for all the dialogs in the gov.intra.net.gui.dialogs package and for DocumentEventHandle
 	* Added more error handling for utility classes
 	* Removed timer from window magnifier, instead used callback interface
+
+Version 1.2.2
+	* Major changes to code base
+	* Removed multiple timer threads for processing pixel dropper and area magnifier tool, replaced by callback interfaces
+	* Small performance boost

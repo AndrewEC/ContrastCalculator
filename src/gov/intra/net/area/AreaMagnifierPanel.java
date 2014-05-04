@@ -27,10 +27,12 @@ public class AreaMagnifierPanel extends JPanel implements ActionListener {
 	private int x, y, size;
 	private AreaMagnifier mag;
 	private AlphaComposite normal, alpha;
+	private IAreaMagnifierResult result;
 
-	public AreaMagnifierPanel(AreaMagnifier mag) {
+	public AreaMagnifierPanel(AreaMagnifier mag, IAreaMagnifierResult result) {
 		this.mag = mag;
-
+		this.result = result;
+		
 		size = 100;
 
 		mouse = new Mouse();
@@ -68,7 +70,7 @@ public class AreaMagnifierPanel extends JPanel implements ActionListener {
 			y = p.y;
 			mag.setLocation(x - size / 2, y - size / 2);
 			if (mouse.isLeft() && isVisible()) {
-				mag.setCoord(new Point(x, y));
+				result.onPointObtained(new Point(x, y), size);
 			}
 			repaint();
 
@@ -84,7 +86,7 @@ public class AreaMagnifierPanel extends JPanel implements ActionListener {
 			}
 
 			if (mouse.isRight() || key.isQuit()) {
-				mag.setCoord(null);
+				result.onError(new Exception("User cancelled the operation."));
 			}
 		}
 	}
@@ -97,8 +99,4 @@ public class AreaMagnifierPanel extends JPanel implements ActionListener {
 		return key;
 	}
 	
-	public int getAreaSize(){
-		return size;
-	}
-
 }

@@ -1,6 +1,6 @@
 package gov.intra.net.window;
 
-import gov.intra.net.gui.Frame;
+import gov.intra.net.frame.Frame;
 
 import java.awt.Dimension;
 import java.awt.event.ComponentEvent;
@@ -30,8 +30,7 @@ import javax.swing.event.ChangeListener;
 import resources.Constants;
 
 @SuppressWarnings("serial")
-public class WindowMagnifier extends JFrame implements ChangeListener,
-		ComponentListener {
+public class WindowMagnifier extends JFrame implements ChangeListener, ComponentListener {
 
 	@SuppressWarnings("rawtypes")
 	private JList windowList;
@@ -59,8 +58,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener,
 		this.frame = frame;
 
 		try {
-			InputStream in = WindowMagnifier.class
-					.getResourceAsStream("/resources/icon.png");
+			InputStream in = WindowMagnifier.class.getResourceAsStream("/resources/icon.png");
 			BufferedImage image = ImageIO.read(in);
 			setIconImage(image);
 		} catch (IOException e) {
@@ -94,10 +92,8 @@ public class WindowMagnifier extends JFrame implements ChangeListener,
 		getContentPane().add(btnRefresh);
 
 		imageScrollPanel = new JScrollPane();
-		imageScrollPanel
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		imageScrollPanel
-				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		imageScrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		imageScrollPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		imageScrollPanel.setBounds(177, 1, 616, 608);
 		getContentPane().add(imageScrollPanel);
 
@@ -189,19 +185,18 @@ public class WindowMagnifier extends JFrame implements ChangeListener,
 	public JButton getSaveButton() {
 		return btnSave;
 	}
-	
-	public JTextField getFileName(){
+
+	public JTextField getFileName() {
 		return txtFileName;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
-	public JList getWindowList(){
+	public JList getWindowList() {
 		return windowList;
 	}
 
 	public String getExt() {
-		for (Enumeration<AbstractButton> e = ext.getElements(); e
-				.hasMoreElements();) {
+		for (Enumeration<AbstractButton> e = ext.getElements(); e.hasMoreElements();) {
 			JRadioButton r = (JRadioButton) e.nextElement();
 			if (r.isSelected()) {
 				return r.getText();
@@ -240,8 +235,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener,
 			lblZoom.setText(String.format("Zoom: %.2f", val));
 			imagePanel.setZoom(val);
 		} else if (e.getSource() == delaySlider) {
-			lblViewDelay.setText(String.format("View Delay: %d Millis",
-					delaySlider.getValue()));
+			lblViewDelay.setText(String.format("View Delay: %d Millis", delaySlider.getValue()));
 		}
 	}
 
@@ -254,10 +248,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener,
 
 	public void componentResized(ComponentEvent e) {
 		if (e.getSource() == this) {
-			imageScrollPanel.setSize(this.getWidth()
-					- Constants.IMAGE_SCROLL_PANE_MARGIN_RIGHT,
-					this.getHeight()
-							- Constants.IMAGE_SCROLL_PANE_MARGIN_BOTTOM);
+			imageScrollPanel.setSize(this.getWidth() - Constants.IMAGE_SCROLL_PANE_MARGIN_RIGHT, this.getHeight() - Constants.IMAGE_SCROLL_PANE_MARGIN_BOTTOM);
 		}
 	}
 

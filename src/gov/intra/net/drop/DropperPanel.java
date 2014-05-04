@@ -29,11 +29,14 @@ public class DropperPanel extends JPanel implements ActionListener {
 	private Key key;
 	private Mouse mouse;
 	private Dropper dropper;
+	private IDropperResult result;
 
-	public DropperPanel(Dimension size, Dropper dropper) {
+	public DropperPanel(Dimension size, Dropper dropper, IDropperResult result) {
 		this.dropper = dropper;
 		width = size.width;
 		height = size.height;
+		
+		this.result = result;
 
 		setBounds(0, 0, size.width, size.height);
 
@@ -82,7 +85,7 @@ public class DropperPanel extends JPanel implements ActionListener {
 			updateMag();
 			repaint();
 			if (key.isQuit() || mouse.isRight()) {
-				dropper.setColour(null);
+				result.onError(new Exception("User cancelled the operation."));
 			}
 		}
 	}
@@ -106,7 +109,7 @@ public class DropperPanel extends JPanel implements ActionListener {
 			}
 			if (mouse.isLeft()) {
 				Color c = Shot.extractColour(dropper.getImage(), x, y);
-				dropper.setColour(c);
+				result.onColourObtained(c);
 			}
 		}
 	}

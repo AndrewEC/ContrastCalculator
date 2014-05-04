@@ -3,7 +3,6 @@ package gov.intra.net.drop;
 import gov.intra.net.util.Contraster;
 import gov.intra.net.util.Shot;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -23,17 +22,16 @@ import resources.Constants.BlindColour;
 public class Dropper extends JFrame {
 
 	private DropperPanel dPanel;
-	private boolean has = false, invertable = false;
-	private Color colour = null;
+	private boolean invertable = false;
 	private BufferedImage image;
 
-	public Dropper() {
+	public Dropper(IDropperResult result) {
 		super("Colour Selector");
 		setAlwaysOnTop(true);
 		setUndecorated(true);
 		setVisible(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+		
 		try {
 			InputStream in = Dropper.class.getResourceAsStream("/resources/icon.png");
 			BufferedImage image = ImageIO.read(in);
@@ -45,7 +43,7 @@ public class Dropper extends JFrame {
 		Rectangle r = Shot.getMultiSize();
 		setSize(Constants.DROPPER_MAG_SIZE, Constants.DROPPER_MAG_SIZE);
 
-		dPanel = new DropperPanel(new Dimension(r.width, r.height), this);
+		dPanel = new DropperPanel(new Dimension(r.width, r.height), this, result);
 		add(dPanel);
 		addKeyListener(dPanel.getKey());
 
@@ -57,20 +55,6 @@ public class Dropper extends JFrame {
 
 	public boolean isInvertable() {
 		return invertable;
-	}
-
-	public void setColour(Color colour) {
-		this.colour = colour;
-		has = true;
-	}
-
-	public boolean hasColour() {
-		return has;
-	}
-
-	public Color getColour() {
-		has = false;
-		return colour;
 	}
 
 	public BufferedImage getImage() {
