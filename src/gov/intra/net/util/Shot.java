@@ -39,15 +39,15 @@ public class Shot {
 		}
 		return bounds;
 	}
-	
-	public static BufferedImage getScreenShot(int x, int y, int width, int height, Component parent){
+
+	public static BufferedImage getScreenShot(int x, int y, int width, int height, Component parent) {
 		BufferedImage image = null;
 		Rectangle rect = new Rectangle(x, y, width, height);
 		try {
 			image = new Robot().createScreenCapture(rect);
 		} catch (AWTException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(parent, "Could not grab image of screen.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(parent, "Could not grab image of screen.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		return image;
 	}
@@ -64,7 +64,7 @@ public class Shot {
 			image = new Robot().createScreenCapture(getMultiSize());
 		} catch (AWTException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(parent, "Could not grab image of screen.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(parent, "Could not grab image of screen.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		return image;
 	}

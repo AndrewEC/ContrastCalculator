@@ -1,4 +1,4 @@
-Contrast Calculator V1.2.2
+Contrast Calculator V1.3
 =====
 
 The project was created for use within the ACOE and other I&IT clusters for checking colour contrast ratios between specified colours. It supports multiple monitors, multiple colour blind settings, and use of JNA for manipulating specific windows in the windows environment.
@@ -16,13 +16,12 @@ The current list of available features are as follows:
 * Apply colour blind filters to screenshots or dropper tool
 * Magnification tool for magnifying individual windows or user defined portions of the screen
 
-Known Issues
+Known Issues - Tested with JRE 1.7
 ---
 * When using a multi monitor setup the main monitor must be the top left most monitor (in terms of virtual coordinates)
 * May have some issues on lower memory machines with many monitors
-* Cannot use dropper tool to select pixels at the very edge of the screen
+* Dropper tool will not update when at the very edge of the screen, though can still select pixel
 * Only accepts a 6 digit hex based colour code for entering colours manually
-* The Shift + N shortcut key is bound to two different places, causing two different actions to occur when viewing the results table panel
 
 Running the Program
 ---

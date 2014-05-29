@@ -11,6 +11,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,7 +19,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 @SuppressWarnings("serial")
-public class ColourPicker extends JFrame implements ChangeListener {
+public class ColourPicker extends JDialog implements ChangeListener {
 
 	private JPanel contentPane;
 	private JColorChooser colorChooser;
@@ -26,6 +27,7 @@ public class ColourPicker extends JFrame implements ChangeListener {
 	private JCheckBox cbForeground, cbBackground;
 
 	public ColourPicker(Frame frame) {
+		super(frame, "Colour Picker");
 		try {
 			InputStream in = this.getClass().getResourceAsStream("/resources/icon.png");
 			BufferedImage image = ImageIO.read(in);
@@ -33,7 +35,6 @@ public class ColourPicker extends JFrame implements ChangeListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		setTitle("Colour Picker");
 		setVisible(false);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

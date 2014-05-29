@@ -6,9 +6,9 @@ import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef.HWND;
 import com.sun.jna.platform.win32.WinDef.RECT;
 
-public class DelayedShot extends Thread implements Runnable {
+public class DelayedShot extends Thread {
 
-	private String windowName;
+	private volatile String windowName;
 	private final User32 instance;
 	private final ICapture cap;
 	private BufferedImage image;
@@ -26,7 +26,7 @@ public class DelayedShot extends Thread implements Runnable {
 		this.delay = delay;
 	}
 	
-	public void setWindowName(String windowName) {
+	public synchronized void setWindowName(String windowName) {
 		this.windowName = windowName;
 	}
 

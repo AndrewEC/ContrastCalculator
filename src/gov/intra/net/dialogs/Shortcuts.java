@@ -36,7 +36,7 @@ public class Shortcuts extends GenericDialog {
 		data.addRow(new Object[] { "", "Contraster Tab" });
 		data.addRow(new Object[] { "Shift + Z", "Open pixel dropper tool to select foreground colour." });
 		data.addRow(new Object[] { "Shift + X", "Open pixel dropper tool to select background colour." });
-		data.addRow(new Object[] { "Shift + V", "Open area magnifier." });
+		data.addRow(new Object[] { "Shift + V", "Open area snipper." });
 		data.addRow(new Object[] { "Shift + C", "Open Window Magnifier." });
 		data.addRow(new Object[] { "Shift + F", "Bring focus to the foreground hex text edit box." });
 		data.addRow(new Object[] { "Shift + B", "Bring focus to the background hex text edit box." });
@@ -65,10 +65,10 @@ public class Shortcuts extends GenericDialog {
 		data.addRow(new Object[] { "Shift + (0-9)", "Set the colour blind mask option." });
 		data.addRow(new Object[] { "", "" });
 
-		data.addRow(new Object[] { "", "Area Magnifier Result" });
+		data.addRow(new Object[] { "", "Area Snipper Result" });
 		data.addRow(new Object[] { "Shift + F", "Bring focus to the save name text edit field." });
 		data.addRow(new Object[] { "Shift + S", "Save the grabbed image in its current size." });
-		data.addRow(new Object[] { "Shift + D", "Close the Area Magnifier Window" });
+		data.addRow(new Object[] { "Shift + D", "Close the Area Snipper Result Window" });
 		data.addRow(new Object[] { "", "" });
 
 		data.addRow(new Object[] { "", "Pixel Dropper and Area Magnifier" });

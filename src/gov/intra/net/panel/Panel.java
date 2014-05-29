@@ -237,12 +237,12 @@ public class Panel extends JPanel {
 		btnMagnifyWindow.setActionCommand("magnify window");
 		event.registerCommand(btnMagnifyWindow, KeyEvent.VK_C);
 
-		JButton btnMagnifyArea = new JButton("Magnify Area");
-		btnMagnifyArea.setBounds(200, 35, 124, 25);
-		panel.add(btnMagnifyArea);
-		btnMagnifyArea.addActionListener(event);
-		btnMagnifyArea.setActionCommand("magnify area");
-		event.registerCommand(btnMagnifyArea, KeyEvent.VK_V);
+		JButton btnAreaSnipper = new JButton("Area Snipper");
+		btnAreaSnipper.setBounds(200, 35, 124, 25);
+		panel.add(btnAreaSnipper);
+		btnAreaSnipper.addActionListener(event);
+		btnAreaSnipper.setActionCommand("snip area");
+		event.registerCommand(btnAreaSnipper, KeyEvent.VK_V);
 
 		JSeparator separator_4 = new JSeparator();
 		separator_4.setBounds(3, 27, 396, 9);

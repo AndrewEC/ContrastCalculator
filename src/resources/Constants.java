@@ -14,6 +14,8 @@ public class Constants {
 	public static final int RESULT_VIEW_WIDTH = 700, RESULT_VIEW_HEIGHT = 393;
 	public static final int MAIN_VIEW_EXTENDED_HEIGHT = 485, MAIN_VIEW_HEIGHT = 393, MAIN_VIEW_WIDTH = 413;
 	
+	public static final String IDROPPER_USER_CANCEL_MESSAGE = "User cancelled the operation.";
+	
 	public static enum BlindColour{
 		
 		NORMAL("Normal", new double[] { 1, 0, 0, 0, 1, 0, 0, 0, 1 }),

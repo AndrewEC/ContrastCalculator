@@ -3,14 +3,11 @@ package gov.intra.net.util;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 
-public class Mouse implements MouseListener, MouseMotionListener, MouseWheelListener {
+public class Mouse implements MouseListener, MouseMotionListener {
 
 	private int x, y;
 	private boolean left, right;
-	private int notches = 0;
 
 	public void mouseDragged(MouseEvent e) {
 		x = e.getX();
@@ -46,11 +43,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 			left = false;
 		}
 	}
-
-	public void mouseWheelMoved(MouseWheelEvent e) {
-		notches = e.getWheelRotation();
-	}
-
+	
 	public int getX() {
 		return x;
 	}
@@ -73,12 +66,6 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 			return true;
 		}
 		return false;
-	}
-
-	public int getNotches() {
-		int x = notches;
-		notches = 0;
-		return x;
 	}
 
 }

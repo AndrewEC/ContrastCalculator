@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 
 @SuppressWarnings("serial")
-public class GenericDialog extends JDialog implements ActionListener {
+public abstract class GenericDialog extends JDialog implements ActionListener {
 
 	protected AbstractAction aa;
 	protected JComponent jc;

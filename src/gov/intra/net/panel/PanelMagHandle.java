@@ -1,56 +1,82 @@
 package gov.intra.net.panel;
 
-import gov.intra.net.area.AreaMagnifier;
-import gov.intra.net.area.AreaMagnifierResult;
-import gov.intra.net.area.IAreaMagnifierResult;
+import gov.intra.net.area.AreaSnipper;
+import gov.intra.net.area.AreaSnipperResult;
+import gov.intra.net.area.IAreaSnipperResult;
 import gov.intra.net.frame.Frame;
 import gov.intra.net.window.WindowMagnifier;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 
 import javax.swing.SwingUtilities;
 
-public class PanelMagHandle extends PanelEventBase implements IAreaMagnifierResult {
+public class PanelMagHandle extends PanelEventBase implements IAreaSnipperResult {
 
-	private AreaMagnifier areaMagnifier;
-	private AreaMagnifierResult areaMagnifierResult;
+	private AreaSnipper areaSnipper;
+	private AreaSnipperResult areaSnipperResult;
 	private WindowMagnifier windowMagnifier;
+	private final IAreaSnipperResult thisHandle;
 
 	public PanelMagHandle(final Frame frame, Panel panel) {
 		super(frame, panel);
-		
-		final PanelMagHandle handle = this;
-		SwingUtilities.invokeLater(new Runnable(){
-			public void run(){
-				areaMagnifier = new AreaMagnifier(handle);
-				areaMagnifierResult = new AreaMagnifierResult();
-				windowMagnifier = new WindowMagnifier(frame);
-			}
-		});
+
+		thisHandle = this;
 	}
 
 	public void onEvent(String command) {
-		if (command.equals("magnify area")) {
-			if (!areaMagnifier.isVisible()) {
-				areaMagnifier.openMagnifier();
+		if (command.equals("snip area")) {
+			if (areaSnipper == null) {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						areaSnipper = new AreaSnipper(thisHandle);
+						if (!areaSnipper.isVisible()) {
+							areaSnipper.openMagnifier();
+						}
+					}
+				});
+			} else if (!areaSnipper.isVisible()) {
+				areaSnipper.openMagnifier();
 			}
-		}else if (command.equals("magnify window")) {
-			if (!windowMagnifier.isVisible()) {
+		} else if (command.equals("magnify window")) {
+			if (windowMagnifier == null) {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						windowMagnifier = new WindowMagnifier(frame);
+						if (!windowMagnifier.isVisible()) {
+							windowMagnifier.openMagnifier();
+						}
+					}
+				});
+			} else if (!windowMagnifier.isVisible()) {
 				windowMagnifier.openMagnifier();
 			}
 		}
 	}
 
-	public void onPointObtained(Point p, int size) {
-		areaMagnifier.closeMagnifier();
+	private void processResult(Rectangle r) {
+		areaSnipper.closeMagnifier();
 		Point loc = panel.getLocationOnScreen();
-		areaMagnifierResult.setValues(p, size, frame.getEvent().getBlindColour());
-		areaMagnifierResult.setLocation(loc);
-		areaMagnifierResult.setVisible(true);
+		areaSnipperResult.setValues(r, frame.getEvent().getBlindColour());
+		areaSnipperResult.setLocation(loc);
+		areaSnipperResult.setVisible(true);
 	}
 
 	public void onError(Exception e) {
-		areaMagnifier.closeMagnifier();
+		areaSnipper.closeMagnifier();
+	}
+
+	public void onAreaSelected(final Rectangle r) {
+		if (areaSnipperResult == null) {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					areaSnipperResult = new AreaSnipperResult();
+					processResult(r);
+				}
+			});
+		} else {
+			processResult(r);
+		}
 	}
 
 }

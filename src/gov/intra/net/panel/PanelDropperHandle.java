@@ -12,6 +12,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import resources.Constants;
 import resources.Constants.ColourLayer;
 
 public class PanelDropperHandle extends PanelEventBase implements IDropperResult {
@@ -50,7 +51,7 @@ public class PanelDropperHandle extends PanelEventBase implements IDropperResult
 			startDetailsDialog();
 		}
 	}
-	
+
 	private void startDetailsDialog() {
 		if (!details.isVisible()) {
 			details.clear();
@@ -60,7 +61,7 @@ public class PanelDropperHandle extends PanelEventBase implements IDropperResult
 			details.requestFocus();
 		}
 	}
-	
+
 	private void appendText() {
 		details.append("Comparing colours:");
 		details.append("\tForeground: ");
@@ -127,6 +128,9 @@ public class PanelDropperHandle extends PanelEventBase implements IDropperResult
 	}
 
 	public void onError(Exception e) {
+		if (!e.getMessage().equals(Constants.IDROPPER_USER_CANCEL_MESSAGE)) {
+			JOptionPane.showMessageDialog(dropper, "An error occured while grabbing pixel:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
 		dropper.closeDropper();
 	}
 

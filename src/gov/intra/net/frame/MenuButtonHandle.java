@@ -120,6 +120,7 @@ public class MenuButtonHandle extends FrameEventBase {
 		for (int i = 0; i < b.getButtonCount(); i++) {
 			if (i == index) {
 				buttons.nextElement().setSelected(true);
+				break;
 			} else {
 				buttons.nextElement();
 			}

@@ -12,7 +12,6 @@ Version 1.1.1
 	* Updated shortcuts with the new key for the colour blind picker option
 	* Updated guide to include information about the new option
 	* Improved formatting of guide dialog and details dialog
-	* Update Readme file
 	
 Version 1.2
 	* Added colour wheel for selecting background and foreground colours
@@ -29,6 +28,16 @@ Version 1.2.1
 	* Removed timer from window magnifier, instead used callback interface
 
 Version 1.2.2
-	* Major changes to code base
+	* Now uses multiple event dispatching/handling classes for main frame and panel, easier to maintain and add features
 	* Removed multiple timer threads for processing pixel dropper and area magnifier tool, replaced by callback interfaces
 	* Small performance boost
+
+Version 1.2.3
+	* Minor code adjustments
+	* Generic dialog class made abstract
+	* Lazy instantiation of area magnifier ui, window magnifier ui, and dialog box ui; quicker startup times
+	* More detailed error messages
+
+Version 1.3
+	* Changed the functionality of the area magnifier to a more conventional snipping tool called area snipper
+	* Updated all references from area magnifier to the area snipper
