@@ -85,7 +85,7 @@ public class DropperPanel extends JPanel implements ActionListener {
 			updateMag();
 			repaint();
 			if (key.isQuit() || mouse.isRight()) {
-				result.onError(new Exception(Constants.IDROPPER_USER_CANCEL_MESSAGE));
+				result.onError(new Exception(Constants.USER_CANCEL_MESSAGE));
 			}
 		}
 	}

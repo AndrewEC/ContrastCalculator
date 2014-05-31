@@ -49,8 +49,8 @@ public class Panel extends JPanel {
 		setDoubleBuffered(false);
 		setLayout(null);
 
-		event = new EventDispatcher(frame);
-		event.addEvent(new PanelMagHandle(frame, this));
+		event = new EventDispatcher();
+		event.addEvent(new PanelSnipHandle(frame, this));
 		event.addEvent(new PanelDropperHandle(frame, this));
 		changeHandle = new PanelChangeHandle(this);
 		hex = new DocumentEventHandle(this);

@@ -2,19 +2,14 @@ package resources;
 
 public class Constants {
 	
-	public static final int MAG_RESULT_WIDTH_MOD = 22, MAG_RESULT_HEIGHT_MOD = 85;
-	public static final int MIN_AREA_MAG_SIZE = 10, MAX_AREA_MAG_SIZE = 500;
-	public static final int DEFAULT_AREA_MAG_RESULT_SIZE = 300;
+	public static final int MAG_RESULT_WIDTH_MOD = 22, MAG_RESULT_HEIGHT_MOD = 100;
+	public static final int AREA_SNIPPER_SIZE = 50;
 	
 	public static final int DROPPER_MAG_SIZE = 192, DROPPER_GRAB_SIZE = 24;
 	public static final int DROPPER_CENTER_MOD = 96;
+	public static final String USER_CANCEL_MESSAGE = "User cancelled the operation.";
 	
 	public static final int IMAGE_SCROLL_PANE_MARGIN_RIGHT = 195, IMAGE_SCROLL_PANE_MARGIN_BOTTOM = 40;
-	
-	public static final int RESULT_VIEW_WIDTH = 700, RESULT_VIEW_HEIGHT = 393;
-	public static final int MAIN_VIEW_EXTENDED_HEIGHT = 485, MAIN_VIEW_HEIGHT = 393, MAIN_VIEW_WIDTH = 413;
-	
-	public static final String IDROPPER_USER_CANCEL_MESSAGE = "User cancelled the operation.";
 	
 	public static enum BlindColour{
 		

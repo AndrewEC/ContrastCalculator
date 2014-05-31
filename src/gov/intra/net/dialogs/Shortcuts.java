@@ -24,8 +24,6 @@ public class Shortcuts extends GenericDialog {
 
 		DefaultTableModel data = new DefaultTableModel(new Object[][] {}, new String[] { "Shortcut", "Action" });
 		data.addRow(new Object[] { "", "Main Window" });
-		data.addRow(new Object[] { "Shift + Q", "Make the contraster tab active." });
-		data.addRow(new Object[] { "Shift + W", "Make the results tab active." });
 		data.addRow(new Object[] { "Shift + A", "Open the about dialog." });
 		data.addRow(new Object[] { "Shift + G", "Open the guidelines dialog." });
 		data.addRow(new Object[] { "Shift + U", "Open the shortcuts dialog." });
@@ -42,16 +40,6 @@ public class Shortcuts extends GenericDialog {
 		data.addRow(new Object[] { "Shift + B", "Bring focus to the background hex text edit box." });
 		data.addRow(new Object[] { "Shift + W", "Swap the background and foreground colours." });
 		data.addRow(new Object[] { "Shift + D", "Open the details dialog window." });
-		data.addRow(new Object[] { "", "" });
-
-		data.addRow(new Object[] { "", "Results Tab" });
-		data.addRow(new Object[] { "Shift + D", "Delete selected record from table." });
-		data.addRow(new Object[] { "Shift + N", "Add current result to table." });
-		data.addRow(new Object[] { "Shift + F", "Bring focus to the result name text edit box." });
-		data.addRow(new Object[] { "Shift + S", "Export table." });
-		data.addRow(new Object[] { "Shift + T", "Bring focus to the table." });
-		data.addRow(new Object[] { "Shift + H", "Set table export type to html." });
-		data.addRow(new Object[] { "Shift + J", "Set table export type to text." });
 		data.addRow(new Object[] { "", "" });
 
 		data.addRow(new Object[] { "", "Options" });

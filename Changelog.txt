@@ -41,3 +41,8 @@ Version 1.2.3
 Version 1.3
 	* Changed the functionality of the area magnifier to a more conventional snipping tool called area snipper
 	* Updated all references from area magnifier to the area snipper
+
+Version 1.3.1
+	* Code maintanance for saving image files
+	* Improved performance of area magnifier
+	* Removed the ability to record/export any results

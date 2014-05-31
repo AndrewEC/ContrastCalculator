@@ -60,7 +60,6 @@ public abstract class GenericDialog extends JDialog implements ActionListener {
 		}
 		if (command.equals("close")) {
 			setVisible(false);
-		} else if (command.equals("focus")) {
 		} else if (callback != null) {
 			callback.onAction(command);
 		}

@@ -14,6 +14,10 @@ public class HexValidator {
 		return validHex(7, hex);
 	}
 
+	public static boolean isValid3Hex(String hex) {
+		return validHex(3, hex);
+	}
+
 	public static boolean validHex(int length, String hex) {
 		if (hex.length() != length) {
 			return false;

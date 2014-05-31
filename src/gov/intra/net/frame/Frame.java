@@ -1,49 +1,39 @@
 package gov.intra.net.frame;
 
 import gov.intra.net.panel.Panel;
-import gov.intra.net.util.Exporter;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
+
+import resources.Constants.BlindColour;
 
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
 
-	private JPanel panelTabRoot, panelResults;
-	private JTabbedPane tabbedPane;
 	private Panel panel;
-	private ButtonGroup bgExport, bgBlind;
-	private JRadioButton rbText, rbHTML;
-	private JTable tbResults;
+	private ButtonGroup bgBlind;
 	private JTextField txtResultName, txtExpName;
 	private JCheckBox cbTop, cbEnableWindowMag, cbColourInvert, cbShowSliders, cbBlindPicker;
 	private JMenu mnColourBlind;
 
-	private FrameChangeListener changeListener;
 	private FrameItemListener itemListener;
 	private EventDispatcher event;
 	private boolean usingWeblaf = true;
@@ -58,73 +48,20 @@ public class Frame extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		setBounds(200, 200, 413, 393);
+		setBounds(200, 200, 413, 373);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		event = new EventDispatcher(this);
-		changeListener = new FrameChangeListener(this);
+		event = new EventDispatcher();
 		itemListener = new FrameItemListener(this);
 		event.addEvent(new DialogEventHandle(this));
 		event.addEvent(new FocusEventHandle(this));
 		event.addEvent(new MenuButtonHandle(this));
 
-		panelTabRoot = new JPanel();
-		panelTabRoot.setLayout(null);
-		getContentPane().add(panelTabRoot, BorderLayout.CENTER);
-
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(-3, -2, 700, 459);
-		tabbedPane.addChangeListener(changeListener);
-		panelTabRoot.add(tabbedPane);
 		panel = new Panel(this);
-		tabbedPane.addTab("Contraster", null, panel, null);
+		getContentPane().add(panel);
 
 		// initialize results panel
-		panelResults = new JPanel();
-		tabbedPane.addTab("Results", null, panelResults, null);
-		panelResults.setLayout(null);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(1, 0, 690, 276);
-		panelResults.add(scrollPane);
-
-		tbResults = new JTable(new DefaultTableModel(new Object[][] {}, Exporter.HEADINGS));
-		tbResults.setFont(new Font("Verdana", Font.PLAIN, 14));
-		tbResults.setDefaultRenderer(Object.class, new TableRenderer());
-		scrollPane.setViewportView(tbResults);
-
-		JButton btnAddCurrentResult = new JButton("Add Current Result");
-		btnAddCurrentResult.setBounds(203, 282, 155, 25);
-		btnAddCurrentResult.addActionListener(event);
-		btnAddCurrentResult.setActionCommand("add result");
-		event.registerCommand(btnAddCurrentResult, KeyEvent.VK_N);
-		panelResults.add(btnAddCurrentResult);
-
-		txtResultName = new JTextField();
-		txtResultName.setBounds(89, 283, 110, 25);
-		txtResultName.setColumns(10);
-		panelResults.add(txtResultName);
-
-		JLabel lblResultName = new JLabel("Result Name:");
-		lblResultName.setBounds(5, 288, 92, 16);
-		panelResults.add(lblResultName);
-
-		JButton btnDelete = new JButton("Delete");
-		btnDelete.setBounds(362, 282, 85, 25);
-		btnDelete.addActionListener(event);
-		btnDelete.setActionCommand("delete");
-		event.registerCommand(btnDelete, KeyEvent.VK_D);
-		panelResults.add(btnDelete);
-
-		JButton btnExportTable = new JButton("Export Table");
-		btnExportTable.setBounds(447, 282, 122, 25);
-		btnExportTable.addActionListener(event);
-		btnExportTable.setActionCommand("export table");
-		event.registerCommand(btnExportTable, KeyEvent.VK_S);
-		panelResults.add(btnExportTable);
-		// initialize results panel
-
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -251,13 +188,6 @@ public class Frame extends JFrame {
 		JMenu mnType = new JMenu("Type");
 		mnExport.add(mnType);
 
-		rbText = new JRadioButton("Text");
-		mnType.add(rbText);
-
-		rbHTML = new JRadioButton("HTML");
-		rbHTML.setSelected(true);
-		mnType.add(rbHTML);
-
 		JMenu mnName = new JMenu("Name");
 		mnExport.add(mnName);
 
@@ -273,10 +203,6 @@ public class Frame extends JFrame {
 		// initialize export menu
 
 		// initialize button groups
-		bgExport = new ButtonGroup();
-		bgExport.add(rbText);
-		bgExport.add(rbHTML);
-
 		bgBlind = new ButtonGroup();
 		bgBlind.add(rbNormal);
 		bgBlind.add(rbInvert);
@@ -293,65 +219,35 @@ public class Frame extends JFrame {
 		// initialize hidden buttons
 		Rectangle r = new Rectangle(-100, -100, 0, 0);
 
-		JButton hResTab = new JButton("");
-		hResTab.setBounds(r);
-		hResTab.setActionCommand("focus results");
-		event.registerCommand(hResTab, KeyEvent.VK_W);
-		panel.add(hResTab);
-
 		JButton hNameFocus = new JButton("");
 		hNameFocus.setBounds(r);
 		hNameFocus.setActionCommand("focus name");
 		event.registerCommand(hNameFocus, KeyEvent.VK_F);
-		panelTabRoot.add(hNameFocus);
+		panel.add(hNameFocus);
 
 		JButton hConTab = new JButton("");
 		hConTab.setBounds(r);
 		hConTab.setActionCommand("focus contraster");
 		event.registerCommand(hConTab, KeyEvent.VK_Q);
-		panelTabRoot.add(hConTab);
-
-		JButton hTabFocus = new JButton("");
-		hTabFocus.setBounds(r);
-		hTabFocus.setActionCommand("focus table");
-		event.registerCommand(hTabFocus, KeyEvent.VK_T);
-		panelTabRoot.add(hTabFocus);
-
-		JButton eHtml = new JButton("");
-		eHtml.setBounds(r);
-		eHtml.setActionCommand("export html");
-		event.registerCommand(eHtml, KeyEvent.VK_H);
-		panelTabRoot.add(eHtml);
-
-		JButton eText = new JButton("");
-		eText.setBounds(r);
-		eText.setActionCommand("export text");
-		event.registerCommand(eText, KeyEvent.VK_J);
-		panelTabRoot.add(eText);
+		panel.add(hConTab);
 
 		JButton hTop = new JButton("");
 		hTop.setBounds(r);
 		hTop.setActionCommand("switch on top");
 		event.registerCommand(hTop, KeyEvent.VK_Y);
-		panelTabRoot.add(hTop);
+		panel.add(hTop);
 
 		JButton hWindowMag = new JButton("");
 		hWindowMag.setBounds(r);
 		hWindowMag.setActionCommand("switch window mag");
 		event.registerCommand(hWindowMag, KeyEvent.VK_E);
-		panelTabRoot.add(hWindowMag);
+		panel.add(hWindowMag);
 
 		JButton hInvert = new JButton("");
 		hInvert.setBounds(r);
 		hInvert.setActionCommand("switch invert");
 		event.registerCommand(hInvert, KeyEvent.VK_I);
-		panelTabRoot.add(hInvert);
-
-		JButton hLocation = new JButton("");
-		hLocation.setBounds(r);
-		hLocation.setActionCommand("export location");
-		event.registerCommand(hLocation, KeyEvent.VK_L);
-		panelTabRoot.add(hLocation);
+		panel.add(hInvert);
 
 		JButton hSlider = new JButton("");
 		hSlider.setBounds(r);
@@ -388,17 +284,13 @@ public class Frame extends JFrame {
 			bo.setBounds(r);
 			bo.setActionCommand("set blind " + i);
 			event.registerCommand(bo, 0x30 + i);
-			panelTabRoot.add(bo);
+			panel.add(bo);
 		}
 		// initialize hidden buttons
 	}
 
 	public ButtonGroup getBlindGroup() {
 		return bgBlind;
-	}
-
-	public JTabbedPane getTabs() {
-		return tabbedPane;
 	}
 
 	public JCheckBox getCbEnableWindowMag() {
@@ -417,20 +309,8 @@ public class Frame extends JFrame {
 		return event;
 	}
 
-	public JRadioButton getRbText() {
-		return rbText;
-	}
-
 	public JTextField getExpName() {
 		return txtExpName;
-	}
-
-	public JTable getResultsTable() {
-		return tbResults;
-	}
-
-	public JRadioButton getRbHtml() {
-		return rbHTML;
 	}
 
 	public JTextField getResultsName() {
@@ -459,6 +339,26 @@ public class Frame extends JFrame {
 
 	public boolean isUsingWebLaF() {
 		return usingWeblaf;
+	}
+	
+	public String getBlindOption() {
+		for (Enumeration<AbstractButton> buttons = getBlindGroup().getElements(); buttons.hasMoreElements();) {
+			AbstractButton b = buttons.nextElement();
+			if (b.isSelected()) {
+				return b.getText();
+			}
+		}
+		return "";
+	}
+	
+	public BlindColour getBlindColour() {
+		String name = getBlindOption();
+		for (BlindColour c : BlindColour.values()) {
+			if (c.value.equals(name)) {
+				return c;
+			}
+		}
+		return BlindColour.NORMAL;
 	}
 
 	private static boolean loaded = true;

@@ -37,10 +37,10 @@ public class PanelDropperHandle extends PanelEventBase implements IDropperResult
 	public void onEvent(String command) {
 		if (command.equals("select fore")) {
 			layer = ColourLayer.FOREGROUND;
-			dropper.openDropper(frame.getInvert(), frame.getEvent().getBlindColour(), frame.getBlindPicker().isSelected());
+			dropper.openDropper(frame.getInvert(), frame.getBlindColour(), frame.getBlindPicker().isSelected());
 		} else if (command.equals("select back")) {
 			layer = ColourLayer.BACKGROUND;
-			dropper.openDropper(frame.getInvert(), frame.getEvent().getBlindColour(), frame.getBlindPicker().isSelected());
+			dropper.openDropper(frame.getInvert(), frame.getBlindColour(), frame.getBlindPicker().isSelected());
 		} else if (command.equals("swap")) {
 			swapColours();
 		} else if (command.equals("focus fore")) {
@@ -128,7 +128,7 @@ public class PanelDropperHandle extends PanelEventBase implements IDropperResult
 	}
 
 	public void onError(Exception e) {
-		if (!e.getMessage().equals(Constants.IDROPPER_USER_CANCEL_MESSAGE)) {
+		if (!e.getMessage().equals(Constants.USER_CANCEL_MESSAGE)) {
 			JOptionPane.showMessageDialog(dropper, "An error occured while grabbing pixel:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		dropper.closeDropper();

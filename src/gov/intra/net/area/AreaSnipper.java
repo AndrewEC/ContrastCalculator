@@ -1,9 +1,6 @@
 package gov.intra.net.area;
 
-import gov.intra.net.util.Shot;
-
 import java.awt.Color;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,13 +8,15 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import resources.Constants;
+
 @SuppressWarnings("serial")
 public class AreaSnipper extends JFrame {
 
 	private AreaSnipperPanel panel;
 
-	public AreaSnipper(IAreaSnipperResult result) {
-		super("Area Magnifier");
+	public AreaSnipper(ISnipperListener result) {
+		super("Area Snipper");
 		try {
 			InputStream in = AreaSnipper.class.getResourceAsStream("/resources/icon.png");
 			BufferedImage image = ImageIO.read(in);
@@ -30,10 +29,10 @@ public class AreaSnipper extends JFrame {
 		setUndecorated(true);
 		setBackground(new Color(0, 0, 0, 0));
 
-		Rectangle r = Shot.getMultiSize();
-		setBounds(0, 0, r.width, r.height);
+		final int size = Constants.AREA_SNIPPER_SIZE;
+		setBounds(0, 0, size, size);
 
-		panel = new AreaSnipperPanel(this, result, r.width, r.height);
+		panel = new AreaSnipperPanel(this, result);
 		add(panel);
 
 		addKeyListener(panel.getKey());
@@ -41,6 +40,8 @@ public class AreaSnipper extends JFrame {
 
 	public void openMagnifier() {
 		panel.getTimer().start();
+		final int size = Constants.AREA_SNIPPER_SIZE;
+		setBounds(0, 0, size, size);
 		setVisible(true);
 	}
 

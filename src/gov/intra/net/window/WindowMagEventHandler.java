@@ -1,8 +1,8 @@
 package gov.intra.net.window;
 
+import gov.intra.net.persist.ImageWriter;
 import gov.intra.net.util.Contraster;
 import gov.intra.net.util.DelayedShot;
-import gov.intra.net.util.Exporter;
 import gov.intra.net.util.ICapture;
 import gov.intra.net.util.WindowIdentifier;
 
@@ -72,19 +72,18 @@ public class WindowMagEventHandler implements ActionListener, ICapture {
 	}
 
 	private void saveImage() {
-		String fileName = mag.getFileName().getText().trim();
-		if (fileName.equals("")) {
-			JOptionPane.showMessageDialog(mag, "Please enter a valid name.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		BufferedImage image = mag.getImagePanel().getImage();
-		String ext = mag.getExt();
-		Exporter.saveImage(fileName + ext, image, ext.replace(".", ""), mag);
+		ImageWriter iw = new ImageWriter();
+		iw.setRememberPath(true);
+		iw.setAutoTrim(true);
+		iw.setParent(mag);
+		iw.setName(mag.getFileName().getText());
+		iw.setExt(mag.getExt());
+		iw.saveImage(mag.getImagePanel().getImage(), iw.promptForFile());
 	}
 
 	public void onCapture(BufferedImage image) {
 		try {
-			BufferedImage capture = Contraster.convertImage(image, mag.getParentFrame().getEvent().getBlindColour());
+			BufferedImage capture = Contraster.convertImage(image, mag.getParentFrame().getBlindColour());
 			mag.getImagePanel().setImage(capture);
 			mag.requestFocus();
 		} catch (Exception e1) {

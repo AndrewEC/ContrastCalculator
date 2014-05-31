@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -12,17 +11,13 @@ import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import resources.Constants.BlindColour;
-
 public class EventDispatcher implements ActionListener {
 
 	private List<EventBase> events;
 	private AbstractAction aa;
-	private final Frame frame;
 
 	@SuppressWarnings("serial")
-	public EventDispatcher(Frame frame) {
-		this.frame = frame;
+	public EventDispatcher() {
 		events = new ArrayList<EventBase>();
 		aa = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
@@ -54,26 +49,6 @@ public class EventDispatcher implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		invokeEvent(e);
-	}
-	
-	public String getBlindOption() {
-		for (Enumeration<AbstractButton> buttons = frame.getBlindGroup().getElements(); buttons.hasMoreElements();) {
-			AbstractButton b = buttons.nextElement();
-			if (b.isSelected()) {
-				return b.getText();
-			}
-		}
-		return "";
-	}
-	
-	public BlindColour getBlindColour() {
-		String name = getBlindOption();
-		for (BlindColour c : BlindColour.values()) {
-			if (c.value.equals(name)) {
-				return c;
-			}
-		}
-		return BlindColour.NORMAL;
 	}
 
 	public void registerCommand(AbstractButton button, int key) {
