@@ -3,7 +3,7 @@ package gov.intra.net.area;
 import gov.intra.net.persist.ClipboardImage;
 import gov.intra.net.persist.ImageWriter;
 import gov.intra.net.util.Contraster;
-import gov.intra.net.util.Shot;
+import gov.intra.net.util.Capturer;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -123,7 +123,7 @@ public class AreaSnipperResult extends JFrame implements ActionListener, Compone
 
 	public void setValues(Rectangle r, BlindColour colour) {
 		try {
-			BufferedImage block = Shot.getScreenShot(r.x, r.y, r.width, r.height, this);
+			BufferedImage block = Capturer.getScreenShot(r.x, r.y, r.width, r.height, this);
 			image = Contraster.convertImage(block, colour);
 			block = null;
 			sizeComponents(r.width, r.height);
@@ -148,9 +148,9 @@ public class AreaSnipperResult extends JFrame implements ActionListener, Compone
 
 	public void saveImage() {
 		ImageWriter iw = new ImageWriter();
+		iw.setAutoTrim(true);
 		iw.setExt(".png");
 		iw.setName(txtName.getText());
-		iw.setAutoTrim(true);
 		iw.setRememberPath(true);
 		iw.setParent(this);
 		iw.saveImage(image, iw.promptForFile());

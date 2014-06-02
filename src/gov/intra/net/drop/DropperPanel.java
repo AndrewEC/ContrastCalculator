@@ -3,7 +3,7 @@ package gov.intra.net.drop;
 import gov.intra.net.util.Contraster;
 import gov.intra.net.util.Key;
 import gov.intra.net.util.Mouse;
-import gov.intra.net.util.Shot;
+import gov.intra.net.util.Capturer;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -58,7 +58,7 @@ public class DropperPanel extends JPanel implements ActionListener {
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		if (dropper.isInvertable()) {
-			Color c = Contraster.invert(Shot.extractColour(dropper.getImage(), x, y));
+			Color c = Contraster.invert(Capturer.extractColour(dropper.getImage(), x, y));
 			g2.setColor(c);
 		} else {
 			g2.setColor(Color.black);
@@ -108,7 +108,7 @@ public class DropperPanel extends JPanel implements ActionListener {
 				}
 			}
 			if (mouse.isLeft()) {
-				Color c = Shot.extractColour(dropper.getImage(), x, y);
+				Color c = Capturer.extractColour(dropper.getImage(), x, y);
 				result.onColourObtained(c);
 			}
 		}

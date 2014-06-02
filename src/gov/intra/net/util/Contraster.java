@@ -88,9 +88,6 @@ public class Contraster {
 	}
 
 	public static BufferedImage invertImage(BufferedImage buffer) {
-		if (buffer == null || buffer.getWidth() == 0 || buffer.getHeight() == 0) {
-			throw new IllegalArgumentException("BufferedImage instance cannot be null and must have a width and height more than 0.");
-		}
 		for (int x = 0; x < buffer.getWidth(); x++) {
 			for (int y = 0; y < buffer.getHeight(); y++) {
 				int col = buffer.getRGB(x, y);
@@ -109,9 +106,6 @@ public class Contraster {
 	}
 
 	public static BufferedImage convertImage(BufferedImage buffer, BlindColour colour) {
-		if (buffer == null || buffer.getWidth() == 0 || buffer.getHeight() == 0) {
-			throw new IllegalArgumentException("BufferedImage instance cannot be null and must have a width and height more than 0.");
-		}
 		switch (colour) {
 		case NORMAL:
 			return buffer;

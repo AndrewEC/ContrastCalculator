@@ -1,7 +1,7 @@
 package gov.intra.net.drop;
 
 import gov.intra.net.util.Contraster;
-import gov.intra.net.util.Shot;
+import gov.intra.net.util.Capturer;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -40,7 +40,7 @@ public class Dropper extends JFrame {
 			e.printStackTrace();
 		}
 
-		Rectangle r = Shot.getMultiSize();
+		Rectangle r = Capturer.getMultiSize();
 		setSize(Constants.DROPPER_MAG_SIZE, Constants.DROPPER_MAG_SIZE);
 
 		dPanel = new DropperPanel(new Dimension(r.width, r.height), this, result);
@@ -63,9 +63,9 @@ public class Dropper extends JFrame {
 
 	public void openDropper(boolean invertable, BlindColour colour, boolean blindMod) {
 		if (blindMod) {
-			this.image = Contraster.convertImage(Shot.getMultiScreenShot(this), colour);
+			this.image = Contraster.convertImage(Capturer.getMultiScreenShot(this), colour);
 		}else{
-			this.image = Shot.getMultiScreenShot(this);
+			this.image = Capturer.getMultiScreenShot(this);
 		}
 		this.invertable = invertable;
 		setVisible(true);

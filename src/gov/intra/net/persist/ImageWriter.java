@@ -38,7 +38,7 @@ public class ImageWriter {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = (autoTrim) ? name.trim() : name;
 	}
 
 	public String getExt() {
@@ -46,7 +46,7 @@ public class ImageWriter {
 	}
 
 	public void setExt(String ext) {
-		this.ext = ext;
+		this.ext = (autoTrim) ? ext.trim() : ext;
 	}
 
 	public void setParent(Component parent) {
@@ -56,23 +56,11 @@ public class ImageWriter {
 	}
 
 	public boolean validate() {
-		if (name == null) {
+		if (name.equals("")) {
 			if (useParent) {
 				JOptionPane.showMessageDialog(parent, "The specified file name cannot be null, empty or white space.", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			return false;
-		}
-
-		if (ext == null) {
-			if (useParent) {
-				JOptionPane.showMessageDialog(parent, "The speficied file extension cannot be null or blank\nand must contain a '.'", "Error", JOptionPane.ERROR_MESSAGE);
-			}
-			return false;
-		}
-
-		if (autoTrim) {
-			name = name.trim();
-			ext = ext.trim();
 		}
 
 		if (ext.equals("") || !ext.contains(".")) {
@@ -80,12 +68,6 @@ public class ImageWriter {
 				JOptionPane.showMessageDialog(parent, "The speficied file extension cannot be null or blank\nand must contain a '.'", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			return false;
-		}
-
-		if (name.equals("")) {
-			if (useParent) {
-				JOptionPane.showMessageDialog(parent, "The specified file name cannot be null, empty or white space.", "Error", JOptionPane.ERROR_MESSAGE);
-			}
 		}
 
 		return true;
@@ -141,41 +123,39 @@ public class ImageWriter {
 		}
 		return false;
 	}
-	
-	public void saveText(){
-		
-	}
 
 	public void saveImage(BufferedImage image, File path) {
+		boolean save = true;
 		if (image == null) {
 			if (useParent) {
 				JOptionPane.showMessageDialog(parent, "Specified image to save cannot be null.", "Error", JOptionPane.ERROR_MESSAGE);
 			}
-			return;
+			save = false;
 		}
 
 		if (!validate()) {
-			return;
+			save = false;
 		}
 
 		if (path == null) {
-			return;
+			save = false;
 		}
 
-		if (willOverwrite(name, ext, path)) {
-			if (!approveOverwrite()) {
-				return;
+		if (save) {
+			if (willOverwrite(name, ext, path)) {
+				if (!approveOverwrite()) {
+					save = false;
+				}
 			}
-		}
-
-		try {
-			File ff = new File(path, name + ext);
-			ImageIO.write(image, ext.replace(".", ""), new File(path, name + ext));
-			if (useParent) {
-				JOptionPane.showMessageDialog(parent, "Image was successfully saved to\n" + ff.getAbsolutePath(), "Save Complete", JOptionPane.INFORMATION_MESSAGE);
+			try {
+				File ff = new File(path, name + ext);
+				ImageIO.write(image, ext.replace(".", ""), new File(path, name + ext));
+				if (useParent) {
+					JOptionPane.showMessageDialog(parent, "Image was successfully saved to\n" + ff.getAbsolutePath(), "Save Complete", JOptionPane.INFORMATION_MESSAGE);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 }

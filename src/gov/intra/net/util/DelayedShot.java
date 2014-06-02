@@ -14,20 +14,17 @@ public class DelayedShot extends Thread {
 	private BufferedImage image;
 	private int delay;
 
-	public DelayedShot(User32 instance, int delay, ICapture cap) {
-		if(instance == null){
-			throw new IllegalArgumentException("User32 instance cannot be null.");
-		}
-		if(cap == null){
-			throw new IllegalArgumentException("ICapture instance cannot be null.");
-		}
+	public DelayedShot(User32 instance, ICapture cap) {
 		this.cap = cap;
 		this.instance = instance;
-		this.delay = delay;
 	}
-	
+
 	public synchronized void setWindowName(String windowName) {
 		this.windowName = windowName;
+	}
+
+	public synchronized void setDelay(int delay) {
+		this.delay = delay;
 	}
 
 	@Override
@@ -51,7 +48,7 @@ public class DelayedShot extends Thread {
 			e.printStackTrace();
 		}
 
-		image = Shot.getScreenShot(r, null);
+		image = Capturer.getScreenShot(r, null);
 		cap.onCapture(image);
 
 		hwnd = WindowIdentifier.getHandle(instance, "Contrast Calculator", null);

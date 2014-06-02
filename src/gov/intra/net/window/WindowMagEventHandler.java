@@ -25,9 +25,6 @@ public class WindowMagEventHandler implements ActionListener, ICapture {
 	private User32 instance;
 
 	public WindowMagEventHandler(WindowMagnifier mag) {
-		if (mag == null) {
-			throw new IllegalArgumentException("WindowMagnifier instance cannot be null.");
-		}
 		this.mag = mag;
 		instance = (User32) Native.loadLibrary("user32", User32.class, W32APIOptions.DEFAULT_OPTIONS);
 	}
@@ -55,7 +52,8 @@ public class WindowMagEventHandler implements ActionListener, ICapture {
 					e1.printStackTrace();
 				}
 			}
-			shot = new DelayedShot(instance, mag.getDelay(), this);
+			shot = new DelayedShot(instance, this);
+			shot.setDelay(mag.getDelay());
 			shot.setWindowName(name);
 			shot.start();
 		}
