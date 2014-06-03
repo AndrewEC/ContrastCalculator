@@ -26,14 +26,11 @@ public class MenuButtonHandle extends FrameEventBase {
 		} else if (command.equals("switch slider")) {
 			JCheckBox b = frame.getCbShowSliders();
 			b.setSelected(!b.isSelected());
-		} else if (command.equals("switch window mag")) {
-			JCheckBox b = frame.getCbEnableWindowMag();
-			b.setSelected(!b.isSelected());
 		} else if (command.equals("switch on top")) {
 			JCheckBox c = frame.getCbTop();
 			c.setSelected(!c.isSelected());
 		}
-	}	
+	}
 
 	private void setBlind(int index) {
 		ButtonGroup b = frame.getBlindGroup();

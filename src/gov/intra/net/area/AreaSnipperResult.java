@@ -2,8 +2,8 @@ package gov.intra.net.area;
 
 import gov.intra.net.persist.ClipboardImage;
 import gov.intra.net.persist.ImageWriter;
-import gov.intra.net.util.Contraster;
 import gov.intra.net.util.Capturer;
+import gov.intra.net.util.Contraster;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -20,6 +20,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -75,34 +76,44 @@ public class AreaSnipperResult extends JFrame implements ActionListener, Compone
 				}
 			}
 		};
-		panel.setBounds(11, 75, 100, 100);
+		panel.setBounds(11, 68, 100, 100);
 		getContentPane().add(panel);
 
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-		btnSave = new JButton("Save");
-		btnSave.setBounds(8, 7, 89, 23);
+		btnSave = new JButton("");
+		try {
+			btnSave.setIcon(new ImageIcon(AreaSnipperResult.class.getResource("/resources/SaveIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnSave.setBounds(52, 5, 40, 40);
 		btnSave.setActionCommand("save");
 		btnSave.addActionListener(this);
 		registerCommand(btnSave, KeyEvent.VK_S);
 		getContentPane().add(btnSave);
 
 		txtName = new JTextField();
-		txtName.setBounds(141, 9, 86, 20);
+		txtName.setBounds(111, 23, 86, 20);
 		getContentPane().add(txtName);
 		txtName.setColumns(10);
 
 		JLabel lblName = new JLabel("Name:");
-		lblName.setBounds(102, 12, 46, 14);
+		lblName.setBounds(97, 6, 46, 14);
 		getContentPane().add(lblName);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(11, 63, 234, 5);
+		separator.setBounds(11, 53, 235, 3);
 		getContentPane().add(separator);
 
-		btnClose = new JButton("Close");
-		btnClose.setBounds(128, 33, 89, 23);
+		btnClose = new JButton("");
+		try {
+			btnClose.setIcon(new ImageIcon(AreaSnipperResult.class.getResource("/resources/CloseIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnClose.setBounds(202, 5, 40, 40);
 		btnClose.setActionCommand("close");
 		btnClose.addActionListener(this);
 		registerCommand(btnClose, KeyEvent.VK_D);
@@ -114,8 +125,13 @@ public class AreaSnipperResult extends JFrame implements ActionListener, Compone
 		registerCommand(focus, KeyEvent.VK_F);
 		getContentPane().add(focus);
 
-		btnCopyImage = new JButton("Copy Image");
-		btnCopyImage.setBounds(8, 33, 115, 23);
+		btnCopyImage = new JButton("");
+		try {
+			btnCopyImage.setIcon(new ImageIcon(AreaSnipperResult.class.getResource("/resources/CopyIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnCopyImage.setBounds(5, 5, 40, 40);
 		btnCopyImage.addActionListener(this);
 		btnCopyImage.setActionCommand("copy image");
 		getContentPane().add(btnCopyImage);
@@ -135,11 +151,11 @@ public class AreaSnipperResult extends JFrame implements ActionListener, Compone
 	}
 
 	private void sizeComponents(int width, int height) {
-		if (width < 350) {
-			width = 350;
+		if (width < Constants.MIN_MAG_RESULT_WIDTH) {
+			width = Constants.MIN_MAG_RESULT_WIDTH;
 		}
-		if (height < 100) {
-			height = 100;
+		if (height < Constants.MIN_MAG_RESULT_HEIGHT) {
+			height = Constants.MIN_MAG_RESULT_HEIGHT;
 		}
 		panel.setSize(width, height);
 		this.setSize(width + Constants.MAG_RESULT_WIDTH_MOD + 10, height + Constants.MAG_RESULT_HEIGHT_MOD + 10);
@@ -153,7 +169,7 @@ public class AreaSnipperResult extends JFrame implements ActionListener, Compone
 		iw.setName(txtName.getText());
 		iw.setRememberPath(true);
 		iw.setParent(this);
-		iw.saveImage(image, iw.promptForFile());
+		iw.saveImage(image);
 	}
 
 	public void actionPerformed(ActionEvent e) {

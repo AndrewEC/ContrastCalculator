@@ -2,7 +2,8 @@ package resources;
 
 public class Constants {
 	
-	public static final int MAG_RESULT_WIDTH_MOD = 22, MAG_RESULT_HEIGHT_MOD = 100;
+	public static final int MAG_RESULT_WIDTH_MOD = 22, MAG_RESULT_HEIGHT_MOD = 93;
+	public static final int MIN_MAG_RESULT_WIDTH = 245, MIN_MAG_RESULT_HEIGHT = 100;
 	public static final int AREA_SNIPPER_SIZE = 50;
 	
 	public static final int DROPPER_MAG_SIZE = 192, DROPPER_GRAB_SIZE = 24;

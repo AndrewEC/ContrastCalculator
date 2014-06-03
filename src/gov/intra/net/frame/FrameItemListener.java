@@ -16,8 +16,6 @@ public class FrameItemListener implements ItemListener {
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getSource() == frame.getCbTop()) {
 			frame.setAlwaysOnTop(frame.getCbTop().isSelected());
-		} else if (e.getSource() == frame.getCbEnableWindowMag()) {
-			frame.getPanel().getBtnMagnify().setEnabled(frame.getCbEnableWindowMag().isSelected());
 		} else if (e.getSource() == frame.getCbShowSliders()) {
 			Panel panel = frame.getPanel();
 			if (frame.getCbShowSliders().isSelected()) {

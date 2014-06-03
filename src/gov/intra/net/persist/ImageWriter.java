@@ -124,7 +124,7 @@ public class ImageWriter {
 		return false;
 	}
 
-	public void saveImage(BufferedImage image, File path) {
+	public void saveImage(BufferedImage image) {
 		boolean save = true;
 		if (image == null) {
 			if (useParent) {
@@ -137,19 +137,17 @@ public class ImageWriter {
 			save = false;
 		}
 
-		if (path == null) {
-			save = false;
-		}
-
 		if (save) {
+			File path = promptForFile();
+			
 			if (willOverwrite(name, ext, path)) {
 				if (!approveOverwrite()) {
-					save = false;
+					return;
 				}
 			}
 			try {
 				File ff = new File(path, name + ext);
-				ImageIO.write(image, ext.replace(".", ""), new File(path, name + ext));
+				ImageIO.write(image, ext.replace(".", ""), ff);
 				if (useParent) {
 					JOptionPane.showMessageDialog(parent, "Image was successfully saved to\n" + ff.getAbsolutePath(), "Save Complete", JOptionPane.INFORMATION_MESSAGE);
 				}

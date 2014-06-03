@@ -1,6 +1,6 @@
 package gov.intra.net.frame;
 
-public interface EventBase {
+public interface EventHandle {
 
 	public void onEvent(String command);
 

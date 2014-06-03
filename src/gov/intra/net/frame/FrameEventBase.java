@@ -1,6 +1,6 @@
 package gov.intra.net.frame;
 
-public abstract class FrameEventBase implements EventBase {
+public abstract class FrameEventBase implements EventHandle {
 	
 	protected final Frame frame;
 	

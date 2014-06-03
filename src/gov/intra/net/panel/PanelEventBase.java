@@ -1,9 +1,9 @@
 package gov.intra.net.panel;
 
-import gov.intra.net.frame.EventBase;
+import gov.intra.net.frame.EventHandle;
 import gov.intra.net.frame.Frame;
 
-public abstract class PanelEventBase implements EventBase {
+public abstract class PanelEventBase implements EventHandle {
 
 	protected final Frame frame;
 	protected final Panel panel;

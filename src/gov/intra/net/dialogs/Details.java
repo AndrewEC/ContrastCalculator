@@ -7,6 +7,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -18,7 +19,7 @@ public class Details extends GenericDialog implements IDialogHandle {
 
 	public Details(Frame frame) {
 		super(frame, "Details");
-		setSize(239, 467);
+		setSize(239, 453);
 
 		registerCallback(this);
 
@@ -31,16 +32,26 @@ public class Details extends GenericDialog implements IDialogHandle {
 		text.setTabSize(4);
 		scrollPane.setViewportView(text);
 
-		JButton btnCopy = new JButton("Copy to Clipboard");
-		btnCopy.setBounds(38, 376, 170, 25);
+		JButton btnCopy = new JButton("");
+		try {
+			btnCopy.setIcon(new ImageIcon(Details.class.getResource("/resources/CopyIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnCopy.setBounds(137, 377, 40, 40);
 		btnCopy.addActionListener(this);
 		btnCopy.setActionCommand("copy");
 		registerCommand(btnCopy, KeyEvent.VK_W);
 		getContentPane().add(btnCopy);
 
-		JButton btnClose = new JButton("Close");
+		JButton btnClose = new JButton("");
+		try {
+			btnClose.setIcon(new ImageIcon(Details.class.getResource("/resources/CloseIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		btnClose.addActionListener(this);
-		btnClose.setBounds(139, 407, 85, 25);
+		btnClose.setBounds(182, 377, 40, 40);
 		btnClose.setActionCommand("close");
 		registerForClose(btnClose);
 		getContentPane().add(btnClose);

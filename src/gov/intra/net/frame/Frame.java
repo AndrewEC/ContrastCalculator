@@ -19,7 +19,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -30,8 +29,7 @@ public class Frame extends JFrame {
 
 	private Panel panel;
 	private ButtonGroup bgBlind;
-	private JTextField txtResultName, txtExpName;
-	private JCheckBox cbTop, cbEnableWindowMag, cbColourInvert, cbShowSliders, cbBlindPicker;
+	private JCheckBox cbTop, cbColourInvert, cbShowSliders, cbBlindPicker;
 	private JMenu mnColourBlind;
 
 	private FrameItemListener itemListener;
@@ -54,9 +52,9 @@ public class Frame extends JFrame {
 
 		event = new EventDispatcher();
 		itemListener = new FrameItemListener(this);
-		event.addEvent(new DialogEventHandle(this));
-		event.addEvent(new FocusEventHandle(this));
-		event.addEvent(new MenuButtonHandle(this));
+		event.addEventHandle(new DialogEventHandle(this));
+		event.addEventHandle(new FocusEventHandle(this));
+		event.addEventHandle(new MenuButtonHandle(this));
 
 		panel = new Panel(this);
 		getContentPane().add(panel);
@@ -72,6 +70,16 @@ public class Frame extends JFrame {
 		mnColourPicker.setActionCommand("open colour picker");
 		mnColourPicker.addActionListener(event);
 		mnFile.add(mnColourPicker);
+		
+		JMenuItem mnClipper = new JMenuItem("Open Area Snipper");
+		mnClipper.setActionCommand("snip area");
+		mnClipper.addActionListener(panel.getEventHandle());
+		mnFile.add(mnClipper);
+		
+		JMenuItem mnWindow = new JMenuItem("Open Window Magnifier");
+		mnWindow.setActionCommand("magnify window");
+		mnWindow.addActionListener(panel.getEventHandle());
+		mnFile.add(mnWindow);
 
 		JMenuItem mnExit = new JMenuItem("Exit");
 		mnExit.setActionCommand("menu exit");
@@ -137,10 +145,6 @@ public class Frame extends JFrame {
 		mnOther.add(cbTop);
 		cbTop.addItemListener(itemListener);
 
-		cbEnableWindowMag = new JCheckBox("Enable Window Magnifier");
-		mnOther.add(cbEnableWindowMag);
-		cbEnableWindowMag.addItemListener(itemListener);
-
 		cbShowSliders = new JCheckBox("Show RGB Sliders");
 		mnOther.add(cbShowSliders);
 		cbShowSliders.addItemListener(itemListener);
@@ -173,33 +177,6 @@ public class Frame extends JFrame {
 		mnGuide.setActionCommand("menu guide");
 		event.registerCommand(mnGuide, KeyEvent.VK_M);
 		mnHelp.add(mnGuide);
-
-		JButton btnGetFocus = new JButton("Get Focus");
-		btnGetFocus.addActionListener(event);
-		btnGetFocus.setActionCommand("get focus");
-		event.registerCommand(btnGetFocus, KeyEvent.VK_O);
-		menuBar.add(btnGetFocus);
-		// initialize help menu
-
-		// initialize export menu
-		JMenu mnExport = new JMenu("Export");
-		mnOptions.add(mnExport);
-
-		JMenu mnType = new JMenu("Type");
-		mnExport.add(mnType);
-
-		JMenu mnName = new JMenu("Name");
-		mnExport.add(mnName);
-
-		txtExpName = new JTextField();
-		txtExpName.setText("Export");
-		txtExpName.setColumns(10);
-		mnName.add(txtExpName);
-
-		JButton btnLocation = new JButton("Location");
-		btnLocation.addActionListener(event);
-		btnLocation.setActionCommand("export location");
-		mnExport.add(btnLocation);
 		// initialize export menu
 
 		// initialize button groups
@@ -236,12 +213,6 @@ public class Frame extends JFrame {
 		hTop.setActionCommand("switch on top");
 		event.registerCommand(hTop, KeyEvent.VK_Y);
 		panel.add(hTop);
-
-		JButton hWindowMag = new JButton("");
-		hWindowMag.setBounds(r);
-		hWindowMag.setActionCommand("switch window mag");
-		event.registerCommand(hWindowMag, KeyEvent.VK_E);
-		panel.add(hWindowMag);
 
 		JButton hInvert = new JButton("");
 		hInvert.setBounds(r);
@@ -293,10 +264,6 @@ public class Frame extends JFrame {
 		return bgBlind;
 	}
 
-	public JCheckBox getCbEnableWindowMag() {
-		return cbEnableWindowMag;
-	}
-
 	public JCheckBox getCbTop() {
 		return cbTop;
 	}
@@ -307,14 +274,6 @@ public class Frame extends JFrame {
 
 	public EventDispatcher getEvent() {
 		return event;
-	}
-
-	public JTextField getExpName() {
-		return txtExpName;
-	}
-
-	public JTextField getResultsName() {
-		return txtResultName;
 	}
 
 	public JCheckBox getInvertCheck() {
@@ -331,10 +290,6 @@ public class Frame extends JFrame {
 
 	public JCheckBox getBlindPicker() {
 		return cbBlindPicker;
-	}
-
-	public boolean getWindowEnabled() {
-		return cbEnableWindowMag.isSelected();
 	}
 
 	public boolean isUsingWebLaF() {

@@ -3,7 +3,6 @@ package gov.intra.net.area;
 import gov.intra.net.util.Key;
 
 import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -53,7 +52,7 @@ public class AreaSnipperPanel extends JPanel implements ActionListener, MouseLis
 		normal = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1);
 		alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f);
 
-		timer = new Timer(20, this);
+		timer = new Timer(30, this);
 
 		BufferedImage c = new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB);
 		Cursor blank = Toolkit.getDefaultToolkit().createCustomCursor(c, new Point(0, 0), "blank");
@@ -74,15 +73,16 @@ public class AreaSnipperPanel extends JPanel implements ActionListener, MouseLis
 			int dx = ox - loc.x;
 			int dy = oy - loc.y;
 			
+			g2.clearRect(dx + 3, dy + 3, w - 3, h - 3);
+			
 			g2.setColor(Color.red);
 			g2.drawRect(dx, dy, w, h);
-			g2.setStroke(new BasicStroke(1));
 			
-			g2.clearRect(dx + 3, dy + 3, w - 3, h - 3);
-
 			g2.setColor(Color.black);
 			g2.drawLine(dx + w - 10, dy + h, dx + w + 10, dy + h);
 			g2.drawLine(dx + w, dy + h + 10, dx + w, dy + h - 10);
+			
+			g2.setColor(Color.red);
 		}
 		g2.drawLine(half - 10, half, half + 10, half);
 		g2.drawLine(half, half - 10, half, half + 10);

@@ -36,27 +36,27 @@ public class Panel extends JPanel {
 
 	private JPanel panel;
 	private TextPreview aaSmall, aaLarge, aaaSmall, aaaLarge;
-	
+
 	private EventDispatcher event;
 	private PanelChangeHandle changeHandle;
 	private DocumentEventHandle hex;
 	private final Frame frame;
 
 	public Panel(Frame frame) {
-		//initialize general components and values
+		// initialize general components and values
 		this.frame = frame;
 		setSize(410, 312);
 		setDoubleBuffered(false);
 		setLayout(null);
 
 		event = new EventDispatcher();
-		event.addEvent(new PanelSnipHandle(frame, this));
-		event.addEvent(new PanelDropperHandle(frame, this));
+		event.addEventHandle(new PanelSnipHandle(frame, this));
+		event.addEventHandle(new PanelDropperHandle(frame, this));
 		changeHandle = new PanelChangeHandle(this);
 		hex = new DocumentEventHandle(this);
-		//initialize general components and values
+		// initialize general components and values
 
-		//initialize foreground specific components
+		// initialize foreground specific components
 		JButton btnForeSelect = new JButton("");
 		try {
 			btnForeSelect.setIcon(new ImageIcon(Panel.class.getResource("/resources/DropperIcon.png")));
@@ -122,9 +122,9 @@ public class Panel extends JPanel {
 		foreCol.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		foreCol.setBounds(150, 14, 40, 40);
 		add(foreCol);
-		//initialize foreground specific components
+		// initialize foreground specific components
 
-		//initialize background specific components
+		// initialize background specific components
 		JButton btnBackSelect = new JButton("");
 		try {
 			btnBackSelect.setIcon(new ImageIcon(Panel.class.getResource("/resources/DropperIcon.png")));
@@ -190,17 +190,17 @@ public class Panel extends JPanel {
 		backCol.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		backCol.setBounds(355, 14, 40, 40);
 		add(backCol);
-		//initialize magnifier components
+		// initialize magnifier components
 
-		//initialize appearance based components
+		// initialize appearance based components
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBackground(Color.BLACK);
 		separator.setBounds(198, 6, 9, 79);
 		add(separator);
-		//initialize appearance based components
+		// initialize appearance based components
 
-		//initialize other items
+		// initialize other items
 		JButton focusFore = new JButton("");
 		focusFore.setBounds(-100, -100, 1, 1);
 		focusFore.setActionCommand("focus fore");
@@ -217,28 +217,42 @@ public class Panel extends JPanel {
 		panel.setBounds(5, 91, 399, 220);
 		add(panel);
 		panel.setLayout(null);
-		//initialize background specific components
+		// initialize background specific components
 
-		//initialize result components
+		// initialize result components
 		JButton btnSwap = new JButton("Swap");
-		btnSwap.setBounds(150, 0, 85, 25);
+		try {
+			btnSwap.setIcon(new ImageIcon(Panel.class.getResource("/resources/SwapIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnSwap.setBounds(140, 0, 106, 25);
 		panel.add(btnSwap);
 		btnSwap.addActionListener(event);
 		btnSwap.setActionCommand("swap");
 		event.registerCommand(btnSwap, KeyEvent.VK_R);
-		//initialize result components
+		// initialize result components
 
-		//initialize magnifier components
+		// initialize magnifier components
 		btnMagnifyWindow = new JButton("Magnify Window");
-		btnMagnifyWindow.setBounds(28, 35, 155, 25);
+		try {
+			btnMagnifyWindow.setIcon(new ImageIcon(Panel.class.getResource("/resources/ZoomIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnMagnifyWindow.setBounds(10, 35, 181, 25);
 		panel.add(btnMagnifyWindow);
-		btnMagnifyWindow.setEnabled(false);
 		btnMagnifyWindow.addActionListener(event);
 		btnMagnifyWindow.setActionCommand("magnify window");
 		event.registerCommand(btnMagnifyWindow, KeyEvent.VK_C);
 
 		JButton btnAreaSnipper = new JButton("Area Snipper");
-		btnAreaSnipper.setBounds(200, 35, 124, 25);
+		try {
+			btnAreaSnipper.setIcon(new ImageIcon(Panel.class.getResource("/resources/SnipperIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnAreaSnipper.setBounds(198, 35, 188, 25);
 		panel.add(btnAreaSnipper);
 		btnAreaSnipper.addActionListener(event);
 		btnAreaSnipper.setActionCommand("snip area");
@@ -378,7 +392,7 @@ public class Panel extends JPanel {
 		JLabel lblBB = new JLabel("B:");
 		lblBB.setBounds(199, 62, 20, 15);
 		sliderPanel.add(lblBB);
-		//initialize other items
+		// initialize other items
 
 		PanelUtil.setForeColour(this, Color.white, true);
 		PanelUtil.setBackColour(this, Color.black, true);
@@ -482,5 +496,9 @@ public class Panel extends JPanel {
 
 	public JPanel getMainPanel() {
 		return panel;
+	}
+
+	public EventDispatcher getEventHandle() {
+		return event;
 	}
 }

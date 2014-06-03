@@ -13,12 +13,12 @@ import javax.swing.KeyStroke;
 
 public class EventDispatcher implements ActionListener {
 
-	private List<EventBase> events;
+	private List<EventHandle> events;
 	private AbstractAction aa;
 
 	@SuppressWarnings("serial")
 	public EventDispatcher() {
-		events = new ArrayList<EventBase>();
+		events = new ArrayList<EventHandle>();
 		aa = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
 				invokeEvent(e);
@@ -26,7 +26,7 @@ public class EventDispatcher implements ActionListener {
 		};
 	}
 
-	public void addEvent(EventBase e) {
+	public void addEventHandle(EventHandle e) {
 		if (e != null && !events.contains(e)) {
 			events.add(e);
 		}
@@ -42,7 +42,7 @@ public class EventDispatcher implements ActionListener {
 		if (command.equals("")) {
 			return;
 		}
-		for (EventBase event : events) {
+		for (EventHandle event : events) {
 			event.onEvent(command);
 		}
 	}

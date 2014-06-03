@@ -76,7 +76,7 @@ public class WindowMagEventHandler implements ActionListener, ICapture {
 		iw.setParent(mag);
 		iw.setName(mag.getFileName().getText());
 		iw.setExt(mag.getExt());
-		iw.saveImage(mag.getImagePanel().getImage(), iw.promptForFile());
+		iw.saveImage(mag.getImagePanel().getImage());
 	}
 
 	public void onCapture(BufferedImage image) {
