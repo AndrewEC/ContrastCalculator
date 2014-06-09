@@ -2,6 +2,8 @@ package gov.intra.net.dialogs;
 
 import gov.intra.net.frame.Frame;
 
+import java.awt.Rectangle;
+
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
@@ -14,17 +16,12 @@ public class Guide extends GenericDialog {
 		super(frame, "Contraster Calculator Guide");
 		setBounds(100, 100, 600, 650);
 
-		JButton btnClose = new JButton("Close");
-		btnClose.addActionListener(this);
-		btnClose.setActionCommand("close");
-		btnClose.setBounds(495, 593, 85, 25);
-		getContentPane().add(btnClose);
+		buildCloseButton(new Rectangle(495, 593, 85, 25));
 
 		JButton focus = new JButton("");
 		focus.setBounds(-100, -100, 0, 0);
 		focus.setActionCommand("focus");
 		getContentPane().add(focus);
-		registerForClose(btnClose);
 
 		final JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(8, 7, 574, 579);

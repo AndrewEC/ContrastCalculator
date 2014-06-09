@@ -76,44 +76,46 @@ public class AreaSnipperResult extends JFrame implements ActionListener, Compone
 				}
 			}
 		};
-		panel.setBounds(11, 68, 100, 100);
+		panel.setBounds(11, 84, 100, 100);
 		getContentPane().add(panel);
 
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-		btnSave = new JButton("");
+		btnSave = new JButton("Save Capture");
+		btnSave.setToolTipText("Save image");
 		try {
 			btnSave.setIcon(new ImageIcon(AreaSnipperResult.class.getResource("/resources/SaveIcon.png")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		btnSave.setBounds(52, 5, 40, 40);
+		btnSave.setBounds(11, 7, 160, 24);
 		btnSave.setActionCommand("save");
 		btnSave.addActionListener(this);
 		registerCommand(btnSave, KeyEvent.VK_S);
 		getContentPane().add(btnSave);
 
 		txtName = new JTextField();
-		txtName.setBounds(111, 23, 86, 20);
+		txtName.setBounds(177, 26, 101, 20);
 		getContentPane().add(txtName);
 		txtName.setColumns(10);
 
 		JLabel lblName = new JLabel("Name:");
-		lblName.setBounds(97, 6, 46, 14);
+		lblName.setBounds(177, 9, 46, 14);
 		getContentPane().add(lblName);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(11, 53, 235, 3);
+		separator.setBounds(11, 69, 235, 3);
 		getContentPane().add(separator);
 
-		btnClose = new JButton("");
+		btnClose = new JButton("Close");
+		btnClose.setToolTipText("Close snipper result view");
 		try {
 			btnClose.setIcon(new ImageIcon(AreaSnipperResult.class.getResource("/resources/CloseIcon.png")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		btnClose.setBounds(202, 5, 40, 40);
+		btnClose.setBounds(288, 7, 93, 24);
 		btnClose.setActionCommand("close");
 		btnClose.addActionListener(this);
 		registerCommand(btnClose, KeyEvent.VK_D);
@@ -125,13 +127,14 @@ public class AreaSnipperResult extends JFrame implements ActionListener, Compone
 		registerCommand(focus, KeyEvent.VK_F);
 		getContentPane().add(focus);
 
-		btnCopyImage = new JButton("");
+		btnCopyImage = new JButton("Copy to Clipboard");
+		btnCopyImage.setToolTipText("Copy image to clipboard");
 		try {
 			btnCopyImage.setIcon(new ImageIcon(AreaSnipperResult.class.getResource("/resources/CopyIcon.png")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		btnCopyImage.setBounds(5, 5, 40, 40);
+		btnCopyImage.setBounds(11, 35, 160, 24);
 		btnCopyImage.addActionListener(this);
 		btnCopyImage.setActionCommand("copy image");
 		getContentPane().add(btnCopyImage);
@@ -146,7 +149,6 @@ public class AreaSnipperResult extends JFrame implements ActionListener, Compone
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(this, "Could not grab specified portion of the screen", "Error", JOptionPane.ERROR_MESSAGE);
-			dispose();
 		}
 	}
 

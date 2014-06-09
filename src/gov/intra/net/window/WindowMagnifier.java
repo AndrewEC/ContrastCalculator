@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -39,7 +40,6 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 
 	private WindowMagImagePanel imagePanel;
 	private WindowMagEventHandler event;
-	private JSeparator separator_1;
 
 	private JRadioButton rbJpg, rbGif, rbPng;
 	private ButtonGroup ext;
@@ -50,6 +50,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 	private JSlider zoomSlider, delaySlider;
 
 	private final Frame frame;
+	private JSeparator separator_1;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public WindowMagnifier(Frame frame) {
@@ -81,13 +82,25 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		windowList = new JList(new DefaultListModel());
 		scrollPane.setViewportView(windowList);
 
-		btnView = new JButton("View");
-		btnView.setBounds(18, 198, 145, 23);
+		btnView = new JButton("View Selected");
+		try {
+			btnView.setIcon(new ImageIcon(WindowMagnifier.class.getResource("/resources/ViewIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnView.setToolTipText("Capture the currently selected window");
+		btnView.setBounds(22, 226, 140, 24);
 		btnView.addActionListener(event);
 		getContentPane().add(btnView);
 
-		btnRefresh = new JButton("Refresh");
-		btnRefresh.setBounds(18, 223, 144, 23);
+		btnRefresh = new JButton("Refresh List");
+		try {
+			btnRefresh.setIcon(new ImageIcon(WindowMagnifier.class.getResource("/resources/SwapIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnRefresh.setToolTipText("Refresh the list of currently open windows");
+		btnRefresh.setBounds(22, 198, 140, 24);
 		btnRefresh.addActionListener(event);
 		getContentPane().add(btnRefresh);
 
@@ -100,22 +113,29 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		imagePanel = new WindowMagImagePanel();
 		imageScrollPanel.setViewportView(imagePanel);
 
-		btnSave = new JButton("Save");
-		btnSave.setBounds(19, 263, 142, 23);
+		btnSave = new JButton();
+		btnSave.setText("Save Capture");
+		try {
+			btnSave.setIcon(new ImageIcon(WindowMagnifier.class.getResource("/resources/SaveIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnSave.setToolTipText("Save current image");
+		btnSave.setBounds(21, 268, 140, 24);
 		btnSave.addActionListener(event);
 		getContentPane().add(btnSave);
 
 		txtFileName = new JTextField();
-		txtFileName.setBounds(20, 309, 134, 28);
+		txtFileName.setBounds(21, 318, 134, 28);
 		getContentPane().add(txtFileName);
 		txtFileName.setColumns(10);
 
 		JLabel lblSaveName = new JLabel("Save Name:");
-		lblSaveName.setBounds(10, 290, 99, 16);
+		lblSaveName.setBounds(11, 299, 99, 16);
 		getContentPane().add(lblSaveName);
 
 		lblZoom = new JLabel("Zoom: 2");
-		lblZoom.setBounds(13, 447, 119, 16);
+		lblZoom.setBounds(14, 456, 119, 16);
 		getContentPane().add(lblZoom);
 
 		zoomSlider = new JSlider();
@@ -124,31 +144,27 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		zoomSlider.setMajorTickSpacing(2);
 		zoomSlider.setMinimum(1);
 		zoomSlider.setMaximum(50);
-		zoomSlider.setBounds(12, 471, 154, 21);
+		zoomSlider.setBounds(13, 480, 154, 21);
 		getContentPane().add(zoomSlider);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(7, 437, 160, 6);
+		separator.setBounds(8, 446, 160, 6);
 		getContentPane().add(separator);
 
-		separator_1 = new JSeparator();
-		separator_1.setBounds(9, 253, 159, 8);
-		getContentPane().add(separator_1);
-
 		JLabel lblImageType = new JLabel("Image Type:");
-		lblImageType.setBounds(10, 345, 152, 16);
+		lblImageType.setBounds(11, 354, 152, 16);
 		getContentPane().add(lblImageType);
 
 		rbJpg = new JRadioButton(".jpg");
-		rbJpg.setBounds(24, 368, 115, 18);
+		rbJpg.setBounds(25, 377, 115, 18);
 		getContentPane().add(rbJpg);
 
 		rbGif = new JRadioButton(".gif");
-		rbGif.setBounds(24, 389, 115, 18);
+		rbGif.setBounds(25, 398, 115, 18);
 		getContentPane().add(rbGif);
 
 		rbPng = new JRadioButton(".png");
-		rbPng.setBounds(24, 410, 115, 18);
+		rbPng.setBounds(25, 419, 115, 18);
 		rbPng.setSelected(true);
 		getContentPane().add(rbPng);
 
@@ -158,20 +174,24 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		ext.add(rbPng);
 
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(6, 499, 160, 6);
+		separator_2.setBounds(7, 508, 160, 6);
 		getContentPane().add(separator_2);
 
 		lblViewDelay = new JLabel("View Delay: 500 Millis");
-		lblViewDelay.setBounds(8, 513, 161, 16);
+		lblViewDelay.setBounds(9, 522, 161, 16);
 		getContentPane().add(lblViewDelay);
 
 		delaySlider = new JSlider();
 		delaySlider.setValue(500);
 		delaySlider.setMinimum(500);
 		delaySlider.setMaximum(3000);
-		delaySlider.setBounds(9, 535, 154, 21);
+		delaySlider.setBounds(10, 544, 154, 21);
 		delaySlider.addChangeListener(this);
 		getContentPane().add(delaySlider);
+		
+		separator_1 = new JSeparator();
+		separator_1.setBounds(19, 258, 144, 6);
+		getContentPane().add(separator_1);
 	}
 
 	public JButton getViewButton() {

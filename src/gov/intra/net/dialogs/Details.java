@@ -2,6 +2,7 @@ package gov.intra.net.dialogs;
 
 import gov.intra.net.frame.Frame;
 
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -19,7 +20,7 @@ public class Details extends GenericDialog implements IDialogHandle {
 
 	public Details(Frame frame) {
 		super(frame, "Details");
-		setSize(239, 453);
+		setSize(239, 467);
 
 		registerCallback(this);
 
@@ -32,29 +33,20 @@ public class Details extends GenericDialog implements IDialogHandle {
 		text.setTabSize(4);
 		scrollPane.setViewportView(text);
 
-		JButton btnCopy = new JButton("");
+		JButton btnCopy = new JButton("Copy to Clipboard");
+		btnCopy.setToolTipText("Copy text to clipboard");
 		try {
 			btnCopy.setIcon(new ImageIcon(Details.class.getResource("/resources/CopyIcon.png")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		btnCopy.setBounds(137, 377, 40, 40);
+		btnCopy.setBounds(3, 377, 165, 25);
 		btnCopy.addActionListener(this);
 		btnCopy.setActionCommand("copy");
 		registerCommand(btnCopy, KeyEvent.VK_W);
 		getContentPane().add(btnCopy);
 
-		JButton btnClose = new JButton("");
-		try {
-			btnClose.setIcon(new ImageIcon(Details.class.getResource("/resources/CloseIcon.png")));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		btnClose.addActionListener(this);
-		btnClose.setBounds(182, 377, 40, 40);
-		btnClose.setActionCommand("close");
-		registerForClose(btnClose);
-		getContentPane().add(btnClose);
+		buildCloseButton(new Rectangle(133, 408, 92, 24));
 	}
 
 	public void append(String t) {

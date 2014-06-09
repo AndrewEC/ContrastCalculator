@@ -2,11 +2,10 @@ package gov.intra.net.dialogs;
 
 import gov.intra.net.frame.Frame;
 
-import java.awt.BorderLayout;
+import java.awt.Rectangle;
 
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
@@ -16,22 +15,13 @@ public class Ratios extends GenericDialog {
 	public Ratios(Frame frame) {
 		super(frame, "About Contrast Requirements");
 		setSize(563, 373);
-		getContentPane().setLayout(new BorderLayout());
+		getContentPane().setLayout(null);
 
-		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
-
-		JButton btnClose = new JButton("Close");
-		btnClose.addActionListener(this);
-		btnClose.setBounds(464, 320, 89, 23);
-		btnClose.setActionCommand("close");
-		registerForClose(btnClose);
-		panel.add(btnClose);
+		buildCloseButton(new Rectangle(464, 320, 89, 23));
 
 		final JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(2, 3, 554, 311);
-		panel.add(scrollPane);
+		getContentPane().add(scrollPane);
 
 		JEditorPane content = new JEditorPane();
 		scrollPane.setViewportView(content);
@@ -41,7 +31,7 @@ public class Ratios extends GenericDialog {
 		JButton focus = new JButton("");
 		focus.setBounds(-100, -100, 0, 0);
 		focus.setActionCommand("focus");
-		panel.add(focus);
+		getContentPane().add(focus);
 		registerForFocus(focus, content);
 
 		SwingUtilities.invokeLater(new Runnable() {

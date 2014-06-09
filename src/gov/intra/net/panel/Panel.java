@@ -58,6 +58,7 @@ public class Panel extends JPanel {
 
 		// initialize foreground specific components
 		JButton btnForeSelect = new JButton("");
+		btnForeSelect.setToolTipText("Select foreground colour.");
 		try {
 			btnForeSelect.setIcon(new ImageIcon(Panel.class.getResource("/resources/DropperIcon.png")));
 		} catch (Exception e) {
@@ -126,6 +127,7 @@ public class Panel extends JPanel {
 
 		// initialize background specific components
 		JButton btnBackSelect = new JButton("");
+		btnBackSelect.setToolTipText("Select background colour");
 		try {
 			btnBackSelect.setIcon(new ImageIcon(Panel.class.getResource("/resources/DropperIcon.png")));
 		} catch (Exception e) {
@@ -221,6 +223,7 @@ public class Panel extends JPanel {
 
 		// initialize result components
 		JButton btnSwap = new JButton("Swap");
+		btnSwap.setToolTipText("Swap background and foreground colours");
 		try {
 			btnSwap.setIcon(new ImageIcon(Panel.class.getResource("/resources/SwapIcon.png")));
 		} catch (Exception e) {
@@ -235,6 +238,7 @@ public class Panel extends JPanel {
 
 		// initialize magnifier components
 		btnMagnifyWindow = new JButton("Magnify Window");
+		btnMagnifyWindow.setToolTipText("Open Window Magnifier Tool");
 		try {
 			btnMagnifyWindow.setIcon(new ImageIcon(Panel.class.getResource("/resources/ZoomIcon.png")));
 		} catch (Exception e) {
@@ -247,6 +251,7 @@ public class Panel extends JPanel {
 		event.registerCommand(btnMagnifyWindow, KeyEvent.VK_C);
 
 		JButton btnAreaSnipper = new JButton("Area Snipper");
+		btnAreaSnipper.setToolTipText("Open Area Snipper Tool");
 		try {
 			btnAreaSnipper.setIcon(new ImageIcon(Panel.class.getResource("/resources/SnipperIcon.png")));
 		} catch (Exception e) {
@@ -271,7 +276,13 @@ public class Panel extends JPanel {
 		panel.add(separator_1);
 
 		JButton btnViewDetails = new JButton("View Details");
-		btnViewDetails.setBounds(70, 91, 104, 25);
+		try {
+			btnViewDetails.setIcon(new ImageIcon(Panel.class.getResource("/resources/ViewIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnViewDetails.setToolTipText("View Ratio Details");
+		btnViewDetails.setBounds(44, 91, 140, 25);
 		panel.add(btnViewDetails);
 		btnViewDetails.addActionListener(event);
 		btnViewDetails.setActionCommand("view details");

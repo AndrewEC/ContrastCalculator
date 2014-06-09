@@ -2,7 +2,8 @@ package gov.intra.net.dialogs;
 
 import gov.intra.net.frame.Frame;
 
-import javax.swing.JButton;
+import java.awt.Rectangle;
+
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -96,11 +97,6 @@ public class Shortcuts extends GenericDialog {
 		lblIfTheShortcut.setBounds(7, 395, 353, 31);
 		getContentPane().add(lblIfTheShortcut);
 
-		JButton btnClose = new JButton("Close");
-		btnClose.addActionListener(this);
-		btnClose.setBounds(350, 418, 85, 25);
-		btnClose.setActionCommand("close");
-		registerForClose(btnClose);
-		getContentPane().add(btnClose);
+		buildCloseButton(new Rectangle(350, 418, 85, 25));
 	}
 }

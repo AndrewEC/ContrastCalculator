@@ -139,7 +139,11 @@ public class ImageWriter {
 
 		if (save) {
 			File path = promptForFile();
-			
+
+			if (path == null) {
+				return;
+			}
+
 			if (willOverwrite(name, ext, path)) {
 				if (!approveOverwrite()) {
 					return;

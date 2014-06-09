@@ -41,7 +41,7 @@ public class WindowMagEventHandler implements ActionListener, ICapture {
 
 	private void startCapture() {
 		if (mag.getWindowList().getSelectedIndex() == -1) {
-			JOptionPane.showMessageDialog(null, "Please select an item to view.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(mag, "Please select an item to view.", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
 			String name = mag.getWindowList().getSelectedValue().toString();
 			if (shot != null) {

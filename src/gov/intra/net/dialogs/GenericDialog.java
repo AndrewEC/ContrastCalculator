@@ -2,6 +2,7 @@ package gov.intra.net.dialogs;
 
 import gov.intra.net.frame.Frame;
 
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -10,6 +11,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 import javax.swing.ActionMap;
+import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -47,6 +49,22 @@ public abstract class GenericDialog extends JDialog implements ActionListener {
 				}
 			}
 		};
+	}
+
+	public JButton buildCloseButton(Rectangle bounds) {
+		JButton b = new JButton("Close");
+		try {
+			b.setIcon(new ImageIcon(GenericDialog.class.getResource("/resources/CloseIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		b.setBounds(bounds);
+		b.setActionCommand("close");
+		b.setToolTipText("Close dialog");
+		registerForClose(b);
+		b.addActionListener(this);
+		getContentPane().add(b);
+		return b;
 	}
 
 	public void registerCallback(IDialogHandle callback) {
