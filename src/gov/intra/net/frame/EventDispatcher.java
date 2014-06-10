@@ -53,11 +53,7 @@ public class EventDispatcher implements ActionListener {
 
 	public void registerCommand(AbstractButton button, int key) {
 		String command = button.getActionCommand();
-		if (command.equals("get focus") || command.equals("focus slider")) {
-			button.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key, InputEvent.CTRL_DOWN_MASK), command);
-		} else {
-			button.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK), command);
-		}
+		button.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK), command);
 		button.getActionMap().put(command, aa);
 	}
 

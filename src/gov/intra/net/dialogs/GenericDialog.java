@@ -84,7 +84,7 @@ public abstract class GenericDialog extends JDialog implements ActionListener {
 	}
 
 	protected void registerCommand(AbstractButton button, int key) {
-		button.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK), button.getActionCommand());
+		button.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK), button.getActionCommand());
 		button.getActionMap().put(button.getActionCommand(), aa);
 	}
 
@@ -100,7 +100,7 @@ public abstract class GenericDialog extends JDialog implements ActionListener {
 	private void finalizeRegister(JButton b, int key) {
 		String name = b.getActionCommand();
 		InputMap in = b.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-		in.put(KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK), name);
+		in.put(KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK), name);
 		ActionMap am = b.getActionMap();
 		am.put(name, aa);
 	}

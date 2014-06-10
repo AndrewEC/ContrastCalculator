@@ -196,7 +196,7 @@ public class AreaSnipperResult extends JFrame implements ActionListener, Compone
 
 	private void registerCommand(JButton b, int key) {
 		String com = b.getActionCommand();
-		b.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK), com);
+		b.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK), com);
 		b.getActionMap().put(com, aa);
 	}
 
