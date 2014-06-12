@@ -1,4 +1,4 @@
-Contrast Calculator V1.3.2
+Contrast Calculator V1.3.3
 =====
 
 The project was created for use within the ACOE and other I&IT clusters for checking colour contrast ratios between specified colours. It supports multiple monitors, multiple colour blind settings, and use of JNA for manipulating specific windows in the windows environment.
@@ -31,9 +31,11 @@ Running the Program
 2. Download the runnable jar or exe from the build directory
 	2a. The Contrast Calculator - WebLaF uses the 3rd party WebLaF look and feel
 	2b. The Contrast Calculator - Steel uses Java's build in Blue Steel look and feel.
-		(WebLaF looks better but Blue Steel has a much faster load time and is a bit easier on memory)
+		(WebLaF looks better but Blue Steel has a much faster load time and is a bit lighter on memory)
 3. Run the program.
 ```
+
+Note: This program requires that your computer and Java version support per-pixel translucency/transparency in order for the snipping tool to properly function.
 
 3rd Party Libraries
 ---
@@ -43,6 +45,8 @@ The project implements the following 3rd party libraries:
 * JNA for native window manipulation on the Windows OS
 * WebLaF look and feel for Java swing GUI
 
-The executable version of the program was created using launch4j. The launch4j configuration file can be found in the build directory. Though it currently uses absolute paths.
+The executable version of the program was created using launch4j. The launch4j configuration file can be found in the build directory but they use absolute paths.
+
+This project was created using Eclipse for Java Developers - Luna M6 Release (4.4.0M6)
 
 Project Designer: Andrew Cumming

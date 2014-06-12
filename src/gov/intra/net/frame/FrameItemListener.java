@@ -5,6 +5,8 @@ import gov.intra.net.panel.Panel;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import resources.Constants;
+
 public class FrameItemListener implements ItemListener {
 
 	private final Frame frame;
@@ -21,11 +23,11 @@ public class FrameItemListener implements ItemListener {
 			if (frame.getCbShowSliders().isSelected()) {
 				panel.getSliderPanel().setVisible(true);
 				panel.getMainPanel().setLocation(panel.getMainPanel().getLocation().x, 182);
-				frame.setSize(frame.getSize().width, 485);
+				frame.setSize(frame.getSize().width, Constants.FRAME_WITH_SLIDERS_HEIGHT);
 			} else {
 				panel.getSliderPanel().setVisible(false);
 				panel.getMainPanel().setLocation(panel.getMainPanel().getLocation().x, 91);
-				frame.setSize(frame.getSize().width, 393);
+				frame.setSize(frame.getSize().width, Constants.FRAME_NO_SLIDERS_HEIGHT);
 			}
 		}
 	}

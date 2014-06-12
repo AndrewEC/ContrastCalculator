@@ -3,7 +3,7 @@ package gov.intra.net.frame;
 import gov.intra.net.dialogs.About;
 import gov.intra.net.dialogs.ColourPicker;
 import gov.intra.net.dialogs.Guide;
-import gov.intra.net.dialogs.Ratios;
+import gov.intra.net.dialogs.Guidelines;
 import gov.intra.net.dialogs.Shortcuts;
 
 import java.awt.Component;
@@ -68,7 +68,7 @@ public class DialogEventHandle extends FrameEventBase {
 					guide = new Guide(frame);
 					showDialog(guide);
 				} else if (command.equals("menu guidelines")) {
-					ratios = new Ratios(frame);
+					ratios = new Guidelines(frame);
 					showDialog(ratios);
 				} else if (command.equals("menu shortcuts")) {
 					shortcuts = new Shortcuts(frame);
