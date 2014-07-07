@@ -47,12 +47,12 @@ public class PanelSnipHandle extends PanelEventBase implements ISnipperListener 
 					public void run() {
 						windowMagnifier = new WindowMagnifier(frame);
 						if (!windowMagnifier.isVisible()) {
-							windowMagnifier.openMagnifier();
+							windowMagnifier.setVisible(true);
 						}
 					}
 				});
 			} else if (!windowMagnifier.isVisible()) {
-				windowMagnifier.openMagnifier();
+				windowMagnifier.setVisible(true);
 			}
 		}
 	}
@@ -67,7 +67,9 @@ public class PanelSnipHandle extends PanelEventBase implements ISnipperListener 
 
 	public void onError(Exception e) {
 		if (!e.getMessage().equals(Constants.USER_CANCEL_MESSAGE)) {
-			JOptionPane.showInternalMessageDialog(panel, "An error occured: \n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			String mess = "An error occured: \n" + e.getMessage();
+			System.err.println(mess);
+			JOptionPane.showMessageDialog(panel, mess, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		areaSnipper.closeMagnifier();
 	}

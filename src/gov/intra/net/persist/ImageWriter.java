@@ -57,15 +57,19 @@ public class ImageWriter {
 
 	public boolean validate() {
 		if (name.equals("")) {
+			String mess = "The specified file name cannot be null, empty or white space.";
+			System.err.println(mess);
 			if (useParent) {
-				JOptionPane.showMessageDialog(parent, "The specified file name cannot be null, empty or white space.", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(parent, mess, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			return false;
 		}
 
 		if (ext.equals("") || !ext.contains(".")) {
+			String mess = "The speficied file extension cannot be null or blank\nand must contain a '.'";
+			System.err.println(mess);
 			if (useParent) {
-				JOptionPane.showMessageDialog(parent, "The speficied file extension cannot be null or blank\nand must contain a '.'", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(parent, mess, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			return false;
 		}
@@ -94,8 +98,10 @@ public class ImageWriter {
 		path = chooser.getSelectedFile();
 
 		if (!path.isDirectory()) {
+			String mess = "Selected path has to be a directory.";
+			System.err.println(mess);
 			if (useParent) {
-				JOptionPane.showMessageDialog(parent, "Selected path has to be a directory.", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(parent, mess, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			return null;
 		}
@@ -127,8 +133,10 @@ public class ImageWriter {
 	public void saveImage(BufferedImage image) {
 		boolean save = true;
 		if (image == null) {
+			String mess = "Specified image to save cannot be null.";
+			System.err.println(mess);
 			if (useParent) {
-				JOptionPane.showMessageDialog(parent, "Specified image to save cannot be null.", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(parent, mess, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			save = false;
 		}
@@ -152,8 +160,10 @@ public class ImageWriter {
 			try {
 				File ff = new File(path, name + ext);
 				ImageIO.write(image, ext.replace(".", ""), ff);
+				String mess = "Image was successfully saved to\n" + ff.getAbsolutePath();
+				System.out.println(mess);
 				if (useParent) {
-					JOptionPane.showMessageDialog(parent, "Image was successfully saved to\n" + ff.getAbsolutePath(), "Save Complete", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(parent, mess, "Save Complete", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

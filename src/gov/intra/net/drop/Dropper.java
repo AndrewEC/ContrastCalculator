@@ -1,12 +1,11 @@
 package gov.intra.net.drop;
 
-import gov.intra.net.util.Contraster;
 import gov.intra.net.util.Capturer;
+import gov.intra.net.util.Contraster;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -40,10 +39,9 @@ public class Dropper extends JFrame {
 			e.printStackTrace();
 		}
 
-		Rectangle r = Capturer.getMultiSize();
 		setSize(Constants.DROPPER_MAG_SIZE, Constants.DROPPER_MAG_SIZE);
 
-		dPanel = new DropperPanel(new Dimension(r.width, r.height), this, result);
+		dPanel = new DropperPanel(new Dimension(Constants.DROPPER_MAG_SIZE, Constants.DROPPER_MAG_SIZE), this, result);
 		add(dPanel);
 		addKeyListener(dPanel.getKey());
 

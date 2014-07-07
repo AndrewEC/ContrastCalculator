@@ -108,7 +108,9 @@ public class PanelDropperHandle extends PanelEventBase implements IDropperResult
 		String fore = panel.getForeHex().getText();
 		String back = panel.getBackHex().getText();
 		if (!HexValidator.isValid6Hex(fore) || !HexValidator.isValid6Hex(back)) {
-			JOptionPane.showMessageDialog(frame, "Could not swap colours due to invalid hex value.", "Error", JOptionPane.ERROR_MESSAGE);
+			String mess = "Could not swap colours due to invalid hex value.";
+			System.err.println(mess);
+			JOptionPane.showMessageDialog(frame, mess, "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
 			PanelUtil.setForeColour(panel, HexValidator.hexToColour(back), true);
 			PanelUtil.setBackColour(panel, HexValidator.hexToColour(fore), true);
@@ -129,7 +131,9 @@ public class PanelDropperHandle extends PanelEventBase implements IDropperResult
 
 	public void onError(Exception e) {
 		if (!e.getMessage().equals(Constants.USER_CANCEL_MESSAGE)) {
-			JOptionPane.showMessageDialog(dropper, "An error occured while grabbing pixel:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			String mess = "An error occured while grabbing pixel:\n" + e.getMessage();
+			System.err.println(mess);
+			JOptionPane.showMessageDialog(dropper, mess, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		dropper.closeDropper();
 	}

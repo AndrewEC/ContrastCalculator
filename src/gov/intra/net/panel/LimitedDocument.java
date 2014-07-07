@@ -38,7 +38,9 @@ public class LimitedDocument extends PlainDocument {
 			char c = str.toCharArray()[0];
 			if (c != '#') {
 				if (showError && parent != null) {
-					JOptionPane.showMessageDialog(parent, "The first character in the hex must be the '#' symbol.", "Error", JOptionPane.ERROR_MESSAGE);
+					String mess = "The first character in the hex must be the '#' symbol.";
+					System.err.println(mess);
+					JOptionPane.showMessageDialog(parent, mess, "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				return;
 			}
@@ -55,11 +57,15 @@ public class LimitedDocument extends PlainDocument {
 
 	private boolean ofLength(String str) {
 		if (str.length() != 7) {
-			JOptionPane.showMessageDialog(parent, "The pasted value needs to be 7 characters in length. Including the initial # character.", "Error", JOptionPane.ERROR_MESSAGE);
+			String mess = "The pasted value needs to be 7 characters in length. Including the initial # character.";
+			System.err.println(mess);
+			JOptionPane.showMessageDialog(parent, mess, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		if (!HexValidator.isValid6Hex(str)) {
 			if (showError && parent != null) {
-				JOptionPane.showMessageDialog(parent, "The pasted value is not a proper hex format.", "Error", JOptionPane.ERROR_MESSAGE);
+				String mess = "The pasted value is not a proper hex format.";
+				System.err.println(mess);
+				JOptionPane.showMessageDialog(parent, mess, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			return true;
 		}

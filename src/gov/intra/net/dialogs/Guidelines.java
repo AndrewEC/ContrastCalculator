@@ -17,7 +17,7 @@ public class Guidelines extends GenericDialog {
 		setSize(563, 373);
 		getContentPane().setLayout(null);
 
-		buildCloseButton(new Rectangle(464, 320, 89, 23));
+		buildCloseButton(new Rectangle(464, 317, 89, 23));
 
 		final JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(2, 3, 554, 311);

@@ -37,7 +37,9 @@ public class WindowIdentifier {
 	public static HWND getHandle(User32 instance, String windowName, Component parent) {
 		HWND hwnd = instance.FindWindow(null, windowName);
 		if (hwnd == null) {
-			JOptionPane.showMessageDialog(parent, "Failed to find specified window.", "Error", JOptionPane.ERROR_MESSAGE);
+			String mess = "Failed to find specified window.";
+			System.err.println(mess);
+			JOptionPane.showMessageDialog(parent, mess, "Error", JOptionPane.ERROR_MESSAGE);
 			return hwnd;
 		}
 		return hwnd;
@@ -53,7 +55,9 @@ public class WindowIdentifier {
 		RECT r = new RECT();
 		boolean result = instance.GetWindowRect(hwnd, r);
 		if (!result) {
-			JOptionPane.showMessageDialog(parent, "Couldn't get boundaries of window for capture.", "Error", JOptionPane.ERROR_MESSAGE);
+			String mess = "Couldn't get boundaries of window for capture.";
+			System.err.println(mess);
+			JOptionPane.showMessageDialog(parent, mess, "Error", JOptionPane.ERROR_MESSAGE);
 			return null;
 		}
 		return r;

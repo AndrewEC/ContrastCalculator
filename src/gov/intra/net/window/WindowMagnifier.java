@@ -188,7 +188,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		delaySlider.setBounds(10, 544, 154, 21);
 		delaySlider.addChangeListener(this);
 		getContentPane().add(delaySlider);
-		
+
 		separator_1 = new JSeparator();
 		separator_1.setBounds(19, 258, 144, 6);
 		getContentPane().add(separator_1);
@@ -241,14 +241,6 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		return delaySlider.getValue();
 	}
 
-	public void openMagnifier() {
-		setVisible(true);
-	}
-
-	public void closeMagnifier() {
-		setVisible(false);
-	}
-
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == zoomSlider) {
 			double val = zoomSlider.getValue() / 10.0;
@@ -269,6 +261,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 	public void componentResized(ComponentEvent e) {
 		if (e.getSource() == this) {
 			imageScrollPanel.setSize(this.getWidth() - Constants.IMAGE_SCROLL_PANE_MARGIN_RIGHT, this.getHeight() - Constants.IMAGE_SCROLL_PANE_MARGIN_BOTTOM);
+			this.revalidate();
 		}
 	}
 

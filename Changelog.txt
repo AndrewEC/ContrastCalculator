@@ -57,3 +57,7 @@ Version 1.3.3
 	* Updated shortcut key references in user guide to reflect previous changes 
 	* Updated icons to make them better quality
 	* Altered html formatting of guidelines dialog
+
+Version 1.3.4
+	* Trace line for all error messages presented in dialogs
+	* Fixed issue with window magnifier image view not resizing when maximizing window
