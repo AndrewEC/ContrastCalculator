@@ -38,17 +38,26 @@ public abstract class GenericDialog extends JDialog implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				JButton b = (JButton) e.getSource();
 				String command = b.getActionCommand();
-				if (command != null) {
-					if (command.equals("close")) {
-						setVisible(false);
-					} else if (command.equals("focus") && jc != null) {
-						jc.requestFocus();
-					} else if (callback != null) {
-						callback.onAction(command);
-					}
-				}
+				processAction(command);
 			}
 		};
+	}
+
+	public void processAction(String command) {
+		if (command == null) {
+			return;
+		}
+		command = command.trim();
+		if (command.equals("")) {
+			return;
+		}
+		if (command.equals("close")) {
+			setVisible(false);
+		} else if (command.equals("focus") && jc != null) {
+			jc.requestFocus();
+		} else if (callback != null) {
+			callback.onAction(command);
+		}
 	}
 
 	public JButton buildCloseButton(Rectangle bounds) {
@@ -72,15 +81,7 @@ public abstract class GenericDialog extends JDialog implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		String command = e.getActionCommand().trim();
-		if (command.equals("")) {
-			return;
-		}
-		if (command.equals("close")) {
-			setVisible(false);
-		} else if (callback != null) {
-			callback.onAction(command);
-		}
+		processAction(e.getActionCommand());
 	}
 
 	protected void registerCommand(AbstractButton button, int key) {

@@ -10,25 +10,23 @@ Current Features
 The current list of available features are as follows:
 * Multi-monitor support
 * Multiple colour blind filter settings
-* Dropper tool for selecting individual on screen pixels
+* Dropper tool for selecting the colour of an individual pixel
 * Take screenshots of a single monitor, multiple monitors, or an individual program window
-* Save and export results into html table or textual format
-* Apply colour blind filters to screenshots or dropper tool
-* Magnification tool for magnifying individual windows or user defined portions of the screen
+* Capture individual portions of the screen with the built in snipping tool
+* Apply colour blind filters to any of the screen capturing tools
 
 Known Issues - Tested with JRE 1.7
 ---
 * When using a multi monitor setup the main monitor must be the top left most monitor (in terms of virtual coordinates)
-* May have some issues on lower memory machines with many monitors as Java generally requires more memory, especially when processing images
-* Dropper tool will not update when at the very edge of the screen, though can still select pixel
-* Your system should support per-pixel transparency/translucency, without it tools such as the area snipper and dropper tools will still function but may become more difficult to use
-* Area snipper tool cannot select parts of the screen from right to left
+* May have some issues on lower memory machines with many monitors
+* Dropper tool will not update when at the very edge of the screen, making it difficult to indentify which pixel is currently in focus
+* When using the area snipper tool you must select an area by dragging from the top left most portion to the bottom right most portion, no other method of selection is currently viable.
 
 Running the Program
 ---
 
 ```
-1. Make sure to have at least JRE 1.5 or newer. Version 1.7 is the recommended version.
+1. Have JRE version 1.7 or newer installed. This program will work with as old as 1.5 but you may experience issues using this old of a version.
 2. Download the runnable jar or exe from the build directory
 	2a. The Contrast Calculator - WebLaF uses the 3rd party WebLaF look and feel
 	2b. The Contrast Calculator - Steel uses Java's build in Blue Steel look and feel.
@@ -44,7 +42,7 @@ Note: This program requires that your computer and Java version support per-pixe
 The project implements the following 3rd party libraries:
 
 * JNA for native window manipulation on the Windows OS
-* WebLaF look and feel for Java swing GUI
+* WebLaF look and feel for Java Swing GUI
 
 The executable version of the program was created using launch4j. The launch4j configuration file can be found in the build directory but they use absolute paths.
 
