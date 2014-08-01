@@ -30,7 +30,7 @@ public class Dropper extends JFrame {
 		setUndecorated(true);
 		setVisible(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
+
 		try {
 			InputStream in = Dropper.class.getResourceAsStream("/resources/icon.png");
 			BufferedImage image = ImageIO.read(in);
@@ -46,8 +46,7 @@ public class Dropper extends JFrame {
 		addKeyListener(dPanel.getKey());
 
 		BufferedImage image = new BufferedImage(5, 5, BufferedImage.TYPE_INT_ARGB);
-		Point p = new Point(0, 0);
-		Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(image, p, "");
+		Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(0, 0), "");
 		setCursor(cursor);
 	}
 
@@ -62,7 +61,7 @@ public class Dropper extends JFrame {
 	public void openDropper(boolean invertable, BlindColour colour, boolean blindMod) {
 		if (blindMod) {
 			this.image = Contraster.convertImage(Capturer.getMultiScreenShot(this), colour);
-		}else{
+		} else {
 			this.image = Capturer.getMultiScreenShot(this);
 		}
 		this.invertable = invertable;

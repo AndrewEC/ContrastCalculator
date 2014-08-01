@@ -14,8 +14,17 @@ public class ImageWriter {
 	private boolean autoTrim = false, useParent = false, rememberPath = false;
 	private String name, ext;
 	private Component parent;
+	private boolean enforceDirectory;
 
 	private static File oldPath;
+
+	public boolean isEnforceDirectory() {
+		return enforceDirectory;
+	}
+
+	public void setEnforceDirectory(boolean enforceDirectory) {
+		this.enforceDirectory = enforceDirectory;
+	}
 
 	public void setRememberPath(boolean rememberPath) {
 		this.rememberPath = rememberPath;
@@ -81,12 +90,10 @@ public class ImageWriter {
 		File path = null;
 		JFileChooser chooser = null;
 
-		if (rememberPath) {
-			if (oldPath != null) {
-				chooser = new JFileChooser(oldPath.getAbsolutePath());
-			} else {
-				chooser = new JFileChooser(System.getProperty("user.dir"));
-			}
+		if (rememberPath && oldPath != null) {
+			chooser = new JFileChooser(oldPath.getAbsolutePath());
+		} else {
+			chooser = new JFileChooser(System.getProperty("user.dir"));
 		}
 
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -97,7 +104,7 @@ public class ImageWriter {
 
 		path = chooser.getSelectedFile();
 
-		if (!path.isDirectory()) {
+		if (enforceDirectory && !path.isDirectory()) {
 			String mess = "Selected path has to be a directory.";
 			System.err.println(mess);
 			if (useParent) {
@@ -108,6 +115,11 @@ public class ImageWriter {
 
 		if (rememberPath) {
 			oldPath = path;
+			if (!path.isDirectory()) {
+				String full = oldPath.getAbsolutePath();
+				int index = full.lastIndexOf("\\");
+				oldPath = new File(full.substring(0, index));
+			}
 		}
 
 		return path;

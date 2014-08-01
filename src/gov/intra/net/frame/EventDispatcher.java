@@ -1,5 +1,6 @@
 package gov.intra.net.frame;
 
+import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -33,13 +34,21 @@ public class EventDispatcher implements ActionListener {
 	}
 
 	protected void invokeEvent(ActionEvent e) {
-		AbstractButton b = (AbstractButton) e.getSource();
-		String command = b.getActionCommand();
+		String command = "";
+		if (e.getSource() instanceof MenuItem) {
+			MenuItem item = (MenuItem) e.getSource();
+			command = item.getActionCommand();
+		} else {
+			AbstractButton b = (AbstractButton) e.getSource();
+			command = b.getActionCommand();
+		}
 		if (command == null) {
+			System.err.println("EventDispatcher command passed was a null value.");
 			return;
 		}
 		command = command.trim();
 		if (command.equals("")) {
+			System.err.println("EventDispatcher command passed was an empty string.");
 			return;
 		}
 		for (EventHandle event : events) {

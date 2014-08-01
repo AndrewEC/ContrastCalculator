@@ -59,6 +59,9 @@ public class Frame extends JFrame {
 		panel = new Panel(this);
 		getContentPane().add(panel);
 
+		@SuppressWarnings("unused")
+		TrayTask tray = new TrayTask(event, panel.getEventHandle());
+
 		// initialize results panel
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -70,12 +73,17 @@ public class Frame extends JFrame {
 		mnColourPicker.setActionCommand("open colour picker");
 		mnColourPicker.addActionListener(event);
 		mnFile.add(mnColourPicker);
-		
+
+		JMenuItem mnOpenImage = new JMenuItem("Open Image");
+		mnOpenImage.setActionCommand("open image");
+		mnOpenImage.addActionListener(panel.getEventHandle());
+		mnFile.add(mnOpenImage);
+
 		JMenuItem mnClipper = new JMenuItem("Open Area Snipper");
 		mnClipper.setActionCommand("snip area");
 		mnClipper.addActionListener(panel.getEventHandle());
 		mnFile.add(mnClipper);
-		
+
 		JMenuItem mnWindow = new JMenuItem("Open Window Magnifier");
 		mnWindow.setActionCommand("magnify window");
 		mnWindow.addActionListener(panel.getEventHandle());
@@ -295,7 +303,7 @@ public class Frame extends JFrame {
 	public boolean isUsingWebLaF() {
 		return usingWeblaf;
 	}
-	
+
 	public String getBlindOption() {
 		for (Enumeration<AbstractButton> buttons = getBlindGroup().getElements(); buttons.hasMoreElements();) {
 			AbstractButton b = buttons.nextElement();
@@ -305,7 +313,7 @@ public class Frame extends JFrame {
 		}
 		return "";
 	}
-	
+
 	public BlindColour getBlindColour() {
 		String name = getBlindOption();
 		for (BlindColour c : BlindColour.values()) {

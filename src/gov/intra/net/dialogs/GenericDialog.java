@@ -45,10 +45,12 @@ public abstract class GenericDialog extends JDialog implements ActionListener {
 
 	public void processAction(String command) {
 		if (command == null) {
+			System.err.println("GenericDialog command was null.");
 			return;
 		}
 		command = command.trim();
 		if (command.equals("")) {
+			System.err.println("GenericDialog command was an empty string.");
 			return;
 		}
 		if (command.equals("close")) {
