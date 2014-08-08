@@ -63,3 +63,9 @@ Version 1.3.4
 	* Fixed issue with window magnifier image view not resizing when maximizing window
 	
 Version 1.4
+	* Added tray icon that allows access to some of the functions that the cc provides
+	* Added the ability to open an image in the window magnifier with or without a blind colour filter
+	
+Version 1.4.1
+	* Added open image button wo the window magnifier
+	* Main contrast calculator window will not minimize when using the are snipper tool
