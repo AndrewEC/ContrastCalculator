@@ -9,8 +9,11 @@ import gov.intra.net.util.WindowIdentifier;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -23,6 +26,7 @@ public class WindowMagEventHandler implements ActionListener, ICapture {
 	private WindowMagnifier mag;
 	private DelayedShot shot;
 	private User32 instance;
+	private ImageWriter iw;
 
 	public WindowMagEventHandler(WindowMagnifier mag) {
 		this.mag = mag;
@@ -36,6 +40,8 @@ public class WindowMagEventHandler implements ActionListener, ICapture {
 			startCapture();
 		} else if (e.getSource() == mag.getSaveButton()) {
 			saveImage();
+		} else if (e.getSource() == mag.getOpenButton()) {
+			loadImage();
 		}
 	}
 
@@ -79,6 +85,26 @@ public class WindowMagEventHandler implements ActionListener, ICapture {
 		iw.setName(mag.getFileName().getText());
 		iw.setExt(mag.getExt());
 		iw.saveImage(mag.getImagePanel().getImage());
+	}
+
+	public void loadImage() {
+		iw = new ImageWriter();
+		iw.setRememberPath(true);
+		iw.setEnforceDirectory(false);
+		iw.setParent(mag);
+		File file = iw.promptForFile();
+		if (file != null && !file.isDirectory()) {
+			try {
+				BufferedImage image = ImageIO.read(file);
+				BufferedImage con = Contraster.convertImage(image, mag.getParentFrame().getBlindColour());
+				mag.getImagePanel().setImage(con);
+			} catch (IOException e) {
+				e.printStackTrace();
+				String err = "An error occured while loading the image:\n" + e.getMessage();
+				JOptionPane.showMessageDialog(mag, err, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+
+		}
 	}
 
 	public void onCapture(BufferedImage image) {

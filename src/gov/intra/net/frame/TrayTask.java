@@ -42,13 +42,13 @@ public class TrayTask {
 	private PopupMenu buildMenu(EventDispatcher frameEvent, EventDispatcher panelEvent) {
 		PopupMenu menu = new PopupMenu();
 
-		MenuItem windowMag = new MenuItem("Window Magnifier");
-		windowMag.setActionCommand("magnify window");
-		windowMag.addActionListener(panelEvent);
-
 		MenuItem openImage = new MenuItem("Open Image");
 		openImage.setActionCommand("open image");
 		openImage.addActionListener(panelEvent);
+
+		MenuItem windowMag = new MenuItem("Open Window Magnifier");
+		windowMag.setActionCommand("magnify window");
+		windowMag.addActionListener(panelEvent);
 
 		MenuItem exit = new MenuItem("Exit");
 		exit.setActionCommand("menu exit");

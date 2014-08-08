@@ -61,3 +61,5 @@ Version 1.3.3
 Version 1.3.4
 	* Trace line for all error messages presented in dialogs
 	* Fixed issue with window magnifier image view not resizing when maximizing window
+	
+Version 1.4

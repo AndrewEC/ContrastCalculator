@@ -35,7 +35,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 
 	@SuppressWarnings("rawtypes")
 	private JList windowList;
-	private JButton btnView, btnRefresh, btnSave;
+	private JButton btnView, btnRefresh, btnSave, btnOpenImage;
 	private JTextField txtFileName;
 
 	private WindowMagImagePanel imagePanel;
@@ -76,7 +76,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		event = new WindowMagEventHandler(this);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(19, 16, 145, 176);
+		scrollPane.setBounds(19, 16, 145, 150);
 		getContentPane().add(scrollPane);
 
 		windowList = new JList(new DefaultListModel());
@@ -89,7 +89,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 			e.printStackTrace();
 		}
 		btnView.setToolTipText("Capture the currently selected window");
-		btnView.setBounds(22, 226, 140, 24);
+		btnView.setBounds(22, 199, 140, 24);
 		btnView.addActionListener(event);
 		getContentPane().add(btnView);
 
@@ -100,7 +100,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 			e.printStackTrace();
 		}
 		btnRefresh.setToolTipText("Refresh the list of currently open windows");
-		btnRefresh.setBounds(22, 198, 140, 24);
+		btnRefresh.setBounds(22, 171, 140, 24);
 		btnRefresh.addActionListener(event);
 		getContentPane().add(btnRefresh);
 
@@ -134,13 +134,13 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		lblSaveName.setBounds(11, 299, 99, 16);
 		getContentPane().add(lblSaveName);
 
-		lblZoom = new JLabel("Zoom: 2");
+		lblZoom = new JLabel("Zoom: 1");
 		lblZoom.setBounds(14, 456, 119, 16);
 		getContentPane().add(lblZoom);
 
 		zoomSlider = new JSlider();
 		zoomSlider.addChangeListener(this);
-		zoomSlider.setValue(20);
+		zoomSlider.setValue(10);
 		zoomSlider.setMajorTickSpacing(2);
 		zoomSlider.setMinimum(1);
 		zoomSlider.setMaximum(50);
@@ -190,8 +190,23 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		getContentPane().add(delaySlider);
 
 		separator_1 = new JSeparator();
-		separator_1.setBounds(19, 258, 144, 6);
+		separator_1.setBounds(19, 231, 144, 6);
 		getContentPane().add(separator_1);
+
+		btnOpenImage = new JButton("Open Image");
+		btnOpenImage.setBounds(21, 239, 140, 24);
+		btnOpenImage.setActionCommand("open image");
+		btnOpenImage.addActionListener(event);
+		try {
+			btnOpenImage.setIcon(new ImageIcon(WindowMagnifier.class.getResource("/resources/OpenIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		getContentPane().add(btnOpenImage);
+	}
+
+	public JButton getOpenButton() {
+		return btnOpenImage;
 	}
 
 	public JButton getViewButton() {
