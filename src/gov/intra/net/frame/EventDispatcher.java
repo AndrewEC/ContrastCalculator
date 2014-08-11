@@ -16,9 +16,19 @@ public class EventDispatcher implements ActionListener {
 
 	private List<EventHandle> events;
 	private AbstractAction aa;
+	private Frame frame;
+
+	public EventDispatcher(Frame frame) {
+		this.frame = frame;
+		init();
+	}
+
+	public EventDispatcher() {
+		init();
+	}
 
 	@SuppressWarnings("serial")
-	public EventDispatcher() {
+	private void init() {
 		events = new ArrayList<EventHandle>();
 		aa = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
@@ -36,6 +46,9 @@ public class EventDispatcher implements ActionListener {
 	protected void invokeEvent(ActionEvent e) {
 		String command = "";
 		if (e.getSource() instanceof MenuItem) {
+			if (frame != null && !frame.isVisible()) {
+				frame.setVisible(true);
+			}
 			MenuItem item = (MenuItem) e.getSource();
 			command = item.getActionCommand();
 		} else {

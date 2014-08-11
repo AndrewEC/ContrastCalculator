@@ -51,7 +51,7 @@ Version 1.3.2
 	* Added icons to many of the buttons where applicable
 	* Fixes issues with the ImageWriter util
 	* Small adjustments to various layouts
-	* Control + Shift for shortcut keys
+	* Control + Shift is not used for shortcut keys for shortcut keys
 
 Version 1.3.3
 	* Updated shortcut key references in user guide to reflect previous changes 
@@ -67,5 +67,11 @@ Version 1.4
 	* Added the ability to open an image in the window magnifier with or without a blind colour filter
 	
 Version 1.4.1
-	* Added open image button wo the window magnifier
-	* Main contrast calculator window will not minimize when using the are snipper tool
+	* Added open image button to the window magnifier
+	* Main contrast calculator window will now minimize when using the are snipper tool
+	* Now using event dispatcher to handle events for the window magnifier
+
+Version 1.4.2
+	* Fixed issues with the main window re-appearing before the area snipper tool captured a portion of the screen
+	* Fixed issues with save image being called when using the open image command before the window magnifier had been initialized
+	* Fixed issues with the focus control shortcuts not working on the window magnifier

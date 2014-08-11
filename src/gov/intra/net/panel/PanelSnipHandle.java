@@ -6,10 +6,10 @@ import gov.intra.net.area.ISnipperListener;
 import gov.intra.net.frame.Frame;
 import gov.intra.net.window.WindowMagnifier;
 
-import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
 
-import javax.swing.JFrame;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -54,9 +54,11 @@ public class PanelSnipHandle extends PanelEventBase implements ISnipperListener 
 			if (windowMagnifier == null) {
 				openMagnifier(true);
 			} else if (windowMagnifier != null) {
-				windowMagnifier.setExtendedState(JFrame.NORMAL);
 				windowMagnifier.setVisible(true);
-				windowMagnifier.getEvent().loadImage();
+				JButton b = new JButton();
+				b.setActionCommand("open image");
+				ActionEvent e = new ActionEvent(b, 0, "");
+				windowMagnifier.getEvent().actionPerformed(e);
 			}
 		}
 	}
@@ -68,7 +70,10 @@ public class PanelSnipHandle extends PanelEventBase implements ISnipperListener 
 				if (!windowMagnifier.isVisible()) {
 					windowMagnifier.setVisible(true);
 					if (load) {
-						windowMagnifier.getEvent().loadImage();
+						JButton b = new JButton();
+						b.setActionCommand("open image");
+						ActionEvent e = new ActionEvent(b, 0, "");
+						windowMagnifier.getEvent().actionPerformed(e);
 					}
 				}
 			}
@@ -77,9 +82,7 @@ public class PanelSnipHandle extends PanelEventBase implements ISnipperListener 
 
 	private void processResult(Rectangle r) {
 		areaSnipper.closeMagnifier();
-		Point loc = panel.getLocationOnScreen();
 		areaSnipperResult.setValues(r, frame.getBlindColour());
-		areaSnipperResult.setLocation(loc);
 		areaSnipperResult.setVisible(true);
 	}
 
@@ -96,18 +99,21 @@ public class PanelSnipHandle extends PanelEventBase implements ISnipperListener 
 	}
 
 	public void onAreaSelected(final Rectangle r) {
-		if (!frame.isVisible()) {
-			frame.setVisible(true);
-		}
 		if (areaSnipperResult == null) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
 					areaSnipperResult = new AreaSnipperResult();
 					processResult(r);
+					if (!frame.isVisible()) {
+						frame.setVisible(true);
+					}
 				}
 			});
 		} else {
 			processResult(r);
+			if (!frame.isVisible()) {
+				frame.setVisible(true);
+			}
 		}
 	}
 }

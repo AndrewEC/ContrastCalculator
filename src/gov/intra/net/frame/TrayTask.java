@@ -20,6 +20,10 @@ public class TrayTask {
 			System.err.println("The system tray is not supported on this OS.");
 			return;
 		}
+		buildIcon(frameEvent, panelEvent);
+	}
+
+	private void buildIcon(EventDispatcher frameEvent, EventDispatcher panelEvent) {
 		try {
 			TrayIcon icon = new TrayIcon(ImageIO.read(TrayTask.class.getResourceAsStream("/resources/icon.png")));
 			icon.setImageAutoSize(true);
@@ -42,20 +46,20 @@ public class TrayTask {
 	private PopupMenu buildMenu(EventDispatcher frameEvent, EventDispatcher panelEvent) {
 		PopupMenu menu = new PopupMenu();
 
-		MenuItem openImage = new MenuItem("Open Image");
-		openImage.setActionCommand("open image");
-		openImage.addActionListener(panelEvent);
-
 		MenuItem windowMag = new MenuItem("Open Window Magnifier");
 		windowMag.setActionCommand("magnify window");
 		windowMag.addActionListener(panelEvent);
+
+		MenuItem openImage = new MenuItem("Open Image");
+		openImage.setActionCommand("open image");
+		openImage.addActionListener(panelEvent);
 
 		MenuItem exit = new MenuItem("Exit");
 		exit.setActionCommand("menu exit");
 		exit.addActionListener(frameEvent);
 
-		menu.add(openImage);
 		menu.add(windowMag);
+		menu.add(openImage);
 		menu.addSeparator();
 		menu.add(exit);
 

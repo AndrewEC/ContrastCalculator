@@ -1,10 +1,13 @@
 package gov.intra.net.window;
 
+import gov.intra.net.frame.EventDispatcher;
 import gov.intra.net.frame.Frame;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +42,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 	private JTextField txtFileName;
 
 	private WindowMagImagePanel imagePanel;
-	private WindowMagEventHandler event;
+	private EventDispatcher event;
 
 	private JRadioButton rbJpg, rbGif, rbPng;
 	private ButtonGroup ext;
@@ -73,7 +76,10 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		addComponentListener(this);
 
-		event = new WindowMagEventHandler(this);
+		event = new EventDispatcher();
+		event.addEventHandle(new MagCaptureHandle(this));
+		event.addEventHandle(new MagImageHandle(this));
+		event.addEventHandle(new MagFocusHandle(this));
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(19, 16, 145, 150);
@@ -88,12 +94,15 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		event.registerCommand(btnView, KeyEvent.VK_V);
 		btnView.setToolTipText("Capture the currently selected window");
 		btnView.setBounds(22, 199, 140, 24);
 		btnView.addActionListener(event);
+		btnView.setActionCommand("view window");
 		getContentPane().add(btnView);
 
 		btnRefresh = new JButton("Refresh List");
+		event.registerCommand(btnRefresh, KeyEvent.VK_R);
 		try {
 			btnRefresh.setIcon(new ImageIcon(WindowMagnifier.class.getResource("/resources/SwapIcon.png")));
 		} catch (Exception e) {
@@ -102,6 +111,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		btnRefresh.setToolTipText("Refresh the list of currently open windows");
 		btnRefresh.setBounds(22, 171, 140, 24);
 		btnRefresh.addActionListener(event);
+		btnRefresh.setActionCommand("refresh");
 		getContentPane().add(btnRefresh);
 
 		imageScrollPanel = new JScrollPane();
@@ -114,7 +124,9 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		imageScrollPanel.setViewportView(imagePanel);
 
 		btnSave = new JButton();
+		event.registerCommand(btnSave, KeyEvent.VK_S);
 		btnSave.setText("Save Capture");
+		btnSave.setActionCommand("save image");
 		try {
 			btnSave.setIcon(new ImageIcon(WindowMagnifier.class.getResource("/resources/SaveIcon.png")));
 		} catch (Exception e) {
@@ -197,12 +209,52 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		btnOpenImage.setBounds(21, 239, 140, 24);
 		btnOpenImage.setActionCommand("open image");
 		btnOpenImage.addActionListener(event);
+		btnOpenImage.setToolTipText("Open image with chosen colour blind filter");
+		event.registerCommand(btnOpenImage, KeyEvent.VK_O);
 		try {
 			btnOpenImage.setIcon(new ImageIcon(WindowMagnifier.class.getResource("/resources/OpenIcon.png")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		getContentPane().add(btnOpenImage);
+
+		// initialize the focus buttons
+		Rectangle r = new Rectangle(-100, -100, 1, 1);
+
+		JButton focusZoom = new JButton("");
+		getContentPane().add(focusZoom);
+		focusZoom.setBounds(r);
+		focusZoom.setActionCommand("focus zoom");
+		focusZoom.addActionListener(event);
+		event.registerCommand(focusZoom, KeyEvent.VK_Z);
+
+		JButton focusFormat = new JButton("");
+		getContentPane().add(focusFormat);
+		focusFormat.setBounds(r);
+		focusFormat.setActionCommand("focus format");
+		focusFormat.addActionListener(event);
+		event.registerCommand(focusFormat, KeyEvent.VK_F);
+
+		JButton focusList = new JButton("");
+		getContentPane().add(focusList);
+		focusList.setBounds(r);
+		focusList.setActionCommand("focus list");
+		focusList.addActionListener(event);
+		event.registerCommand(focusList, KeyEvent.VK_L);
+
+		JButton focusName = new JButton("");
+		getContentPane().add(focusName);
+		focusName.setBounds(r);
+		focusName.setActionCommand("focus name");
+		focusName.addActionListener(event);
+		event.registerCommand(focusName, KeyEvent.VK_N);
+
+		JButton focusDelay = new JButton("");
+		getContentPane().add(focusDelay);
+		focusDelay.setBounds(r);
+		focusDelay.setActionCommand("focus delay ");
+		focusDelay.addActionListener(event);
+		event.registerCommand(focusDelay, KeyEvent.VK_D);
 	}
 
 	public JButton getOpenButton() {
@@ -240,7 +292,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		return "";
 	}
 
-	public WindowMagEventHandler getEvent() {
+	public EventDispatcher getEvent() {
 		return event;
 	}
 
@@ -254,6 +306,18 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 
 	public int getDelay() {
 		return delaySlider.getValue();
+	}
+
+	public JSlider getDelaySlider() {
+		return delaySlider;
+	}
+
+	public JSlider getZoomSlider() {
+		return zoomSlider;
+	}
+
+	public JRadioButton getFirstFormat() {
+		return rbJpg;
 	}
 
 	public void stateChanged(ChangeEvent e) {

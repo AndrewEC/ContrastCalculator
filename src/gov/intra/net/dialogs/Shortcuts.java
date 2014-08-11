@@ -82,6 +82,17 @@ public class Shortcuts extends GenericDialog {
 		data.addRow(new Object[] { "Control + Shift + F", "Focus on guidelines text box." });
 		data.addRow(new Object[] { "", "" });
 
+		data.addRow(new Object[] { "", "Window Magnifier" });
+		data.addRow(new Object[] { "Control + Shift + S", "Save currently display image." });
+		data.addRow(new Object[] { "Control + Shift + R", "Refresh the list of windows to view." });
+		data.addRow(new Object[] { "Control + Shift + V", "View the currently selected window." });
+		data.addRow(new Object[] { "Control + Shift + O", "Open an image to view with selected colour blind filter." });
+		data.addRow(new Object[] { "Control + Shift + Z", "Set focus on the zoom slider." });
+		data.addRow(new Object[] { "Control + Shift + L", "Set focus on the window list." });
+		data.addRow(new Object[] { "Control + Shift + F", "Set focus on the first radio button for the image save format selection." });
+		data.addRow(new Object[] { "Control + Shift + N", "Set focus on the save file name edit field." });
+		data.addRow(new Object[] { "Control + Shift + D", "Set focus on the capture delay slider." });
+
 		table = new JTable(data) {
 			public boolean isCellEditable(int row, int col) {
 				return false;
