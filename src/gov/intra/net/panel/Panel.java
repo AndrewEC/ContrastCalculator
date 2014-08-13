@@ -354,6 +354,7 @@ public class Panel extends JPanel {
 		frSlider.setMaximum(255);
 		frSlider.setValue(255);
 		frSlider.setBounds(27, 4, 151, 22);
+		frSlider.setToolTipText("Set foreground red value");
 		frSlider.addChangeListener(changeHandle);
 		sliderPanel.add(frSlider);
 
@@ -361,6 +362,7 @@ public class Panel extends JPanel {
 		fgSlider.setMaximum(255);
 		fgSlider.setValue(255);
 		fgSlider.setBounds(26, 30, 151, 22);
+		fgSlider.setToolTipText("Set foreground green value");
 		fgSlider.addChangeListener(changeHandle);
 		sliderPanel.add(fgSlider);
 
@@ -368,6 +370,7 @@ public class Panel extends JPanel {
 		fbSlider.setMaximum(255);
 		fbSlider.setValue(255);
 		fbSlider.setBounds(26, 57, 151, 22);
+		fbSlider.setToolTipText("Set foreground blue value");
 		fbSlider.addChangeListener(changeHandle);
 		sliderPanel.add(fbSlider);
 
@@ -375,6 +378,7 @@ public class Panel extends JPanel {
 		brSlider.setMaximum(255);
 		brSlider.setValue(0);
 		brSlider.setBounds(219, 5, 151, 22);
+		brSlider.setToolTipText("Set background red value");
 		brSlider.addChangeListener(changeHandle);
 		sliderPanel.add(brSlider);
 
@@ -390,6 +394,7 @@ public class Panel extends JPanel {
 		bgSlider.setValue(0);
 		bgSlider.setMaximum(255);
 		bgSlider.setBounds(218, 31, 151, 22);
+		bgSlider.setToolTipText("Set background green value");
 		bgSlider.addChangeListener(changeHandle);
 		sliderPanel.add(bgSlider);
 
@@ -397,6 +402,7 @@ public class Panel extends JPanel {
 		bbSlider.setValue(0);
 		bbSlider.setMaximum(255);
 		bbSlider.setBounds(218, 58, 151, 22);
+		bbSlider.setToolTipText("Set background blue value");
 		bbSlider.addChangeListener(changeHandle);
 		sliderPanel.add(bbSlider);
 

@@ -75,3 +75,5 @@ Version 1.4.2
 	* Fixed issues with the main window re-appearing before the area snipper tool captured a portion of the screen
 	* Fixed issues with save image being called when using the open image command before the window magnifier had been initialized
 	* Fixed issues with the focus control shortcuts not working on the window magnifier
+	* Added tooltips to all the application sliders
+	* Added button on the window magnifier to for copying the image from the image view in its original size

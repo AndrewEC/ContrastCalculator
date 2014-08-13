@@ -1,14 +1,15 @@
 package gov.intra.net.window;
 
+import gov.intra.net.persist.ClipboardImage;
+import gov.intra.net.persist.ImageWriter;
+import gov.intra.net.util.Contraster;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-
-import gov.intra.net.persist.ImageWriter;
-import gov.intra.net.util.Contraster;
 
 public class MagImageHandle extends MagEventBase {
 
@@ -23,6 +24,8 @@ public class MagImageHandle extends MagEventBase {
 			loadImage();
 		} else if (command.equals("save image")) {
 			saveImage();
+		} else if (command.equals("copy image")) {
+			new ClipboardImage(window.getImagePanel().getImage()).addToClipboard();
 		}
 	}
 

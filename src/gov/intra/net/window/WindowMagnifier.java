@@ -38,7 +38,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 
 	@SuppressWarnings("rawtypes")
 	private JList windowList;
-	private JButton btnView, btnRefresh, btnSave, btnOpenImage;
+	private JButton btnView, btnRefresh, btnSave, btnOpenImage, btnCopyImage;
 	private JTextField txtFileName;
 
 	private WindowMagImagePanel imagePanel;
@@ -133,21 +133,34 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 			e.printStackTrace();
 		}
 		btnSave.setToolTipText("Save current image");
-		btnSave.setBounds(21, 268, 140, 24);
+		btnSave.setBounds(21, 296, 140, 24);
 		btnSave.addActionListener(event);
 		getContentPane().add(btnSave);
 
+		btnCopyImage = new JButton("Copy Image");
+		try {
+			btnCopyImage.setIcon(new ImageIcon(WindowMagnifier.class.getResource("/resources/CopyIcon.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		btnCopyImage.setBounds(21, 238, 140, 24);
+		btnCopyImage.setActionCommand("copy image");
+		btnCopyImage.addActionListener(event);
+		btnCopyImage.setToolTipText("Copy the current image from the image view in its original size");
+		getContentPane().add(btnCopyImage);
+		event.registerCommand(btnCopyImage, KeyEvent.VK_C);
+
 		txtFileName = new JTextField();
-		txtFileName.setBounds(21, 318, 134, 28);
+		txtFileName.setBounds(21, 346, 134, 28);
 		getContentPane().add(txtFileName);
 		txtFileName.setColumns(10);
 
 		JLabel lblSaveName = new JLabel("Save Name:");
-		lblSaveName.setBounds(11, 299, 99, 16);
+		lblSaveName.setBounds(11, 327, 99, 16);
 		getContentPane().add(lblSaveName);
 
 		lblZoom = new JLabel("Zoom: 1");
-		lblZoom.setBounds(14, 456, 119, 16);
+		lblZoom.setBounds(14, 484, 119, 16);
 		getContentPane().add(lblZoom);
 
 		zoomSlider = new JSlider();
@@ -156,27 +169,28 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		zoomSlider.setMajorTickSpacing(2);
 		zoomSlider.setMinimum(1);
 		zoomSlider.setMaximum(50);
-		zoomSlider.setBounds(13, 480, 154, 21);
+		zoomSlider.setBounds(13, 508, 154, 21);
+		zoomSlider.setToolTipText("Set the magnification level for the image view");
 		getContentPane().add(zoomSlider);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(8, 446, 160, 6);
+		separator.setBounds(8, 474, 160, 6);
 		getContentPane().add(separator);
 
 		JLabel lblImageType = new JLabel("Image Type:");
-		lblImageType.setBounds(11, 354, 152, 16);
+		lblImageType.setBounds(11, 382, 152, 16);
 		getContentPane().add(lblImageType);
 
 		rbJpg = new JRadioButton(".jpg");
-		rbJpg.setBounds(25, 377, 115, 18);
+		rbJpg.setBounds(25, 405, 115, 18);
 		getContentPane().add(rbJpg);
 
 		rbGif = new JRadioButton(".gif");
-		rbGif.setBounds(25, 398, 115, 18);
+		rbGif.setBounds(25, 426, 115, 18);
 		getContentPane().add(rbGif);
 
 		rbPng = new JRadioButton(".png");
-		rbPng.setBounds(25, 419, 115, 18);
+		rbPng.setBounds(25, 447, 115, 18);
 		rbPng.setSelected(true);
 		getContentPane().add(rbPng);
 
@@ -186,19 +200,20 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		ext.add(rbPng);
 
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(7, 508, 160, 6);
+		separator_2.setBounds(7, 536, 160, 6);
 		getContentPane().add(separator_2);
 
 		lblViewDelay = new JLabel("View Delay: 500 Millis");
-		lblViewDelay.setBounds(9, 522, 161, 16);
+		lblViewDelay.setBounds(9, 550, 161, 16);
 		getContentPane().add(lblViewDelay);
 
 		delaySlider = new JSlider();
 		delaySlider.setValue(500);
 		delaySlider.setMinimum(500);
 		delaySlider.setMaximum(3000);
-		delaySlider.setBounds(10, 544, 154, 21);
+		delaySlider.setBounds(10, 572, 154, 21);
 		delaySlider.addChangeListener(this);
+		delaySlider.setToolTipText("Set the delay, in milliseconds, before a screenshot is taken of the window");
 		getContentPane().add(delaySlider);
 
 		separator_1 = new JSeparator();
@@ -206,7 +221,7 @@ public class WindowMagnifier extends JFrame implements ChangeListener, Component
 		getContentPane().add(separator_1);
 
 		btnOpenImage = new JButton("Open Image");
-		btnOpenImage.setBounds(21, 239, 140, 24);
+		btnOpenImage.setBounds(21, 267, 140, 24);
 		btnOpenImage.setActionCommand("open image");
 		btnOpenImage.addActionListener(event);
 		btnOpenImage.setToolTipText("Open image with chosen colour blind filter");
