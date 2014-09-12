@@ -11,8 +11,8 @@ public class DelayedShot extends Thread {
 	private volatile String windowName;
 	private final User32 instance;
 	private final ICapture cap;
-	private BufferedImage image;
-	private int delay;
+	private volatile BufferedImage image;
+	private volatile int delay;
 
 	public DelayedShot(User32 instance, ICapture cap) {
 		this.cap = cap;
@@ -46,6 +46,7 @@ public class DelayedShot extends Thread {
 			sleep(delay);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			cap.onCaptureFail(new Exception("Could not pause thread for specified delay time of " + delay));
 		}
 
 		image = Capturer.getScreenShot(r, null);

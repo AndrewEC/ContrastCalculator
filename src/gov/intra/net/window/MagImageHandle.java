@@ -17,6 +17,10 @@ public class MagImageHandle extends MagEventBase {
 
 	public MagImageHandle(WindowMagnifier window) {
 		super(window);
+		iw = new ImageWriter();
+		iw.setRememberPath(true);
+		iw.setParent(window);
+		iw.setAutoTrim(true);
 	}
 
 	public void onEvent(String command) {
@@ -30,20 +34,14 @@ public class MagImageHandle extends MagEventBase {
 	}
 
 	private void saveImage() {
-		ImageWriter iw = new ImageWriter();
-		iw.setRememberPath(true);
-		iw.setAutoTrim(true);
-		iw.setParent(window);
+		iw.setEnforceDirectory(true);
 		iw.setName(window.getFileName().getText());
 		iw.setExt(window.getExt());
 		iw.saveImage(window.getImagePanel().getImage());
 	}
 
 	public void loadImage() {
-		iw = new ImageWriter();
-		iw.setRememberPath(true);
 		iw.setEnforceDirectory(false);
-		iw.setParent(window);
 		File file = iw.promptForFile();
 		if (file != null && !file.isDirectory()) {
 			try {
