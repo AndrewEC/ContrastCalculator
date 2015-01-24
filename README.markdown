@@ -50,3 +50,4 @@ This project was created using Eclipse for Java Developers - Luna M6 Release (4.
 
 Project Designer: Andrew Cumming
 Email: andrew.e.cumming@gmail.com
+Project Page: https://portfolio-andrewsstuff.rhcloud.com/Projects/ContrastCalculator
