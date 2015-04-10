@@ -49,5 +49,7 @@ The executable version of the program was created using launch4j. The launch4j c
 This project was created using Eclipse for Java Developers - Luna M6 Release (4.4.0M6)
 
 Project Designer: Andrew Cumming
+
 Email: andrew.e.cumming@gmail.com
+
 Project Page: https://portfolio-andrewsstuff.rhcloud.com/Projects/ContrastCalculator
