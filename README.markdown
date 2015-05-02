@@ -52,4 +52,4 @@ Project Designer: Andrew Cumming
 
 Email: andrew.e.cumming@gmail.com
 
-Project Page: https://portfolio-andrewsstuff.rhcloud.com/Projects/ContrastCalculator
+Project Page: https://andrewsportfolio.herokuapp.com/page/contrast_calculator
