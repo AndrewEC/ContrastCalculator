@@ -1,7 +1,7 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>I:\Windows 8 Stuff\GitHub\ContrastCalculator\build\ContrastCalculator - WebLaF.jar</jar>
+  <jar>I:\Windows 8 Stuff\GitHub\ContrastCalculator\build\Contrast Calculator - WebLaF.jar</jar>
   <outfile>I:\Windows 8 Stuff\GitHub\ContrastCalculator\build\Contrast Calculator - WebLaF.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>

@@ -1,7 +1,7 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>I:\Windows 8 Stuff\GitHub\ContrastCalculator\build\ContrastCalculator - Steel.jar</jar>
+  <jar>I:\Windows 8 Stuff\GitHub\ContrastCalculator\build\Contrast Calculator - Steel.jar</jar>
   <outfile>I:\Windows 8 Stuff\GitHub\ContrastCalculator\build\Contrast Calculator - Steel.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
