@@ -47,9 +47,8 @@ The project implements the following 3rd party libraries:
 The executable version of the program was created using launch4j. The launch4j configuration file can be found in the build directory but they use absolute paths.
 
 This project was created using Eclipse for Java Developers - Luna M6 Release (4.4.0M6)
-
-Project Designer: Andrew Cumming
+Later moved to Intellij IDEA.
 
 Email: andrew.e.cumming@gmail.com
 
-Project Page: https://andrewsportfolio.herokuapp.com/page/contrast_calculator
+Project Page: https://portfolio-andrewsstuff.rhcloud.com/page/contrast_calculator
