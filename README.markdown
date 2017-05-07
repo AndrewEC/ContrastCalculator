@@ -36,6 +36,10 @@ Running the Program
 
 Note: This program requires that your computer and Java version support per-pixel translucency/transparency in order for the snipping tool to properly function.
 
+Downloads
+---
+Take a look at the [build](https://github.com/pele1250/ContrastCalculator/tree/master/build) folder for the various builds available for download.
+
 3rd Party Libraries
 ---
 
@@ -48,7 +52,5 @@ The executable version of the program was created using launch4j. The launch4j c
 
 This project was created using Eclipse for Java Developers - Luna M6 Release (4.4.0M6)
 Later moved to Intellij IDEA.
-
-Email: andrew.e.cumming@gmail.com
 
 Project Page: https://portfolio-andrewsstuff.rhcloud.com/page/contrast_calculator
