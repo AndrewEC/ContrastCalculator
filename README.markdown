@@ -52,5 +52,3 @@ The executable version of the program was created using launch4j. The launch4j c
 
 This project was created using Eclipse for Java Developers - Luna M6 Release (4.4.0M6)
 Later moved to Intellij IDEA.
-
-Project Page: https://portfolio-andrewsstuff.rhcloud.com/page/contrast_calculator
